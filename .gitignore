@@ -1,0 +1,20 @@
+# If you want to ignore a file that is already checked in,
+# you must untrack the file before you add a rule to ignore it.
+# From your terminal, untrack the file:
+#   git rm --cached FILENAME
+#
+# To ignore a file update this file (.gitignore) then add, commit, and push this file.
+# Do this BEFORE any other pushes so the rule will be in effect.
+
+# These files are above GitHub's recommended file size (50 MB).
+MonteCarlo/fermi.txt
+Examples/mctuple.root
+Examples/mctuple.hbook
+Examples/ntuple.root
+Examples/log
+Examples/omega2p_sim_1.itape
+Examples/ntuple.hbook
+
+# These are object files. Code that is compiled to machine code, not needed to be saved/tracked in GitHub.
+*.o
+*.o.*
