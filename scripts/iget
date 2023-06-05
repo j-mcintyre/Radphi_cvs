@@ -1,0 +1,50 @@
+#!/bin/tcsh
+#
+# iget - fetch files from IU mass storage system (hpss)
+#
+# Note: This script uses wget and the ordinary ftp protocol to fetch
+#	raw data from the Indiana HPSS archive.  It will only work
+#	if a valid entry for $ftphost exists in the current user's
+#	$HOME/.netrc file.
+#
+# Richard Jones, October 24 2000
+# ------------------------------
+
+set tempdir=/export/radphi/temp
+set localdir=/export/radphi/raw_data
+set listdir=/export/radphi/hpss
+set ftphost=ftp://steige@hpss.indiana.edu
+set filelist=""
+
+while ($#argv > 0)
+   switch ($argv[1])
+    case -*:
+      echo "Usage: iget rNNNN.evt [...]";
+      echo "       iget (no arguments)";
+      echo " after creating dummy filenames in directory $listdir";
+      exit
+    default:
+      set filelist="$filelist $argv[1]"
+      shift
+   endsw
+end
+
+if ("$filelist" == "") then
+   set filelist=`ls $listdir`
+endif
+
+foreach file ($filelist)
+   if (-r $listdir/$file) then
+      mv $listdir/$file $listdir/.pending
+      if ($? == 0) then
+         cd $tempdir
+         wget -q $ftphost/$file
+         if (-r $file) then
+            mv $file $localdir
+            rm -f $listdir/.pending/$file
+         else
+            mv $listdir/.pending/$file $listdir
+         endif
+      endif
+   endif
+end

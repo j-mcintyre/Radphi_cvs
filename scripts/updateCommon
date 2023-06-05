@@ -1,0 +1,8 @@
+#!  /usr/local/bin/perl
+
+chdir($ENV{'RADPHI_HOME'});
+
+# Update makefiles,scripts,include
+$cmd ="$ENV{'RADPHI_HOME'}/scripts/cvsCheckout makefiles scripts include";
+#print "$cmd\n";
+system($cmd);

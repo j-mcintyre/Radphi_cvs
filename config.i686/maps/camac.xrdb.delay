@@ -1,0 +1,86 @@
+#
+# Trigger hardware programming resource database
+#
+
+camac.ncrates:1
+camac.cr.*.slot.*.module: NONE
+camac.cr.*.slot.*.alias: NONE
+
+camac.cr.0.slot.11.alias: LGD_HV
+camac.cr.0.slot.13.alias: DVM
+camac.cr.0.slot.13.module: KS_3516
+camac.cr.0.slot.13.ch.*.gain : 0
+
+camac.cr.0.slot.13.lgdx: 0
+camac.cr.0.slot.13.lgdy: 1
+camac.cr.0.slot.13.rpdx: 2
+camac.cr.0.slot.13.rpdy: 3
+camac.cr.0.slot.13.rpdz: 4
+camac.cr.0.slot.13.norm: 5
+
+
+camac.cr.0.slot.14.alias: LGD_XP
+camac.cr.0.slot.14.module: NONE
+camac.cr.0.slot.15.module: NONE
+camac.cr.0.slot.16.module: NONE
+
+camac.cr.0.slot.17.alias: RPD_XY_XP
+camac.cr.0.slot.17.module: NONE
+camac.cr.0.slot.18.module: NONE
+camac.cr.0.slot.9.alias: RPD_Z_XP
+
+camac.cr.0.slot.1.module: LRS_3420
+camac.cr.0.slot.1.ch.*.threshold: 18
+camac.cr.0.slot.1.mask: 0x8888
+camac.cr.0.slot.1.duration: 0x1
+camac.cr.0.slot.1.deadtime: 0x4
+
+camac.cr.0.slot.2.module: LRS_4413
+camac.cr.0.slot.2.threshold: 100
+camac.cr.0.slot.2.mask: 0xff88
+
+camac.cr.0.slot.3.module: LRS_4413
+camac.cr.0.slot.3.threshold: 100
+camac.cr.0.slot.3.mask: 0xe100
+
+#camac.cr.0.slot.4.module: LRS_4516
+#camac.cr.0.slot.4.stage.0: OR
+#camac.cr.0.slot.4.stage.1: AND
+
+
+camac.cr.0.slot.5.alias: IU_DELAY
+camac.cr.0.slot.5.module: IU_DELAY
+camac.cr.0.slot.5.delay.0: 0x0
+camac.cr.0.slot.5.delay.1: 0x6
+
+
+camac.cr.0.slot.7.alias: SCALER_A
+
+
+camac.cr.0.slot.19.module: IU_ESUM
+camac.cr.0.slot.19.alias: IU_ESUM
+camac.cr.0.slot.19.threshold: 0x0
+
+camac.cr.0.slot.21.module: LRS_2323
+camac.cr.0.slot.21.ch.0.mantissa: 0xff
+camac.cr.0.slot.21.ch.0.exponent: 0x7
+camac.cr.0.slot.21.ch.0.latch: FALSE
+camac.cr.0.slot.21.ch.0.delayWidth: 0x3
+camac.cr.0.slot.21.ch.1.mantissa: 0xff
+camac.cr.0.slot.21.ch.1.exponent: 0x7
+camac.cr.0.slot.21.ch.1.latch: FALSE
+camac.cr.0.slot.21.ch.1.delayWidth: 0x3
+
+
+camac.cr.0.slot.23.alias: LATCH
+camac.cr.0.slot.23.module: JORWAY_41
+camac.cr.0.slot.23.levels: 0x0
+camac.cr.0.slot.23.lgdMon: 0x1
+camac.cr.0.slot.23.ped: 0x2
+camac.cr.0.slot.23.taggerbypass: 0x4
+camac.cr.0.slot.23.rpdbypass: 0x8
+camac.cr.0.slot.23.cpvbypass: 0x10
+camac.cr.0.slot.23.rpdMon: 0x20
+camac.cr.0.slot.23.inhibit: 0x40
+camac.cr.0.slot.23.tsgo: 0x80
+

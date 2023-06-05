@@ -1,0 +1,6 @@
+#
+# ESUM parameter file
+#
+
+esum.nChannels: 5
+esum.Total: 4

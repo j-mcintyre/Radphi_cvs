@@ -1,0 +1,192 @@
+setup.maxParticles: 20
+*returnData: False
+*isPhoton: False
+*2Body.theta.code: YLM
+*2Body.phi.code: UNIFORM
+*3Body.theta.code: DALITZ
+*3Body.phi.code: UNIFORM
+
+target.fermi: False
+
+# Old stuff, can be removed later
+*2Body.code: YLM
+*3Body.code: DALITZ
+
+
+setup.doHistos: False
+setup.returnAll: False
+setup.energyCut: 0.25
+setup.separationCut: 8
+setup.geometry: E852
+
+setup.doEnergySmear: True
+setup.doPositionSmear: True
+setup.output: NONE
+
+setup*positionSmear: 0.45
+setup.energySmear.floor: 0.02
+setup.energySmear.stat: 0.06
+
+
+
+pi+.massCode: DELTA  
+pi+.mass: 0.13957
+pi+.lifetime: 0
+pi+.charge: 1
+pi+.nDecays: 0
+pi+.spin: 0
+
+
+pi-.massCode: DELTA
+pi-.mass: 0.13957
+pi-.lifetime: 0
+pi-.charge: -1
+pi-.nDecays: 0
+pi-.spin:0
+
+
+pi0.massCode: DELTA
+pi0.mass: 0.13498
+pi0.spin: 0
+pi0.lifetime: 0
+pi0.charge: 0
+pi0.nDecays: 1
+pi0.decay.1.products: gamma,gamma
+pi0.decay.1.branch: 1.0
+
+gamma.massCode: DELTA
+gamma.mass: 0
+gamma.spin: 1
+gamma.lifetime: 0
+gamma.charge:0
+gamma.nDecays:0
+gamma.returnData: True
+gamma.isPhoton: True
+
+proton.massCode: DELTA
+proton.mass: 0.93827
+proton.spin: -1
+proton.lifetime: 0
+proton.charge: 1
+proton.nDecays: 0
+
+
+neutron.massCode: DELTA
+neutron.mass: 0.93956
+neutron.spin: -1
+neutron.lifetime: 0
+neutron.charge: 0
+neutron.nDecays: 0
+
+eta.massCode: DELTA
+eta.mass: 0.54745
+eta.spin: 0
+eta.lifetime: 0
+eta.charge: 0
+eta.nDecays: 1
+eta.decay.1.products: gamma,gamma
+eta.decay.1.branch: 1.0
+
+a0.massCode: BW
+a0.mass: 0.980
+a0.width: 0.057
+a0.spin: 0
+a0.lifetime:0
+a0.charge:0
+a0.nDecays:1
+a0.decay.1.branch:1.0
+a0.decay.1.products: eta,pi0
+
+
+f0.massCode: BW
+f0.mass: 0.980
+f0.width: 0.055
+f0.spin:0
+f0.lifetime:0
+f0.charge:0
+f0.nDecays:1
+f0.decay.1.branch:1.0
+f0.decay.1.products: pi0,pi0
+
+a2.massCode: BW
+a2.mass: 1.32
+a2.width: 0.110
+a2.spin:2
+a2.lifetime: 0
+a2.charge: 0
+a2.nDecays: 1
+a2.decay.1.branch: 1.0
+a2.decay.1.products: eta,pi0
+
+f2.massCode: BW
+f2.mass: 1.275
+f2.width: 0.185
+f2.spin:2
+f2.lifetime: 0
+f2.charge:0
+f2.nDecays: 1
+f2.decay.1.branch: 1.0
+f2.decay.1.products: pi0,pi0
+
+omega.massCode: BW
+omega.mass: 0.78194
+omega.width: 0.008
+omega.spin: 1
+omega.lifetime: 0
+omega.charge: 0
+omega.nDecays: 1
+omega.decay.1.branch:1
+omega.decay.1.products: pi0,gamma
+
+rho0.massCode: BW
+rho0.mass: 0.770
+rho0.width: 0.151
+rho0.spin: 1
+rho0.lifetime: 0
+rho0.charge: 0
+rho0.nDecays: 1
+rho0.decay.1.branch:1
+rho0.decay.1.products: pi+,pi-
+
+rho-.massCode: BW
+rho-.mass: 0.770
+rho-.width: 0.151
+rho-.spin: 1
+rho-.lifetime: 0
+rho-.charge: -1
+rho-.nDecays: 1
+rho-.decay.1.branch:1
+rho-.decay.1.products: pi-,pi0
+
+rho+.massCode: BW
+rho+.mass: 0.770
+rho+.width: 0.151
+rho+.spin:1
+rho+.lifetime: 0
+rho+.charge: 1
+rho+.nDecays: 1
+rho+.decay.1.branch:1
+rho+.decay.1.products: pi+,pi0
+
+etaprime.massCode: DELTA
+etaprime.mass: 0.95777
+etaprime.spin:0
+etaprime.lifetime:0
+etaprime.charge:0
+etaprime.nDecays:1
+etaprime.decay.1.branch:1
+etaprime.decay.1.products: eta,pi0,pi0
+
+
+
+phi.massCode: BW
+phi.mass: 1.019
+phi.width: 0.004
+phi.spin: 1
+phi.lifetime: 0
+phi.charge: 0
+phi.nDecays: 1
+phi.decay.1.branch:1
+#phi.decay.1.products: pi0,gamma
+phi.decay.1.products: eta,gamma
+

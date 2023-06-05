@@ -1,0 +1,47 @@
+#!/bin/tcsh
+#
+# jsplit - compact and partition raw data files
+#
+# Richard Jones, October 11 2000
+# ------------------------------
+
+set rawpath=/export/app/radphi/raw_data
+set destdir=/export/app/radphi/archive
+
+set partsize=100000000
+
+set stdout=/tmp/stdout$$
+set stderr=/tmp/stderr$$
+
+if ( $# < 1 ) then
+   cd $rawpath
+   set filelist=`ls r*.evt`
+else
+   set filelist="$*"
+   set argv[1]=""
+endif
+
+source /home/radphi/setup
+
+set source=""
+foreach stub ($filelist)
+   set basename=`echo $stub | awk -F. '{print $1}'`
+   if ( -d $destdir/$basename ) then
+      echo "$basename already on disk, keeping"
+   else if ( ! -r $rawpath/$stub ) then
+      echo "$stub does not exist, skipping"
+   else
+      set source="$source $basename"
+   endif
+end
+
+foreach basename ($source)
+   mkdir $destdir/$basename >& /dev/null
+   if ( $? != 0 ) then
+      echo "$basename already on disk, keeping"
+   else
+      mv $rawpath/$basename.evt $rawpath/.pending
+      compact $rawpath/.pending/$basename.evt | partition -p$partsize $destdir/$basename/$basename
+      rm -f $rawpath/.pending/$basename.evt
+   endif
+end

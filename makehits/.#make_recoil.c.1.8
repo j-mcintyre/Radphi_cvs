@@ -1,0 +1,214 @@
+/* make_recoil.c
+ *  Craig Steffen  June 20 2001
+ *
+ * -modified to remove hardwired timing corrections
+ *  R.T. Jones     June 2, 2003
+ *
+ *
+ */
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+#include <string.h>
+#include <math.h>
+
+#include <itypes.h> 
+#include <iitypes.h>
+#include <eventType.h>
+#include <ntypes.h> 
+
+#include <disData.h>
+#include <pedestals.h>
+#include <calibration.h> 
+#include <makeHits.h>
+
+/* #define DEBUGGING 1 */
+
+#define max(a,b) ((a)>(b))?(a):(b)
+#define max3(a,b,c) max(a,max(b,c))
+
+int make_recoil(itape_header_t *event, recoil_t *p_recoil, int maxpix){
+  recoil_t recoil;
+  bsd_pixels_t *bsd_pixels=NULL;
+  float pixel_time_differences[3];
+  float time_ave;
+  int pixel_index;
+  int N_timed_pixels=0;
+  int i,j;
+  int S;
+  int S_array[200];
+  int Z_array[200];
+  int pixel_indices[200];
+  int Z_diff;
+  int S_diff;
+  int hist_index;
+  float Er, El, Es, Tr, Tl, Ts, midz;
+  int correct_pixel;
+
+#ifdef DEBUGGING 
+    fprintf(stderr,"make_recoil: run %4d event %6d\n",
+	    event->runNo,event->eventNo);
+#endif
+  if((bsd_pixels=data_getGroup(event,GROUP_BSD_PIXELS,(int)NULL))==NULL){
+    N_timed_pixels=0;
+#ifdef DEBUGGING 
+    fprintf(stderr,"make_recoil: no GROUP_BSD_PIXELS\n");
+#endif
+  }
+  else{
+#ifdef DEBUGGING 
+    fprintf(stderr,"make_recoil: looping through %3d BSD pixels:\n",
+	    bsd_pixels->npixels);
+#endif    
+    for(i=0;i<bsd_pixels->npixels;i++){
+#ifdef DEBUGGING 
+      fprintf(stderr,"make_recoil: pixel %3d: ",i);
+#endif    
+      if(bsd_pixels->pixel[i].ring>=BSD_N_RINGS){
+	/* would form pixel off the DS end! */
+	fprintf(stderr,"make_recoil: found pixel off end of barrel: ");
+	fprintf(stderr,"REALLY BAD ERROR!\n");
+	return(1);
+      }
+      if(bsd_pixels->pixel[i].time[0]>10000.0 ||
+	 bsd_pixels->pixel[i].time[1]>10000.0 ||
+	 bsd_pixels->pixel[i].time[2]>10000.0){
+#ifdef DEBUGGING 
+	fprintf(stderr,"pixel has paddle without tdc hits (happens occasionally)\n");
+#endif
+	continue;
+      }
+      /* this indicates that there is no timing info on at least one paddle
+       * in a pixel, so we throw that pixel out.
+       */
+      S=bsd_pixels->pixel[i].straight-24;
+      if(bsd_pixels->pixel[i].ring<0 || S<0 || S>=BSD_N_PIXELS_PER_RING){
+	fprintf(stderr,"construct_recoil:\n");
+	fprintf(stderr,
+		"WARNING!!! WARNING!!! ring or straight out of range.\n");
+	fprintf(stderr,"Z=%2d S=%2d\n",bsd_pixels->pixel[i].ring,
+		S);
+	return(1);
+      }
+      pixel_index=((bsd_pixels->pixel[i].ring)*24)+S;
+      pixel_time_differences[0]=bsd_pixels->pixel[i].time[1]-
+	                        bsd_pixels->pixel[i].time[0];
+      pixel_time_differences[1]=bsd_pixels->pixel[i].time[1]-
+	                        bsd_pixels->pixel[i].time[2];
+      pixel_time_differences[2]=bsd_pixels->pixel[i].time[0]-
+	                        bsd_pixels->pixel[i].time[2];
+#ifdef DEBUGGING 
+      fprintf(stderr,"ndx: %3d ",pixel_index);
+#endif
+      
+      if(pixel_time_differences[0]<3.0 &&
+	 pixel_time_differences[1]<3.0 &&
+	 pixel_time_differences[2]<3.0){ /* if pixel is time correlated */
+	if(N_timed_pixels<maxpix){
+	  pixel_indices[N_timed_pixels]=pixel_index;
+	  S_array[N_timed_pixels]=S;
+	  Z_array[N_timed_pixels]=bsd_pixels->pixel[i].ring;
+	}
+	if(N_timed_pixels<MAX_PIXELS_IN_RECOIL){
+	  recoil.pixel_index_in_pixel_list[N_timed_pixels]=i;
+	  recoil.pixel_index_in_bsd[N_timed_pixels]=pixel_index;
+	}
+	N_timed_pixels++;
+      }
+#ifdef DEBUGGING 
+      fprintf(stderr,"\n");
+#endif
+    }
+  }
+  switch(N_timed_pixels){
+  case 0:
+    recoil.recoil_class=RECOIL_CLASS_NONE;
+    break;
+  case 1:
+    recoil.recoil_class=RECOIL_CLASS_SINGLE;
+    recoil.N_pixels=1;
+    recoil.Z_index=(float)Z_array[0];
+    recoil.S_index=(float)S_array[0];
+    recoil.theta=atan2(BSD_RADIUS,bsd_ring_midz[Z_array[0]]);
+    recoil.phi=BSD_PHI_ZERO+(BSD_PHI_INCREMENT*((float)recoil.S_index));
+    if(recoil.phi>=TWO_PI)
+      recoil.phi-=TWO_PI;
+    correct_pixel=recoil.pixel_index_in_pixel_list[0];
+    Er = bsd_pixels->pixel[correct_pixel].energy[0];
+    El = bsd_pixels->pixel[correct_pixel].energy[1];
+    Es = bsd_pixels->pixel[correct_pixel].energy[2];
+    Tr = bsd_pixels->pixel[correct_pixel].time[0];
+    Tl = bsd_pixels->pixel[correct_pixel].time[1];
+    Ts = bsd_pixels->pixel[correct_pixel].time[2];
+    recoil.time = (Tr+Tl+Ts)/3.;
+    recoil.dEdx = (Er+El+Es-max3(Er,El,Es))/sin(recoil.theta);
+    break;
+  case 2:
+    recoil.N_pixels=2;
+    Z_diff=abs(Z_array[0]-Z_array[1]);
+    S_diff=abs(S_array[0]-S_array[1]);
+    if(Z_diff==0){
+      if( S_diff==1){
+	recoil.recoil_class=RECOIL_CLASS_DOUBLE_Z;
+	recoil.Z_index=Z_array[0];
+	recoil.S_index=(S_array[0]+S_array[1])/2.0;
+      }
+      else if( S_diff==23){
+	recoil.recoil_class=RECOIL_CLASS_DOUBLE_Z;
+	recoil.Z_index=Z_array[0];
+	recoil.S_index=23.5;
+      }
+      else{
+	recoil.recoil_class=RECOIL_CLASS_TWO_DISJOINT;
+      }
+    }
+    else if(Z_diff==1){
+      if(S_diff==0){
+	recoil.recoil_class=RECOIL_CLASS_DOUBLE_S;
+	recoil.Z_index=(Z_array[0]+Z_array[1])/2.0;
+	recoil.S_index=S_array[0];
+      }
+      else{
+	recoil.recoil_class=RECOIL_CLASS_TWO_DISJOINT;
+      }
+    }
+    else{
+      recoil.recoil_class=RECOIL_CLASS_TWO_DISJOINT;
+    }
+    midz=(bsd_ring_midz[Z_array[0]]+bsd_ring_midz[Z_array[1]])/2;
+    recoil.theta=atan2(BSD_RADIUS,midz);
+    recoil.phi=BSD_PHI_ZERO+(BSD_PHI_INCREMENT*((float)recoil.S_index));
+    if(recoil.phi>=TWO_PI)
+      recoil.phi-=TWO_PI;
+    Er = (bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[0]].energy[0] +
+          bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[1]].energy[0]);
+    El = (bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[0]].energy[1] +
+          bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[1]].energy[1]);
+    Es = (bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[0]].energy[2] +
+          bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[1]].energy[2]);
+    Tr = (bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[0]].time[0] +
+          bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[1]].time[0])/2;
+    Tl = (bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[0]].time[1] +
+          bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[1]].time[1])/2;
+    Ts = (bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[0]].time[2] +
+          bsd_pixels->pixel[recoil.pixel_index_in_pixel_list[1]].time[2])/2;
+    recoil.time = (Tr+Tl+Ts)/3.;
+    recoil.dEdx = (Er+El+Es-max3(Er,El,Es))/sin(recoil.theta);
+    break;  
+  default:
+    recoil.recoil_class=RECOIL_CLASS_TOO_MANY_PIXELS;
+  }
+#ifdef DEBUGGING 
+  fprintf(stderr,"final recoil class is ---------------> %3d\n",
+	  recoil.recoil_class);
+#endif
+  if(p_recoil==NULL) {
+    int size = sizeof(recoil_t);
+    recoil_t *tmp=data_addGroup(event,BUFSIZE,GROUP_RECOIL,0,size);
+    memcpy(tmp,&recoil,size);
+  }
+  return(0);
+}

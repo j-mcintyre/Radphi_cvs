@@ -1,0 +1,175 @@
+#
+# This is the UMAP database for the FASTBUS ROC (ROC4)
+#
+#   new version for March 1998 run period - R.T.Jones
+#
+roc.4.address: 4
+roc.4.nmodules: 4
+roc.4.module.*.bus: FASTBUS
+#
+# First TDC
+#
+roc.4.module.0.type: LRS_1877
+roc.4.module.0.slot: 16
+roc.4.module.0.channel.*.detector: CPV
+roc.4.module.0.channel.0.channel: 13
+roc.4.module.0.channel.1.channel: 17
+roc.4.module.0.channel.2.channel: UNUSED
+roc.4.module.0.channel.3.channel: 19
+roc.4.module.0.channel.4.channel: 25
+roc.4.module.0.channel.5.channel: 23
+roc.4.module.0.channel.6.channel: 29
+roc.4.module.0.channel.7.channel: 27
+roc.4.module.0.channel.8.channel: 11
+roc.4.module.0.channel.9.channel: 5
+roc.4.module.0.channel.10.channel: 7
+roc.4.module.0.channel.11.channel: 9
+roc.4.module.0.channel.12.channel: UNUSED
+roc.4.module.0.channel.13.channel: 1
+roc.4.module.0.channel.14.channel: 15
+roc.4.module.0.channel.15.channel: 16
+roc.4.module.0.channel.16.channel: 8
+roc.4.module.0.channel.17.channel: 21
+roc.4.module.0.channel.18.channel: 6
+roc.4.module.0.channel.19.channel: 26
+roc.4.module.0.channel.20.channel: 14
+roc.4.module.0.channel.21.channel: 28
+roc.4.module.0.channel.22.channel: 20
+roc.4.module.0.channel.23.channel: 12
+roc.4.module.0.channel.24.channel: 24
+roc.4.module.0.channel.25.channel: 4
+roc.4.module.0.channel.26.channel: 10
+roc.4.module.0.channel.27.channel: 0
+roc.4.module.0.channel.28.channel: 3
+roc.4.module.0.channel.29.channel: 22
+roc.4.module.0.channel.30.channel: 18
+roc.4.module.0.channel.31.channel: 2
+roc.4.module.0.channel.32.detector: UPV
+roc.4.module.0.channel.32.channel: 2
+roc.4.module.0.channel.33.detector: UPV
+roc.4.module.0.channel.33.channel: 3
+roc.4.module.0.channel.34.detector: UPV
+roc.4.module.0.channel.34.channel: 7
+roc.4.module.0.channel.35.detector: UPV
+roc.4.module.0.channel.35.channel: 4
+roc.4.module.0.channel.36.detector: UPV
+roc.4.module.0.channel.36.channel: 5
+roc.4.module.0.channel.37.detector: UPV
+roc.4.module.0.channel.37.channel: 1
+roc.4.module.0.channel.38.detector: UPV
+roc.4.module.0.channel.38.channel: 0
+roc.4.module.0.channel.39.detector: UPV
+roc.4.module.0.channel.39.channel: 6
+#
+# IU MAM
+#
+roc.4.module.1.type: IU_MAM
+roc.4.module.1.slot: 12
+roc.4.module.1.channel.*.detector: LGD
+#
+# TDC # 1
+#
+roc.4.module.2.type: STK_10C6
+roc.4.module.2.slot: 23
+roc.4.module.2.channel.*.detector: TAGGER
+roc.4.module.2.channel.0.channel: 15
+roc.4.module.2.channel.1.channel: 14
+roc.4.module.2.channel.2.channel: 13
+roc.4.module.2.channel.3.channel: 12
+roc.4.module.2.channel.4.channel: 11
+roc.4.module.2.channel.5.channel: 10
+roc.4.module.2.channel.6.channel: 9
+roc.4.module.2.channel.7.channel: 8
+roc.4.module.2.channel.8.channel: 7
+roc.4.module.2.channel.9.channel: 6
+roc.4.module.2.channel.10.channel: 5
+roc.4.module.2.channel.11.channel: 4
+roc.4.module.2.channel.12.channel: 3
+roc.4.module.2.channel.13.channel: 2
+roc.4.module.2.channel.14.channel: 1
+roc.4.module.2.channel.15.channel: 0
+roc.4.module.2.channel.16.channel: 34
+roc.4.module.2.channel.17.channel: 33
+roc.4.module.2.channel.18.channel: 32
+roc.4.module.2.channel.19.channel: 31
+roc.4.module.2.channel.20.channel: 30
+roc.4.module.2.channel.21.channel: 29
+roc.4.module.2.channel.22.channel: 28
+roc.4.module.2.channel.23.channel: 27
+roc.4.module.2.channel.24.channel: 26
+roc.4.module.2.channel.25.channel: 25
+roc.4.module.2.channel.26.channel: 24
+roc.4.module.2.channel.27.channel: 23
+roc.4.module.2.channel.28.channel: 22
+roc.4.module.2.channel.29.channel: 21
+roc.4.module.2.channel.30.channel: 20
+roc.4.module.2.channel.31.channel: 19
+#
+# TDC #2
+#
+roc.4.module.3.type: STK_10C6
+roc.4.module.3.slot: 24
+roc.4.module.3.channel.0.channel: UNUSED
+roc.4.module.3.channel.0.detector: UNUSED
+roc.4.module.3.channel.1.channel: 8
+roc.4.module.3.channel.1.detector: RPD
+roc.4.module.3.channel.2.channel: 10
+roc.4.module.3.channel.2.detector: RPD
+roc.4.module.3.channel.3.channel: UNUSED
+roc.4.module.3.channel.3.detector: UNUSED
+roc.4.module.3.channel.4.channel: 14
+roc.4.module.3.channel.4.detector: RPD
+roc.4.module.3.channel.5.channel: 16
+roc.4.module.3.channel.5.detector: RPD
+roc.4.module.3.channel.6.channel: 12
+roc.4.module.3.channel.6.detector: RPD
+roc.4.module.3.channel.7.channel: 9
+roc.4.module.3.channel.7.detector: RPD
+roc.4.module.3.channel.8.channel: 11
+roc.4.module.3.channel.8.detector: RPD
+roc.4.module.3.channel.9.channel: 13
+roc.4.module.3.channel.9.detector: RPD
+roc.4.module.3.channel.10.channel: 15
+roc.4.module.3.channel.10.detector: RPD
+roc.4.module.3.channel.11.channel: 17
+roc.4.module.3.channel.11.detector: RPD
+roc.4.module.3.channel.12.channel: 0
+roc.4.module.3.channel.12.detector: CPV
+roc.4.module.3.channel.13.channel: UNUSED
+roc.4.module.3.channel.13.detector: UNUSED
+roc.4.module.3.channel.14.channel: 6
+roc.4.module.3.channel.14.detector: RPD
+roc.4.module.3.channel.15.channel: 7
+roc.4.module.3.channel.15.detector: RPD
+roc.4.module.3.channel.16.channel: 34
+roc.4.module.3.channel.16.detector: UNUSED
+roc.4.module.3.channel.17.channel: 35
+roc.4.module.3.channel.17.detector: UNUSED
+roc.4.module.3.channel.18.channel: 36
+roc.4.module.3.channel.18.detector: UNUSED
+roc.4.module.3.channel.19.channel: 37
+roc.4.module.3.channel.19.detector: UNUSED
+roc.4.module.3.channel.20.channel: 38
+roc.4.module.3.channel.20.detector: UNUSED
+roc.4.module.3.channel.21.channel: 39
+roc.4.module.3.channel.21.detector: UNUSED
+roc.4.module.3.channel.22.channel: 40
+roc.4.module.3.channel.22.detector: UNUSED
+roc.4.module.3.channel.23.channel: 41
+roc.4.module.3.channel.23.detector: UNUSED
+roc.4.module.3.channel.24.channel: 42
+roc.4.module.3.channel.24.detector: UNUSED
+roc.4.module.3.channel.25.channel: 43
+roc.4.module.3.channel.25.detector: UNUSED
+roc.4.module.3.channel.26.channel: 16
+roc.4.module.3.channel.26.detector: TAGGER
+roc.4.module.3.channel.27.channel: 17
+roc.4.module.3.channel.27.detector: TAGGER
+roc.4.module.3.channel.28.channel: 18
+roc.4.module.3.channel.28.detector: TAGGER
+roc.4.module.3.channel.29.channel: 35
+roc.4.module.3.channel.29.detector: TAGGER
+roc.4.module.3.channel.30.channel: 36
+roc.4.module.3.channel.30.detector: TAGGER
+roc.4.module.3.channel.31.channel: 37
+roc.4.module.3.channel.31.detector: TAGGER

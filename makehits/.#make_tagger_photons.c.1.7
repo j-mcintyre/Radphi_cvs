@@ -1,0 +1,176 @@
+/* 2001 June 22 
+   Craig Steffen */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+#include <string.h>
+#include <math.h>
+
+#include <itypes.h> 
+#include <iitypes.h>
+#include <eventType.h>
+#include <ntypes.h> 
+
+#include <disData.h>
+#include <pedestals.h>
+#include <calibration.h> 
+#include <makeHits.h>
+
+/* #define DEBUGGING 1 */
+#define BACKWARD_LOOP
+#define FORWARD_LOOP
+int make_tagger_photons(itape_header_t *event, int max_photons){
+  tagger_clusters_t *tagger_clusters=NULL;
+  recoil_t *recoil=NULL;
+  tagger_photons_t *tagger_photons=NULL,*tmp=NULL;
+  int size;
+  int i;
+  int dummy_index;
+  float dummy_time;
+  int N_loops;
+  int N_in_time;
+  int transposed_flag;
+  int *tagger_cluster_to_photon_list=NULL;
+  int N_photons=0;
+  float time_margin;
+  
+  tagger_photons=malloc(sizeof_tagger_photons_t(max_photons));
+  tagger_photons->class=TAGGER_PHOTONS_CLASS_UNDEFINED;
+
+  if((recoil=data_getGroup(event,GROUP_RECOIL,(int)NULL))==NULL){
+    fprintf(stderr,"make_tagger_photons: failed to get recoil group!\n");
+    return(1);
+  }
+  if((tagger_clusters=data_getGroup(event,GROUP_TAGGER_CLUSTERS,(int)NULL))==NULL){
+    fprintf(stderr,"make_tagger_photons:");
+    fprintf(stderr," failed to get tagger clusters group!\n");
+    return(1);
+  }
+  if(tagger_clusters->nclusters>max_photons){
+    fprintf(stderr,"make_tagger_photons:");
+    fprintf(stderr," too many tagger clusters (%d)\n",
+	    tagger_clusters->nclusters);
+    return(1);
+  }
+  if(recoil->recoil_class==RECOIL_CLASS_SINGLE){
+    tagger_photons->nphotons=tagger_clusters->nclusters;
+#ifdef DEBUGGING
+    fprintf(stderr,"Single recoil, now sorting %3d tagger clusters ");
+    fprintf(stderr," into photon list\n", tagger_photons->nphotons);    
+#endif
+    for(i=0;i<tagger_clusters->nclusters;i++){
+      tagger_photons->photon[i].tagger_cluster_index=i;
+      tagger_photons->photon[i].time_offset=
+	(recoil->time-tagger_clusters->cluster[i].time)-bsd_minus_tagger_offset;
+    }
+#ifdef DEBUGGING
+    fprintf(stderr,"Before sorting:\n");
+    for(i=0;i<tagger_photons->nphotons;i++){
+      fprintf(stderr,"tagger photon index %3d cluster_index %3d offset= %+.2f\n",i,
+	      tagger_photons->photon[i].tagger_cluster_index,
+	      tagger_photons->photon[i].time_offset);
+    }
+#endif
+    /* now we have the cluster times and indices loaded into the tagger_photons
+       structure.  Now we put them in order of increasing time_offset, meaning 
+       that element 0 is the closest one to being correct */
+    N_loops=0;
+    transposed_flag=1;
+    if(tagger_photons->nphotons>1){
+      while(transposed_flag){
+	transposed_flag=0;
+#ifdef FORWARD_LOOP
+	for(i=0;i<(tagger_photons->nphotons-1);i++){
+	  if(fabs(tagger_photons->photon[i].time_offset)>
+	     fabs(tagger_photons->photon[i+1].time_offset)){
+	    transposed_flag=1;
+	    dummy_time=tagger_photons->photon[i].time_offset;
+	    dummy_index=tagger_photons->photon[i].tagger_cluster_index;
+	    tagger_photons->photon[i].time_offset=
+	      tagger_photons->photon[i+1].time_offset;
+	    tagger_photons->photon[i].tagger_cluster_index=
+	      tagger_photons->photon[i+1].tagger_cluster_index;
+	    tagger_photons->photon[i+1].time_offset=dummy_time;
+	    tagger_photons->photon[i+1].tagger_cluster_index=dummy_index;
+	  }
+	}
+#endif
+#ifdef BACKWARD_LOOP
+	for(i=(tagger_photons->nphotons-2);i>=0;i--){
+	  if(fabs(tagger_photons->photon[i].time_offset)>
+	     fabs(tagger_photons->photon[i+1].time_offset)){
+	    transposed_flag=1;
+	    dummy_time=tagger_photons->photon[i].time_offset;
+	    dummy_index=tagger_photons->photon[i].tagger_cluster_index;
+	    tagger_photons->photon[i].time_offset=
+	      tagger_photons->photon[i+1].time_offset;
+	    tagger_photons->photon[i].tagger_cluster_index=
+	      tagger_photons->photon[i+1].tagger_cluster_index;
+	    tagger_photons->photon[i+1].time_offset=dummy_time;
+	    tagger_photons->photon[i+1].tagger_cluster_index=dummy_index;
+	  }
+	}
+#endif
+	N_loops++;
+	if(N_loops/4000){
+	  fprintf(stderr,"make_tagger_photons: HELP! ");
+          fprintf(stderr," Ordering loop: %d iterations\n", N_loops);
+	  fprintf(stderr,"There were %d tagger clusters!\n",
+                  tagger_clusters->nclusters);
+	  for(i=0;i<tagger_photons->nphotons;i++){
+	    fprintf(stderr,"tagger photon index %3d offset= %+.2f\n",
+		    tagger_photons->photon[i].tagger_cluster_index,
+		    tagger_photons->photon[i].time_offset);
+	  }
+	}
+      }  /* while(!transposed_flag) */
+#ifdef DEBUGGING
+      fprintf(stderr,"make_tagger_photons: %3d photons, %4d loops\n",
+	      tagger_photons->nphotons,N_loops);
+      for(i=0;i<tagger_photons->nphotons;i++){
+	fprintf(stderr,"tagger photon index %3d cluster_index %3d offset= %+.2f\n",i,
+		tagger_photons->photon[i].tagger_cluster_index,
+		tagger_photons->photon[i].time_offset);
+      }
+#endif
+    }   /* if(tagger_photons->nphotons>1) */
+
+    /* tagger photons have now been placed in order of time from the correct time
+       according to the BSD, starting with the closest */
+
+    N_in_time=0;
+    while(fabs(tagger_photons->photon[N_in_time].time_offset)<
+	  TAG_BSD_TIME_WINDOW_HALF_WIDTH){
+      N_in_time++;
+      if(N_in_time>=tagger_clusters->nclusters)
+	break;
+    }
+    if(N_in_time>TAGGER_PHOTONS_MAX_IN_TIME_PHOTONS){
+      tagger_photons->class=TAGGER_PHOTONS_CLASS_TOO_MANY_IN_TIME;
+    }
+    else{
+      tagger_photons->class=N_in_time;
+    }
+
+  } /* if(recoil->recoil_class==RECOIL_CLASS_SINGLE) */
+  else{
+    tagger_photons->class=TAGGER_PHOTONS_CLASS_NO_RECOIL;
+    tagger_photons->nphotons=0;
+  }
+
+  size=sizeof_tagger_photons_t(tagger_photons->nphotons);
+  tmp=data_addGroup(event,BUFSIZE,GROUP_TAGGER_PHOTONS,0,size);
+  
+#ifdef DEBUGGING
+  fprintf(stderr,"make_tagger_photons: about to add GROUP_TAGGER_PHOTONS\n");
+  fprintf(stderr,"with %d photons and class=%d.\n",
+	  tagger_photons->nphotons,
+	  tagger_photons->class);
+#endif
+  memcpy(tmp,tagger_photons,size);
+  free(tagger_photons);
+  return(0);
+}
+

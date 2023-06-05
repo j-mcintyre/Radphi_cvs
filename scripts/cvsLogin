@@ -1,0 +1,4 @@
+#! /bin/sh
+
+
+cvs -d :pserver:radphi@jlabs1.jlab.org:/group/radphi/cvs login

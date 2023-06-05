@@ -1,0 +1,16 @@
+#! /bin/csh -f
+
+setenv REMOTE_TARGET irix-mips4
+source ~radphi/setup.lqp
+cd $RADPHI_HOME/scripts
+foreach RCSFILE (RCS/*,v)
+  rcsdiff $RCSFILE >& /dev/null
+  if($status) then
+	co $RCSFILE >& /dev/null
+  endif
+end
+
+
+
+
+

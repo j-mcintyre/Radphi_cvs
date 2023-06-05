@@ -1,0 +1,14 @@
+#!/bin/csh -f
+
+setenv REMOTE_TARGET solaris
+source /group/radphi/setup
+$RADPHI_HOME/scripts/doOneTarget >& $RADPHI_HOME/build.$RADPHI_MAKETARGET/build.log
+if ($status != 0) then
+  echo "Errors during build of $RADPHI_MAKETARGET target"
+endif
+setenv REMOTE_TARGET solaris-o
+source /ngroupradphi/setup
+$RADPHI_HOME/scripts/doOneTarget >& $RADPHI_HOME/build.$RADPHI_MAKETARGET/build.log
+if ($status != 0) then
+  echo "Errors during build of $RADPHI_MAKETARGET target"
+endif

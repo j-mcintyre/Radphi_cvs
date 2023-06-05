@@ -1,0 +1,28 @@
+#! /usr/local/bin/perl
+
+
+$file = "/usr/tmp/cvs.$$";
+open(FILE,">$file") || die "Failed to open $file\n";
+
+$SIG{'INT'} = 'handler';
+$SIG{'QUIT'} = 'handler';
+
+print FILE "Changes made by $ENV{'USER'}\@$ENV{'HOST'}\n";
+
+print "Enter log comment:\n";
+
+while(<STDIN>){
+    print FILE $_;
+}
+close FILE;
+
+$cmd = "cvs -d :pserver:radphi\@jlabs1.jlab.org:/group/radphi/cvs commit -F $file  @ARGV";
+#print $cmd."\n";
+system($cmd);
+system("rm $file");
+
+
+sub handler{
+    system("rm $file");
+    exit(0);
+}

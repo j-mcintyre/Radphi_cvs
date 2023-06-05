@@ -1,0 +1,82 @@
+#!/bin/tcsh
+#
+# jsplit-condor - compact and partition raw data files
+#
+# Richard Jones, November 17, 2007
+# --------------------------------
+
+set rawpath=/nfs/direct/app/radphi/raw_data
+set jobdir=/nfs/direct/scratch/jsplit-condor.tmp
+set destdir=/pnfs/phys.uconn.edu/data/radphi
+
+if ( `whoami` != prod ) then
+   echo "Please run this script as user prod"
+   exit 1
+endif
+
+set partsize=100000000
+
+cd $rawpath
+if ( $# < 1 ) then
+   cd $rawpath
+   set filelist=`ls r*.evt`
+else
+   set filelist="$*"
+   set argv[1]=""
+endif
+
+source /home/radphi/setup
+if ( -d $jobdir == 0 ) then
+   mkdir $jobdir
+   chgrp prod $jobdir
+   chmod g+ws $jobdir
+endif
+
+cat <<end-of-input >$jobdir/condor.sub
+universe = vanilla
+executable = /bin/tcsh
+notification = Never
+log = $jobdir/condor.log
+requirements = (QUEUE=="fast")&&(arch!="PPC")
+OnExitRemove = (ExitCode==0)&&(ExitBySignal==FALSE)
+OnExitHold = (OnExitRemove==0)&&(JobRunCount > 2)
+end-of-input
+
+set source=""
+foreach stub ($filelist)
+   set basename=`echo $stub | awk -F. '{print $1}'`
+   if ( -d $destdir/$basename ) then
+      echo "$basename already on disk, keeping"
+   else if ( -r $rawpath/$stub == 0 ) then
+      echo "$stub does not exist, skipping"
+   else
+      set source="$source $basename"
+   endif
+end
+
+foreach basename ($source)
+   if ( -d $destdir/$basename ) then
+      echo "$basename already on disk, keeping"
+   else
+      echo '#\!/bin/tcsh' >$jobdir/$basename.stdin
+      echo 'source ~radphi/setup' >>$jobdir/$basename.stdin
+      echo "compact $rawpath/$basename.evt | partition -p$partsize "'$_CONDOR_SCRATCH_DIR'"/$basename" >>$jobdir/$basename.stdin
+      echo 'if ( $? != 0 ) then\n   exit 1\nendif' >>$jobdir/$basename.stdin
+      echo "mkdir $destdir/$basename" >>$jobdir/$basename.stdin
+      echo 'if ( $? != 0 ) then\n   exit 1\nendif' >>$jobdir/$basename.stdin
+      echo 'dccp $_CONDOR_SCRATCH_DIR'"/${basename}p0.itape $destdir/$basename/${basename}p0.itape" >>$jobdir/$basename.stdin
+      echo 'if ( $? != 0 ) then\n   exit 1\nendif' >>$jobdir/$basename.stdin
+      echo 'if ( -r $_CONDOR_SCRATCH_DIR'"/${basename}p1.itape ) then" >>$jobdir/$basename.stdin
+      echo '  dccp $_CONDOR_SCRATCH_DIR'"/${basename}p1.itape $destdir/$basename/${basename}p1.itape" >>$jobdir/$basename.stdin
+      echo "endif" >>$jobdir/$basename.stdin
+      echo 'if ( $? != 0 ) then\n   exit 1\nendif' >>$jobdir/$basename.stdin
+      echo "rm -f $rawpath/$basename.evt" >>$jobdir/$basename.stdin
+      echo "Input = $jobdir/$basename.stdin" >> $jobdir/condor.sub
+      echo "Output = $jobdir/$basename.stdout" >> $jobdir/condor.sub
+      echo "Error = $jobdir/$basename.stderr" >> $jobdir/condor.sub
+      echo "queue" >> $jobdir/condor.sub
+   endif
+end
+
+echo condor_submit $jobdir/condor.sub
+condor_submit $jobdir/condor.sub

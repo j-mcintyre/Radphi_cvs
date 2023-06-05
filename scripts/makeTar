@@ -1,0 +1,26 @@
+#! /usr/local/bin/perl
+
+$RADPHI_HOME = "/group/radphi";
+@targets = ("irix-mips4","irix-mips4-o","irix-mips3","irix-mips3-o","irix-mips2","irix-mips2-o","hpux","hpux-o","aix","aix-o","solaris","solaris-o");
+
+
+chdir($RADPHI_HOME);
+foreach $target (@targets){
+    # There are two sets to make - complete and just the update
+
+    # First make the complete sets
+    $cmd = "/usr/local/bin/gnutar czf $RADPHI_HOME/tarballs/bin.$target.tar.gz --exclude=\"*.O\"  bin.$target";
+    system($cmd);
+    $cmd = "/usr/local/bin/gnutar czf $RADPHI_HOME/tarballs/lib.$target.tar.gz --exclude=libpacklib.a --exclude=libmathlib.a --exclude=libkernlib.a  --exclude=CERNLIB_96a lib.$target";
+    system($cmd);
+    # Now make the incremental
+    $cmd = "/usr/local/bin/gnutar czf $RADPHI_HOME/tarballs/bin.$target-update.tar.gz --exclude=\"*.O\" -N \"1 day ago\" bin.$target  2>&1  1>/dev/null";
+    system($cmd);
+    $cmd = "/usr/local/bin/gnutar czf $RADPHI_HOME/tarballs/lib.$target-update.tar.gz --exclude=libpacklib.a --exclude=libmathlib.a --exclude=libkernlib.a --exclude=CERNLIB_96a -N \"1 day ago\" lib.$target  2>&1  1>/dev/null";
+    system($cmd);
+    
+}
+# Do the source code
+
+$cmd = "/usr/local/bin/gnutar czf $RADPHI_HOME/tarballs/source.tar.gz --exclude=CVS source 2>&1  1>/dev/null";
+system($cmd);

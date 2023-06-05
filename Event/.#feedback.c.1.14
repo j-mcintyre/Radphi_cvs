@@ -1,0 +1,963 @@
+/* The event display here represented was designed, coded & documented by   */
+/* Troels Petersen under the supervision of Elton Smith, with help from     */
+/*   Dave  Heddle and James Muguira.					    */
+/* Comments can be found around more complicated code leaving the basics    */
+/* uncommented. Upon problems and/or questions, please contact Troels       */
+/* Petersen at: <petersen@cebaf.gov> or <petersen@fys.ku.dk>		    */
+
+#include  "Event.h"
+
+void Feedback(Hv_View View, Hv_Point pp)
+{
+  static float		dist, theta;
+  static char		text[50];
+  static int		posx, posy, dx, dy;
+
+  worldx = (float)(xc-pp.x)/(float)nsize*4.0;
+  worldy = (float)(yc-pp.y)/(float)nsize*4.0;
+  dist = sqrt(worldx*worldx+worldy*worldy);
+  theta = atan2(dist,100.0);
+
+  sprintf(text, "Real World X: %.2f cm", worldx);
+  Hv_ChangeFeedback(View, WORLDX, text);
+
+  sprintf(text, "Real World Y: %.2f cm", worldy);
+  Hv_ChangeFeedback(View, WORLDY, text);
+
+  sprintf(text, "Distance from beam: %.2f cm", dist);
+  Hv_ChangeFeedback(View, DIST, text);
+
+  sprintf(text, "Angle from beam: %.3f rad", theta);
+  Hv_ChangeFeedback(View, THETA, text);
+
+  /* - geometry conversion (from symmetry) for the IF-statement - */
+  posx=(pp.x-xc)/nsize;
+  if (posx < 0) posx=-posx;
+  dy=geo[13-posx]*nsize;
+  posy=(pp.y-yc)/nsize;
+  if (posy < 0) posy=-posy;
+  dx=geo[13-posy]*nsize;
+  
+  /* - if the mouse is at a LGB, then... - */
+  if ((xc-dx<pp.x) && (pp.x<xc+dx) && (yc-dy<pp.y) && (pp.y<yc+dy)) { /* in the LGD */
+    lgx = 27-(pp.x-xp)/nsize;
+    lgy = 27-(pp.y-yp)/nsize;
+    lgn = lgx + lgy*28;
+    if (((lgx==13) || (lgx==14)) && ((lgy==13) || (lgy==14))) {
+      lgx=0; lgy=0; lgn=0;
+    }  
+    sprintf(text, "ID number: %4d   Lead Glass X: %3d (column)", lgn, lgx);
+    Hv_ChangeFeedback(View, POSS, text);
+
+    if (calibrated && trigbit==2) {
+      sprintf(text, "Energy (MeV):%4d Lead Glass Y: %3d (row)", lg[lgx][lgy], lgy);
+      Hv_ChangeFeedback(View, INFO, text);
+    }
+    else {
+       sprintf(text, "ADC:    %4d      Lead Glass Y: %3d (row)", lg[lgx][lgy], lgy);
+       Hv_ChangeFeedback(View, INFO, text);
+    }
+  } else {
+    Hv_ChangeFeedback(View, POSS, "                                   ");
+    Hv_ChangeFeedback(View, INFO, "                                   ");
+  }  
+}
+
+void FeedbackTagger(Hv_View View, Hv_Point pp)
+{
+
+  static char		text[50];
+  static int	        dx, dy, id, tdcs;
+  static float	        time;
+  static float          photon_energy;
+
+  /*  average energy of photon w.r.t. original beam energy */
+  static float          tag_energy[19] = {0.9490, 0.93975, 0.9288, 0.9183,
+                                         0.9096, 0.9006, 0.89195, 0.8836,
+                                         0.87445, 0.8648, 0.85475, 0.8441,
+                                         0.8329, 0.8219, 0.8129, 0.80565,
+                                         0.79795, 0.7897, 0.78105};
+ 
+
+  worldx = (float)(pp.x)/(float)nsize*4.0;
+  worldy = (float)(pp.y)/(float)nsize*4.0;
+
+  dx = pp.x - xctag ;
+  dy = pp.y - yctag ; 
+
+  id = dx/nsize;    /* note: hardware numbering starts at 1 */
+
+  if (dy > 0 && dy < nsize*2 && id < 19 ){
+      sprintf(text, "Tagger channel:  %.1i Left", id+1);
+      Hv_ChangeFeedback(View, 8, text);
+      
+      tdcs = tagger[id].multicount;
+      time = tagger[id].time[0];
+      photon_energy = beamEnergy * tag_energy[id];
+
+      if (tdcs > 0) {
+	sprintf(text, "TDC hits :   %.2i  channels", tdcs);
+	Hv_ChangeFeedback(View, 9, text);
+
+	sprintf(text, "time    :   %.1f  ns", time);
+	Hv_ChangeFeedback(View, 7, text);
+
+	sprintf(text, "Photon Energy: %.2f GeV", photon_energy);
+	Hv_ChangeFeedback(View, 22, text);
+      }
+      else {
+	Hv_ChangeFeedback(View,  7, "                                   ");
+	Hv_ChangeFeedback(View,  9, "                                   ");
+	Hv_ChangeFeedback(View, 22, "                                   ");
+      }
+  }
+  else if (dy <0 && dy > -nsize*2 && id < 19 ){
+      sprintf(text, "Tagger channel:  %.1i Right", id+1);
+      Hv_ChangeFeedback(View, 8, text);
+
+      tdcs = tagger[id+19].multicount;
+      time = tagger[id+19].time[0];
+      photon_energy = beamEnergy * tag_energy[id];
+
+      if (tdcs > 0) {
+	sprintf(text, "TDC hits :   %.2i  channels", tdcs);
+	Hv_ChangeFeedback(View, 9, text);
+	
+	sprintf(text, "time    :   %.1f  ns", time);
+	Hv_ChangeFeedback(View, 7, text);
+
+	sprintf(text, "Photon Energy: %.2f GeV", photon_energy);
+	Hv_ChangeFeedback(View, 22, text);
+     }
+      else {
+	Hv_ChangeFeedback(View,  9, "                                   ");
+	Hv_ChangeFeedback(View,  7, "                                   ");
+	Hv_ChangeFeedback(View, 22, "                                   ");
+      }
+  }
+  else {
+    Hv_ChangeFeedback(View,  8, "                                   ");
+    Hv_ChangeFeedback(View,  9, "                                   ");
+    Hv_ChangeFeedback(View,  7, "                                   ");
+    Hv_ChangeFeedback(View, 22, "                                   ");
+  }
+
+  return;
+}
+
+void FeedbackCPV(Hv_View View, Hv_Point pp)
+{  
+  static char		text[50];
+  float ppi = 7.9558;
+  int id, adc, i;
+  float time;
+  worldx = pp.x - xctcpv;
+  worldy = pp.y - yctcpv;
+ 
+  if ((((worldx > 0) && (worldx < (22.188*ppi))) && ((worldy > (0.625*ppi)) && (worldy < (22.625*ppi)))) &&
+					      ((!((worldx > (17.188*ppi)) && (worldy > (15.875*ppi)))) &&
+					      (!((worldx < (1.626*ppi)) && (worldy < (1.875*ppi))))))
+    {
+      if (((worldy > (15.875*ppi))  && (worldy < (22.625*ppi)))  && (worldx < (17.188 * ppi))) { 
+	id = 0;
+	adc = cpv[id];
+	if(cpv_times[id].multicount > 0){
+	  for(i = 0;i < cpv_times[id].multicount; i++){
+	    if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	      time = (float)cpv_times[id].time[i] * 0.500;
+	      sprintf(text, "TDC value  : %.1f ns.",time);
+	      Hv_ChangeFeedback(View, 12, text);
+	    }
+	    else {Hv_ChangeFeedback(View,12,"              ");}
+	  }  
+	}
+	else {Hv_ChangeFeedback(View, 12 ,"               ");}
+      }
+      else if (((worldy > (12.375*ppi)) && (worldy < (15.875 * ppi))) && (worldx < (22.188*ppi))){ 
+	id = 2;
+	adc=cpv[id];
+        if(cpv_times[id].multicount > 0){
+	  for(i = 0;i < cpv_times[id].multicount; i++){
+	    if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	      time = (float)cpv_times[id].time[i] * 0.500;
+	      sprintf(text, "TDC value  : %.1f ns.",time);
+	      Hv_ChangeFeedback(View, 12, text);
+	    }
+	    else {Hv_ChangeFeedback(View,12,"                 ");}	  
+	  }
+	}
+	else {Hv_ChangeFeedback(View, 12 ,"               ");}
+      }
+      else if (((worldy > (8.875*ppi)) && (worldy < (12.375 * ppi))) && (worldx < (22.188 * ppi))){ 
+	id = 4;
+	adc=cpv[id];
+	if(cpv_times[id].multicount > 0){
+	  for(i = 0;i < cpv_times[id].multicount; i++){
+	    if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	      time = (float)cpv_times[id].time[i] * 0.500;
+	      sprintf(text, "TDC value  : %.1f ns.",time);
+	      Hv_ChangeFeedback(View, 12, text);
+	    }
+	    else {Hv_ChangeFeedback(View,12,"                  ");}	  
+	  }
+	}
+	else {Hv_ChangeFeedback(View, 12 ,"               ");}
+      }
+      else if (((worldy > (5.375*ppi)) && (worldy < (8.875 * ppi))) && (worldx < (22.188*ppi))){ 
+	id = 6;
+	adc=cpv[id];
+	if(cpv_times[id].multicount > 0){
+	  for(i = 0;i < cpv_times[id].multicount; i++){
+	    if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	      time = (float)cpv_times[id].time[i] * 0.500;
+	      sprintf(text, "TDC value  : %.1f ns.",time);
+	      Hv_ChangeFeedback(View, 12, text);
+	    }
+	    else {Hv_ChangeFeedback(View,12,"                ");}	  
+	  }
+	}
+	else {Hv_ChangeFeedback(View, 12 ,"               ");}
+      }
+      else if (((worldy > (3.125*ppi)) && (worldy < (5.375 * ppi))) && (worldx < (22.188 * ppi))){ 
+	id = 8;
+	adc=cpv[id];
+	if(cpv_times[id].multicount > 0){
+	  for(i = 0;i < cpv_times[id].multicount; i++){
+	    if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	      time = (float)cpv_times[id].time[i] * 0.500;
+	      sprintf(text, "TDC value  : %.1f ns.",time);
+	      Hv_ChangeFeedback(View, 12, text);
+	    }
+	    else {Hv_ChangeFeedback(View,12,"              ");}
+	  }
+	}
+	else {Hv_ChangeFeedback(View, 12 ,"              ");}
+      } 
+      else if (((worldy > (1.875*ppi)) && (worldy < (3.125 * ppi))) && (worldx < (22.188*ppi))){ 
+	id = 10;
+	adc=cpv[id];
+	if(cpv_times[id].multicount > 0){
+	  for(i = 0;i < cpv_times[id].multicount; i++){
+	    if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	      time = (float)cpv_times[id].time[i] * 0.500;
+	      sprintf(text, "TDC value  : %.1f ns.",time);
+	      Hv_ChangeFeedback(View, 12, text);
+	    }
+	    else {Hv_ChangeFeedback(View,12,"              ");}
+	  }
+	}
+	else {Hv_ChangeFeedback(View, 12 ,"               ");}
+      }
+      else if (((worldy > (0.625*ppi)) && (worldy < (1.875 * ppi))) && ((worldx < (22.188 * ppi))&& (worldx > (1.626*ppi)))){ 
+	id = 12;
+	adc=cpv[id];
+	if(cpv_times[id].multicount > 0){
+	  for(i = 0;i < cpv_times[id].multicount; i++){
+	    if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	      time = (float)cpv_times[id].time[i] * 0.500;
+	      sprintf(text, "TDC value  : %.1f ns.",time);
+	      Hv_ChangeFeedback(View, 12, text);
+	    }
+	    else {Hv_ChangeFeedback(View,12,"              ");}
+	  }
+	}
+	else {Hv_ChangeFeedback(View, 12 ,"               ");}
+      }
+
+     
+      sprintf(text, "CPV channel: %i", id);
+      Hv_ChangeFeedback(View, 10, text);
+      sprintf(text, "ADC value  : %i", adc);
+      Hv_ChangeFeedback(View, 11, text);
+     
+    }
+ 
+ else if ((((worldx > 0) && (worldx < (22.188*ppi))) && ((worldy < (-0.625*ppi)) && (worldy > (-22.625*ppi)))) &&
+					      ((!((worldx > (17.188*ppi)) && (worldy < (-15.875*ppi)))) &&
+					      (!((worldx < (1.626*ppi)) && (worldy > (-1.875*ppi)))))){
+    if (((worldy < (-15.875*ppi))  && (worldy > (-22.625*ppi)))  && (worldx < (17.188 * ppi))){ 
+      id = 28;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	  for(i = 0;i < cpv_times[id].multicount; i++){
+	    if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	      time = (float)cpv_times[id].time[i] * 0.500;
+	      sprintf(text, "TDC value  : %.1f ns.",time);
+	      Hv_ChangeFeedback(View, 12, text);
+	    }
+	    else {Hv_ChangeFeedback(View,12,"              ");}
+	  }
+	}
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    } 
+    else if (((worldy < (-12.375*ppi)) && (worldy > (-15.875 * ppi))) && (worldx < (22.188*ppi))){ 
+      id = 26;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+    else if (((worldy < (-8.875*ppi)) && (worldy > (-12.375 * ppi))) && (worldx < (22.188 * ppi))){ 
+      id = 24;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"              ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+    else if (((worldy < (-5.375*ppi)) && (worldy > (-8.875 * ppi))) && (worldx < (22.188*ppi))){ 
+      id = 22;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"              ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"              ");}
+    } 
+    else if (((worldy < (-1.875*ppi)) && (worldy > (-3.125 * ppi))) && (worldx < (22.188*ppi))){ 
+      id = 18;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"              ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"              ");}
+    }
+    else if (((worldy < (-3.125*ppi)) && (worldy > (-5.375 * ppi))) && (worldx < (22.188 * ppi))){ 
+      id = 20;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"              ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"              ");}
+    }
+    else if (((worldy < (-0.625*ppi)) && (worldy > (-1.875 * ppi))) && ((worldx < (22.188 * ppi))&& (worldx > (1.626*ppi)))){ 
+      id = 16;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+
+    sprintf(text, "CPV channel: %i", id);
+    Hv_ChangeFeedback(View, 10, text);
+    sprintf(text, "ADC value  : %i", adc);
+    Hv_ChangeFeedback(View, 11, text);
+ }
+
+
+  else if ((((worldx < 0) && (worldx > (-22.188*ppi))) && ((worldy < (-0.625*ppi)) && (worldy > (-22.625*ppi)))) &&
+	   ((!((worldx < (-17.188*ppi)) && (worldy < (-15.875*ppi)))) &&
+	    (!((worldx > (-1.626*ppi)) && (worldy > (-1.875*ppi)))))){
+    if (((worldy < (-15.875*ppi))  && (worldy > (-22.625*ppi)))  && (worldx > (-17.188 * ppi))){ 
+      id = 29;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    } 
+    else if (((worldy < (-12.375*ppi)) && (worldy > (-15.875 * ppi))) && (worldx > (-22.188*ppi))){ 
+      id = 27;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+    else if (((worldy < (-8.875*ppi)) && (worldy > (-12.375 * ppi))) && (worldx > (-22.188 * ppi))){ 
+      id = 25;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+    else if (((worldy < (-5.375*ppi)) && (worldy > (-8.875 * ppi))) && (worldx > (-22.188*ppi))){ 
+      id = 23;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+    else if (((worldy < (-3.125*ppi)) && (worldy > (-5.375 * ppi))) && (worldx > (-22.188 * ppi))){ 
+      id = 21;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    } 
+    else if (((worldy < (-1.875*ppi)) && (worldy > (-3.125 * ppi))) && (worldx > (-22.188*ppi))){ 
+      id = 19;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"       ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+    else if (((worldy < (-0.625*ppi)) && (worldy > (-1.875 * ppi))) && ((worldx > (-22.188 * ppi))&& (worldx < (-1.626*ppi)))){ 
+      id = 17;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+
+    sprintf(text, "CPV channel: %i", id);
+    Hv_ChangeFeedback(View, 10, text);
+    sprintf(text, "ADC value  : %i", adc);
+    Hv_ChangeFeedback(View, 11, text);
+  }
+  
+
+  else if ((((worldx < 0) && (worldx > (-22.188*ppi))) && ((worldy > (0.625*ppi)) && (worldy < (22.625*ppi)))) &&
+	   ((!((worldx < (-17.188*ppi)) && (worldy > (15.875*ppi)))) &&
+	    (!((worldx > (-1.626*ppi)) && (worldy < (1.875*ppi)))))){
+    if (((worldy > (15.875*ppi))  && (worldy < (22.625*ppi)))  && (worldx > (-17.188 * ppi))){ 
+      id = 1;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    } 
+    else if (((worldy > (12.375*ppi)) && (worldy < (15.875 * ppi))) && (worldx > (-22.188*ppi))){ 
+      id = 3;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"                ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+    else if (((worldy > (8.875*ppi)) && (worldy < (12.375 * ppi))) && (worldx > (-22.188 * ppi))){ 
+      id = 5;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+    else if (((worldy > (5.375*ppi)) && (worldy < (8.875 * ppi))) && (worldx > (-22.188*ppi))){ 
+      id = 7;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+    else if (((worldy > (3.125*ppi)) && (worldy < (5.375 * ppi))) && (worldx > (-22.188 * ppi))){ 
+      id = 9;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    } 
+    else if (((worldy > (1.875*ppi)) && (worldy < (3.125 * ppi))) && (worldx > (-22.188*ppi))){ 
+      id = 11;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"               ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+    else if (((worldy > (0.625*ppi)) && (worldy < (1.875 * ppi))) && ((worldx > (-22.188 * ppi))&& (worldx < (-1.626*ppi)))){ 
+      id = 13;
+      adc=cpv[id];
+      if(cpv_times[id].multicount > 0){
+	for(i = 0;i < cpv_times[id].multicount; i++){
+	  if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	    time = (float)cpv_times[id].time[i] * 0.500;
+	    sprintf(text, "TDC value  : %.1f ns.",time);
+	    Hv_ChangeFeedback(View, 12, text);
+	  }
+	  else {Hv_ChangeFeedback(View,12,"                ");}
+	}
+      }
+      else {Hv_ChangeFeedback(View, 12 ,"               ");}
+    }
+    sprintf(text, "CPV channel: %i", id);
+    Hv_ChangeFeedback(View, 10, text);
+    sprintf(text, "ADC value  : %i", adc);
+    Hv_ChangeFeedback(View, 11, text);
+  }
+
+
+  else if (((worldx > (1.626*ppi)) && (worldx < (22.188*ppi))) && ((worldy < (.625*ppi)) && (worldy > (-.625*ppi)))) {
+    id = 14;
+    adc=cpv[id];
+    if(cpv_times[id].multicount > 0){
+      for(i = 0;i < cpv_times[id].multicount; i++){
+	if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	  time = (float)cpv_times[id].time[i] * 0.500;
+	  sprintf(text, "TDC value  : %.1f ns.",time);
+	  Hv_ChangeFeedback(View, 12, text);
+	}
+	else {Hv_ChangeFeedback(View,12,"                 ");}
+      }
+    }
+    else {Hv_ChangeFeedback(View, 12 ,"               ");}
+
+    sprintf(text, "CPV channel: %i", id);
+    Hv_ChangeFeedback(View, 10, text);
+    sprintf(text, "ADC value  : %i", adc);
+    Hv_ChangeFeedback(View, 11, text);
+  }
+
+
+  else if (((worldx < (-1.626*ppi)) && (worldx > (-22.188*ppi))) && ((worldy < (.625*ppi)) && (worldy > (-.625*ppi)))) {
+    id = 15;
+    adc=cpv[id];
+    if(cpv_times[id].multicount > 0){
+      for(i = 0;i < cpv_times[id].multicount; i++){
+	if ((cpv_times[id].time[i] > lb_cpvT) && (cpv_times[id].time[i] < ub_cpvT)){
+	  time = (float)cpv_times[id].time[i] * 0.500;
+	  sprintf(text, "TDC value  : %.1f ns.",time);
+	  Hv_ChangeFeedback(View, 12, text);
+	}
+	else {Hv_ChangeFeedback(View,12,"               ");}
+      }
+    }
+    else {Hv_ChangeFeedback(View, 12 ,"               ");}
+
+    sprintf(text, "CPV channel: %i", id);
+    Hv_ChangeFeedback(View, 10, text);
+    sprintf(text, "ADC value  : %i", adc);
+    Hv_ChangeFeedback(View, 11, text);
+  }
+
+  else{
+    Hv_ChangeFeedback(View,10,"               ");
+    Hv_ChangeFeedback(View,11,"               ");
+    Hv_ChangeFeedback(View,12,"               ");
+  }
+}
+
+void FeedbackBSD(Hv_View View, Hv_Point pp) 
+{
+  static char       text[50];
+  int i, id_s, id_r, id_l, adc_s, adc_r, adc_l;
+  int a,b,c,d,rightx,righty,leftx,lefty;
+  float time_s, time_r, time_l;
+  int coordx, coordy;
+  int SW = 24; /* distance between straight counters in pixels */
+  int LW = 48; /* distance between left or right counters in pixels */
+
+  time_s = 0;
+  time_r = 0;
+  time_l = 0;
+
+  /* obtain the world coordinates from the mouse location */
+
+  Hv_LocalToWorld(View, &worldx, &worldy, pp.x, pp.y);
+
+  worldx = (pp.x - xctbsd);
+  worldy = (pp.y - yctbsd);
+
+  coordx = worldx + 288;
+  coordy = worldy - 96;
+
+  if((worldx > -288 && worldx < 288) && (worldy > -96 && worldy < 96)){
+    /* finds straight counter where mouse is located */
+    id_s = (coordx - coordx%SW) / SW;
+    adc_s = bsd_s[id_s];
+   
+    if(bsd_s_times[id_s].multicount > 0){
+      for(i=0; i<bsd_s_times[id_s].multicount; i++){
+	if((bsd_s_times[id_s].time[i] > lb_bsdT) && (bsd_s_times[id_s].time[i] < ub_bsdT)){
+	  time_s = (float)bsd_s_times[id_s].time[i] * 0.500;
+	} /* end if */
+	/*else {Hv_ChangeFeedback(View,19,"                      ");}*/
+      } /* end for */
+    } /* end if */
+    
+    /* do shear transformation to find right counter where mouse is located */
+    /* transformation = [(a,c),(b,d)] */
+    
+    a=1;
+    b=1;
+    c=0;
+    d=1;
+    
+    rightx = a*coordx + b*coordy;
+    righty = c*coordx + d*coordy;
+
+    if(rightx > 0){
+      id_r = (rightx - rightx%LW) / LW;}
+    else {
+      rightx = abs(rightx);
+      id_r = -((rightx - rightx%LW) / LW) + 11;}
+
+    adc_r = bsd_r[id_r];
+    
+    if(bsd_r_times[id_r].multicount > 0){
+      for(i=0; i<bsd_r_times[id_r].multicount; i++){
+	if((bsd_r_times[id_r].time[i] > lb_bsdT) && (bsd_r_times[id_r].time[i] < ub_bsdT)){
+	  time_r = (float)bsd_r_times[id_r].time[i] * 0.500;
+	} /* end if */
+	/* 	else {Hv_ChangeFeedback(View,20,"                      ");}*/
+      } /* end for */
+    } /* end if */
+    
+    /* do shear transformation to find left counter where mouse is located */
+    /* transformation = [(a,c),(b,d)] */
+    
+    a=1;
+    b=-1;
+    c=0;
+    d=1;
+    
+    leftx = a*coordx + b*coordy;
+    lefty = c*coordx + d*coordy;
+    
+    if(leftx < 576){
+      id_l = (leftx - leftx%LW) / LW;}
+    else {
+      leftx = abs(leftx);
+      id_l = ((leftx - leftx%LW) / LW) - 12;}
+    
+    adc_l = bsd_l[id_l];
+    
+    if(bsd_l_times[id_l].multicount > 0){
+      for(i=0; i<bsd_l_times[id_l].multicount; i++){
+	if((bsd_l_times[id_l].time[i] > lb_bsdT) && (bsd_l_times[id_l].time[i] < ub_bsdT)){
+	  time_l = (float)bsd_l_times[id_l].time[i] * 0.500;
+	} /* end if */
+	/*	else {Hv_ChangeFeedback(View,21,"                      ");}*/
+      } /* end for */
+    } /* end if */
+    
+    sprintf(text,"BSD Counter: S%2d    ADC value: %i", id_s, adc_s);
+    Hv_ChangeFeedback(View, 16, text);
+    sprintf(text,"           : R%2d             : %i", id_r, adc_r);
+    Hv_ChangeFeedback(View, 17, text);
+    sprintf(text,"           : L%2d             : %i", id_l, adc_l);
+    Hv_ChangeFeedback(View, 18, text);
+   
+    sprintf(text,"S TDC value: %.1f ns.", time_s);
+    Hv_ChangeFeedback(View, 19, text);
+    sprintf(text,"R TDC value: %.1f ns.", time_r);
+    Hv_ChangeFeedback(View, 20, text);
+    sprintf(text,"L TDC value: %.1f ns.", time_l);
+    Hv_ChangeFeedback(View, 21, text);
+
+  } /* end if */
+  else {
+    Hv_ChangeFeedback(View,16,"                               ");
+    Hv_ChangeFeedback(View,17,"                               ");
+    Hv_ChangeFeedback(View,18,"                               ");
+    Hv_ChangeFeedback(View,19,"                     ");
+    Hv_ChangeFeedback(View,20,"                     ");
+    Hv_ChangeFeedback(View,21,"                     ");
+  } /* end else */
+  
+} /* end FeedbackBSD */
+
+void FeedbackUPV(Hv_View View, Hv_Point pp)
+{  
+  static char		text[50];
+  float ppi = 5.54;
+  int  id, adc, i;
+  float time;
+ 
+  worldx = (pp.x - xctupv);
+  worldy = (pp.y - yctupv); 
+ 
+
+
+  if (((worldx > (2.25*ppi)) && ( worldx < (16.75*ppi)))  && (( worldy > (3.37*ppi)) &&( worldy < (10.47*ppi)))) {
+    id = 0;
+    adc = upv[id];
+    if(upv_times[id].multicount > 0){
+      for(i = 0;i < upv_times[id].multicount; i++){
+	if ((upv_times[id].time[i] > lb_upvT) && (upv_times[id].time[i] < ub_upvT)){
+	  time = (float)upv_times[id].time[i] * 0.500;
+	  sprintf(text, "TDC value: %.1f ns.",time);
+	  Hv_ChangeFeedback(View, 15, text);
+	}
+	else {Hv_ChangeFeedback(View,15,"       ");}
+      }
+    }
+    sprintf(text, "UPV id   : H%i",id);
+    Hv_ChangeFeedback(View,13,text);
+    sprintf(text, "ADC value: %i",adc);
+    Hv_ChangeFeedback(View,14,text);
+  }
+   
+  else if (((worldx > (2.25 * ppi)) && ( worldx < (16.75 *ppi ))) && ((worldy > (-3.37*ppi)) && (worldy < (3.37 *ppi)))){
+    id = 2;
+    adc = upv[id];
+    if(upv_times[id].multicount > 0){
+      for(i = 0;i < upv_times[id].multicount; i++){
+	if ((upv_times[id].time[i] > lb_upvT) && (upv_times[id].time[i] < ub_upvT)){
+	  time = (float)upv_times[id].time[i] * 0.500;
+	  sprintf(text, "TDC value: %.1f ns.",time);
+	  Hv_ChangeFeedback(View, 15, text);
+	}
+	else {Hv_ChangeFeedback(View,15,"       ");}
+      }
+    }
+    sprintf(text, "UPV id   : H%i",id);
+    Hv_ChangeFeedback(View,13,text);
+    sprintf(text, "ADC value: %i",adc);
+    Hv_ChangeFeedback(View,14,text);
+  }
+  else if (((worldx > (2.25 * ppi)) && ( worldx < (16.75 *ppi ))) && ((worldy < (-3.37 *ppi)) && (worldy > (-10.47*ppi)))){
+    id = 4;
+    adc = upv[id];
+    if(upv_times[id].multicount > 0){
+      for(i = 0;i < upv_times[id].multicount; i++){
+	if ((upv_times[id].time[i] > lb_upvT) && (upv_times[id].time[i] < ub_upvT)){
+	  time = (float)upv_times[id].time[i] * 0.500;
+	  sprintf(text, "TDC value: %.1f ns.",time);
+	  Hv_ChangeFeedback(View, 15, text);
+	}
+	else {Hv_ChangeFeedback(View,15,"       ");}
+      }
+    }
+    sprintf(text, "UPV id   : H%i",id);
+    Hv_ChangeFeedback(View,13,text);
+    sprintf(text, "ADC value: %i",adc);
+    Hv_ChangeFeedback(View,14,text);
+  }
+  else if (((worldx < (-2.25 *ppi)) && (worldx > (-16.75*ppi))) &&  (( worldy > (3.37*ppi )) &&( worldy < (10.47 * ppi)))){
+    Hv_ChangeFeedback(View, 15,"               ");
+    id = 1;
+    adc = upv[id];
+    if(upv_times[id].multicount > 0){
+      for(i = 0;i < upv_times[id].multicount; i++){
+	if ((upv_times[id].time[i] > lb_upvT) && (upv_times[id].time[i] < ub_upvT)){
+	  time = (float)upv_times[id].time[i] * 0.500;
+	  sprintf(text, "TDC value: %.1f ns.",time);
+	  Hv_ChangeFeedback(View, 15, text);
+	}
+	else {Hv_ChangeFeedback(View,15,"       ");}
+      }
+    }
+    sprintf(text, "UPV id   : H%i",id);
+    Hv_ChangeFeedback(View,13,text);
+    sprintf(text, "ADC value: %i",adc);
+    Hv_ChangeFeedback(View,14,text);
+  }
+  else if (((worldx < (-2.25 *ppi)) && (worldx > (-16.75*ppi))) && ((worldy > (-3.37*ppi)) && (worldy < (3.37 *ppi)))){
+    Hv_ChangeFeedback(View, 15,"               ");
+    id = 3;
+    adc = upv[id];
+    if(upv_times[id].multicount > 0){
+      for(i = 0;i < upv_times[id].multicount; i++){
+	if ((upv_times[id].time[i] > lb_upvT) && (upv_times[id].time[i] < ub_upvT)){
+	  time = (float)upv_times[id].time[i] * 0.500;
+	  sprintf(text, "TDC value: %.1f ns.",time);
+	  Hv_ChangeFeedback(View, 15, text);
+	}
+	else {Hv_ChangeFeedback(View,15,"       ");}
+      }
+    }
+    sprintf(text, "UPV id   : H%i",id);
+    Hv_ChangeFeedback(View,13,text);
+    sprintf(text, "ADC value: %i",adc);
+    Hv_ChangeFeedback(View,14,text);
+  }
+  else if (((worldx < (-2.25 *ppi)) && (worldx > (-16.75*ppi))) && ((worldy < (-3.37 *ppi)) && (worldy > (-10.47*ppi)))){
+    Hv_ChangeFeedback(View, 15,"               ");
+    id = 5;
+    adc = upv[id];
+    if(upv_times[id].multicount > 0){
+      for(i = 0;i < upv_times[id].multicount; i++){
+	if ((upv_times[id].time[i] > lb_upvT) && (upv_times[id].time[i] < ub_upvT)){
+	  time = (float)upv_times[id].time[i] * 0.500;
+	  sprintf(text, "TDC value: %.1f ns.",time);
+	  Hv_ChangeFeedback(View, 15, text);
+	}
+	else {Hv_ChangeFeedback(View,15,"       ");}
+      }
+    }
+    sprintf(text, "UPV id   : H%i",id);
+    Hv_ChangeFeedback(View,13,text);
+    sprintf(text, "ADC value: %i",adc);
+    Hv_ChangeFeedback(View,14,text);  
+  }
+  else if ((((worldx > (-3.55*ppi)) && (worldx < (3.35*ppi))) && ((worldy < (-10.65*ppi)) && (worldy > (-16.75*ppi))))
+	   ||(((worldx > (-2.25 * ppi)) && (worldx < (2.25*ppi)))  && ((worldy < (-2.25*ppi)) && (worldy > (-10.65*ppi))))){
+    Hv_ChangeFeedback(View, 15,"               ");
+    id = 7;
+    adc = upv[id];
+    if(upv_times[id].multicount > 0){
+      for(i = 0;i < upv_times[id].multicount; i++){
+	if ((upv_times[id].time[i] > lb_upvT) && (upv_times[id].time[i] < ub_upvT)){
+	  time = (float)upv_times[id].time[i] * 0.500;
+	  sprintf(text, "TDC value: %.1f ns.",time);
+	  Hv_ChangeFeedback(View, 15, text);
+	}
+	else {Hv_ChangeFeedback(View,15,"       ");}
+      }
+    }
+    sprintf(text, "UPV id   : V%i",(id-6));
+    Hv_ChangeFeedback(View,13,text);
+    sprintf(text, "ADC value: %i",adc);
+    Hv_ChangeFeedback(View,14,text);
+  }
+
+  else if ((((worldx > (-3.55*ppi)) && (worldx < (3.35*ppi))) && ((worldy > (10.65*ppi)) && (worldy < (16.75*ppi))))
+	   ||(((worldx > (-2.25 * ppi)) && (worldx < (2.25*ppi)))  && ((worldy > (2.25*ppi)) && (worldy < (10.65*ppi))))){
+    Hv_ChangeFeedback(View, 15,"               ");
+    id = 6;
+    adc = upv[id];
+    if(upv_times[id].multicount > 0){
+      for(i = 0;i < upv_times[id].multicount; i++){
+	if ((upv_times[id].time[i] > lb_upvT) && (upv_times[id].time[i] < ub_upvT)){
+	  time = (float)upv_times[id].time[i] * 0.500;
+	  sprintf(text, "TDC value: %.1f ns.",time);
+	  Hv_ChangeFeedback(View, 15, text);
+	}
+	else {Hv_ChangeFeedback(View,15,"       ");}
+      }
+    }
+    sprintf(text, "UPV id   : V%i",(id-6));
+    Hv_ChangeFeedback(View,13,text);
+    sprintf(text, "ADC value: %i",adc);
+    Hv_ChangeFeedback(View,14,text);
+  }
+ 
+  else{
+    Hv_ChangeFeedback(View,13,"           ");
+    Hv_ChangeFeedback(View,14,"           ");
+    Hv_ChangeFeedback(View,15,"           ");
+  }
+}

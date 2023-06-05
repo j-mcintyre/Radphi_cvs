@@ -1,0 +1,7 @@
+MACRO plotbgv
+ satt * seen 0
+ satt bgvs seen 1
+ satt bvlg seen 1
+ dopt hide on
+ next; draw bgv 140 40 0 13 8 .14 .14
+RETURN

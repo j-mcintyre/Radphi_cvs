@@ -1,0 +1,11 @@
+MACRO plotrpd
+ satt * seen 0
+ satt pmte seen 1
+ satt lgth seen 1
+ satt thsn seen 1
+ satt pmtd seen 1
+ satt lgds seen 1
+ satt dsen seen 1
+ dopt hide on
+ next; draw rpd 140 40 0 10 10 .12 .12
+RETURN

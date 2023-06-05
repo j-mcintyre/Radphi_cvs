@@ -1,0 +1,369 @@
+#
+# This is the UMAP database for the FASTBUS ROC (ROC4)
+#
+#   new version for March 1998 run period - R.T.Jones
+#     corrected hardware cable mapping problem in tagger TDC
+#     by remapping here - June 98   D.S. Armstrong
+#     also, added TAG_or CPV_or RPD_or to slot 24
+#   1875 added in slot 17; cables moved from the 10C6s
+#
+#   new version for July 1999 run period
+#
+#   starting with the 2000 run, have 2 1877S TDCs and the mam in this 
+#   crate.  I have now updated this information here.
+
+roc.0.address: 21
+roc.0.nmodules: 3
+roc.0.module.*.bus: FASTBUS
+#
+# Slow TDC
+#
+LRS_1877.nchannels: 96     
+LRS_1877.bus: FASTBUS
+LRS_1877.type: TDC
+roc.0.module.0.type: LRS_1877
+roc.0.module.0.slot: 19
+roc.0.module.0.channel.*.detector: BSD
+roc.0.module.0.channel.0.detector: UPV
+roc.0.module.0.channel.0.channel: 3
+roc.0.module.0.channel.1.detector: UPV
+roc.0.module.0.channel.1.channel: 0
+roc.0.module.0.channel.2.detector: UPV
+roc.0.module.0.channel.2.channel: 7
+roc.0.module.0.channel.3.detector: UPV
+roc.0.module.0.channel.3.channel: 5
+roc.0.module.0.channel.4.detector: UPV
+roc.0.module.0.channel.4.channel: 4
+roc.0.module.0.channel.5.detector: UPV
+roc.0.module.0.channel.5.channel: 2
+roc.0.module.0.channel.6.detector: UPV
+roc.0.module.0.channel.6.channel: 1
+roc.0.module.0.channel.7.detector: UPV
+roc.0.module.0.channel.7.channel: 6
+roc.0.module.0.channel.8.detector: TAGGER
+roc.0.module.0.channel.8.channel: 38
+roc.0.module.0.channel.9.detector: UPV
+roc.0.module.0.channel.9.channel: 8
+roc.0.module.0.channel.10.detector: BSD
+roc.0.module.0.channel.10.channel: 51
+roc.0.module.0.channel.11.detector: UNUSED
+roc.0.module.0.channel.11.channel: UNUSED
+roc.0.module.0.channel.12.detector: BSD
+roc.0.module.0.channel.12.channel: 48
+roc.0.module.0.channel.13.detector: BSD
+roc.0.module.0.channel.13.channel: 49
+roc.0.module.0.channel.14.detector: BSD
+roc.0.module.0.channel.14.channel: 50
+roc.0.module.0.channel.15.detector: UNUSED
+roc.0.module.0.channel.15.channel: UNUSED
+roc.0.module.0.channel.16.detector: CPV
+roc.0.module.0.channel.16.channel: 13
+roc.0.module.0.channel.17.detector: CPV
+roc.0.module.0.channel.17.channel: 8
+roc.0.module.0.channel.18.detector: CPV
+roc.0.module.0.channel.18.channel: 16
+roc.0.module.0.channel.19.detector: UNUSED
+roc.0.module.0.channel.19.channel: UNUSED
+roc.0.module.0.channel.20.detector: CPV
+roc.0.module.0.channel.20.channel: 26
+roc.0.module.0.channel.21.detector: CPV
+roc.0.module.0.channel.21.channel: 4
+roc.0.module.0.channel.22.detector: CPV
+roc.0.module.0.channel.22.channel: 18
+roc.0.module.0.channel.23.detector: CPV
+roc.0.module.0.channel.23.channel: 0
+roc.0.module.0.channel.24.detector: CPV
+roc.0.module.0.channel.24.channel: 19
+roc.0.module.0.channel.25.detector: CPV
+roc.0.module.0.channel.25.channel: 7
+roc.0.module.0.channel.26.detector: CPV
+roc.0.module.0.channel.26.channel: 11
+roc.0.module.0.channel.27.detector: CPV
+roc.0.module.0.channel.27.channel: 10
+roc.0.module.0.channel.28.detector: CPV
+roc.0.module.0.channel.28.channel: 6
+roc.0.module.0.channel.29.detector: CPV
+roc.0.module.0.channel.29.channel: 3
+roc.0.module.0.channel.30.detector: CPV
+roc.0.module.0.channel.30.channel: 5
+roc.0.module.0.channel.31.detector: CPV
+roc.0.module.0.channel.31.channel: 20
+roc.0.module.0.channel.32.detector: CPV
+roc.0.module.0.channel.32.channel: 9
+roc.0.module.0.channel.33.detector: CPV
+roc.0.module.0.channel.33.channel: 2
+roc.0.module.0.channel.34.detector: CPV
+roc.0.module.0.channel.34.channel: 1
+roc.0.module.0.channel.35.detector: UNUSED
+roc.0.module.0.channel.35.channel: UNUSED
+roc.0.module.0.channel.36.detector: CPV
+roc.0.module.0.channel.36.channel: 21
+roc.0.module.0.channel.37.detector: CPV
+roc.0.module.0.channel.37.channel: 15
+roc.0.module.0.channel.38.detector: CPV
+roc.0.module.0.channel.38.channel: 24
+roc.0.module.0.channel.39.detector: CPV
+roc.0.module.0.channel.39.channel: 29
+roc.0.module.0.channel.40.detector: CPV
+roc.0.module.0.channel.40.channel: 23
+roc.0.module.0.channel.41.detector: CPV
+roc.0.module.0.channel.41.channel: 12
+roc.0.module.0.channel.42.detector: CPV
+roc.0.module.0.channel.42.channel: 25
+roc.0.module.0.channel.43.detector: CPV
+roc.0.module.0.channel.43.channel: 27
+roc.0.module.0.channel.44.detector: CPV
+roc.0.module.0.channel.44.channel: 22
+roc.0.module.0.channel.45.detector: CPV
+roc.0.module.0.channel.45.channel: 28
+roc.0.module.0.channel.46.detector: CPV
+roc.0.module.0.channel.46.channel: 14
+roc.0.module.0.channel.47.detector: CPV
+roc.0.module.0.channel.47.channel: 17
+roc.0.module.0.channel.48.channel: 0
+roc.0.module.0.channel.49.channel: 1
+roc.0.module.0.channel.50.channel: 2
+roc.0.module.0.channel.51.channel: 3
+roc.0.module.0.channel.52.channel: 4
+roc.0.module.0.channel.53.channel: 5
+roc.0.module.0.channel.54.channel: 6
+roc.0.module.0.channel.55.channel: 7
+roc.0.module.0.channel.56.channel: 8
+roc.0.module.0.channel.57.channel: 9
+roc.0.module.0.channel.58.channel: 10
+roc.0.module.0.channel.59.channel: 11
+roc.0.module.0.channel.60.channel: 12
+roc.0.module.0.channel.61.channel: 13
+roc.0.module.0.channel.62.channel: 14
+roc.0.module.0.channel.63.channel: 15
+roc.0.module.0.channel.64.channel: 16
+roc.0.module.0.channel.65.channel: 17
+roc.0.module.0.channel.66.channel: 18
+roc.0.module.0.channel.67.channel: 19
+roc.0.module.0.channel.68.channel: 20
+roc.0.module.0.channel.69.channel: 21
+roc.0.module.0.channel.70.channel: 22
+roc.0.module.0.channel.71.channel: 23
+roc.0.module.0.channel.72.channel: 24
+roc.0.module.0.channel.73.channel: 25
+roc.0.module.0.channel.74.channel: 26
+roc.0.module.0.channel.75.channel: 27
+roc.0.module.0.channel.76.channel: 28
+roc.0.module.0.channel.77.channel: 29
+roc.0.module.0.channel.78.channel: 30
+roc.0.module.0.channel.79.channel: 31
+roc.0.module.0.channel.80.channel: 32
+roc.0.module.0.channel.81.channel: 33
+roc.0.module.0.channel.82.channel: 34
+roc.0.module.0.channel.83.channel: 35
+roc.0.module.0.channel.84.channel: 36
+roc.0.module.0.channel.85.channel: 37
+roc.0.module.0.channel.86.channel: 38
+roc.0.module.0.channel.87.channel: 39
+roc.0.module.0.channel.88.channel: 40
+roc.0.module.0.channel.89.channel: 41
+roc.0.module.0.channel.90.channel: 42
+roc.0.module.0.channel.91.channel: 43
+roc.0.module.0.channel.92.channel: 44
+roc.0.module.0.channel.93.channel: 45
+roc.0.module.0.channel.94.channel: 46
+roc.0.module.0.channel.95.channel: 47
+
+##
+## Another slow TDC
+##
+
+LRS_1877.nchannels: 96     
+LRS_1877.bus: FASTBUS
+LRS_1877.type: TDC
+roc.0.module.1.type: LRS_1877
+roc.0.module.1.slot: 16
+roc.0.module.1.channel.*.detector: BGV
+# BGV is set as the default; it has 48 channels vs. the 38 tagger channels
+
+#first bank of 16
+roc.0.module.1.channel.0.detector: TAGGER
+roc.0.module.1.channel.0.channel: 15
+roc.0.module.1.channel.1.detector: TAGGER
+roc.0.module.1.channel.1.channel: 14
+roc.0.module.1.channel.2.detector: TAGGER
+roc.0.module.1.channel.2.channel: 13
+roc.0.module.1.channel.3.detector: TAGGER
+roc.0.module.1.channel.3.channel: 12
+roc.0.module.1.channel.4.detector: TAGGER
+roc.0.module.1.channel.4.channel: 11
+roc.0.module.1.channel.5.detector: TAGGER
+roc.0.module.1.channel.5.channel: 10
+roc.0.module.1.channel.6.detector: TAGGER
+roc.0.module.1.channel.6.channel: 9
+roc.0.module.1.channel.7.detector: TAGGER
+roc.0.module.1.channel.7.channel: 8
+roc.0.module.1.channel.8.detector: TAGGER
+roc.0.module.1.channel.8.channel: 7
+roc.0.module.1.channel.9.detector: TAGGER
+roc.0.module.1.channel.9.channel: 6
+roc.0.module.1.channel.10.detector: TAGGER
+roc.0.module.1.channel.10.channel: 5
+roc.0.module.1.channel.11.detector: TAGGER
+roc.0.module.1.channel.11.channel: 4
+roc.0.module.1.channel.12.detector: TAGGER
+roc.0.module.1.channel.12.channel: 3
+roc.0.module.1.channel.13.detector: TAGGER
+roc.0.module.1.channel.13.channel: 2
+roc.0.module.1.channel.14.detector: TAGGER
+roc.0.module.1.channel.14.channel: 1
+roc.0.module.1.channel.15.detector: TAGGER
+roc.0.module.1.channel.15.channel: 0
+
+#second bank of 16
+roc.0.module.1.channel.16.detector: TAGGER
+roc.0.module.1.channel.16.channel: 34
+roc.0.module.1.channel.17.detector: TAGGER
+roc.0.module.1.channel.17.channel: 33
+roc.0.module.1.channel.18.detector: TAGGER
+roc.0.module.1.channel.18.channel: 32
+roc.0.module.1.channel.19.detector: TAGGER
+roc.0.module.1.channel.19.channel: 31
+roc.0.module.1.channel.20.detector: TAGGER
+roc.0.module.1.channel.20.channel: 30
+roc.0.module.1.channel.21.detector: TAGGER
+roc.0.module.1.channel.21.channel: 29
+roc.0.module.1.channel.22.detector: TAGGER
+roc.0.module.1.channel.22.channel: 28
+roc.0.module.1.channel.23.detector: TAGGER
+roc.0.module.1.channel.23.channel: 27
+roc.0.module.1.channel.24.detector: TAGGER
+roc.0.module.1.channel.24.channel: 26
+roc.0.module.1.channel.25.detector: TAGGER
+roc.0.module.1.channel.25.channel: 25
+roc.0.module.1.channel.26.detector: TAGGER
+roc.0.module.1.channel.26.channel: 24
+roc.0.module.1.channel.27.detector: TAGGER
+roc.0.module.1.channel.27.channel: 23
+roc.0.module.1.channel.28.detector: TAGGER
+roc.0.module.1.channel.28.channel: 22
+roc.0.module.1.channel.29.detector: TAGGER
+roc.0.module.1.channel.29.channel: 21
+roc.0.module.1.channel.30.detector: TAGGER
+roc.0.module.1.channel.30.channel: 20
+roc.0.module.1.channel.31.detector: TAGGER
+roc.0.module.1.channel.31.channel: 19
+roc.0.module.1.channel.32.detector: TAGGER
+
+# third bank of 16
+roc.0.module.1.channel.32.channel: 16
+roc.0.module.1.channel.33.detector: TAGGER
+roc.0.module.1.channel.33.channel: 17
+roc.0.module.1.channel.34.detector: TAGGER
+roc.0.module.1.channel.34.channel: 18
+roc.0.module.1.channel.35.detector: TAGGER
+roc.0.module.1.channel.35.channel: 35
+roc.0.module.1.channel.36.detector: TAGGER
+roc.0.module.1.channel.36.channel: 36
+roc.0.module.1.channel.37.detector: TAGGER
+roc.0.module.1.channel.37.channel: 37
+roc.0.module.1.channel.38.detector: UNUSED
+roc.0.module.1.channel.38.channel: UNUSED
+roc.0.module.1.channel.39.detector: UNUSED
+roc.0.module.1.channel.39.channel: UNUSED
+roc.0.module.1.channel.40.detector: UNUSED
+roc.0.module.1.channel.40.channel: UNUSED
+roc.0.module.1.channel.41.detector: UNUSED
+roc.0.module.1.channel.41.channel: UNUSED
+roc.0.module.1.channel.42.detector: UNUSED
+roc.0.module.1.channel.42.channel: UNUSED
+roc.0.module.1.channel.43.detector: UNUSED
+roc.0.module.1.channel.43.channel: UNUSED
+roc.0.module.1.channel.44.detector: UNUSED
+roc.0.module.1.channel.44.channel: UNUSED
+roc.0.module.1.channel.45.detector: UNUSED
+roc.0.module.1.channel.45.channel: UNUSED
+roc.0.module.1.channel.46.detector: UNUSED
+roc.0.module.1.channel.46.channel: UNUSED
+roc.0.moudle.1.channel.47.detector: UNUSED
+roc.0.module.1.channel.47.channel: UNUSED
+
+# fourth bank of 16
+roc.0.module.1.channel.48.channel: 0
+roc.0.module.1.channel.49.channel: 1
+roc.0.module.1.channel.50.channel: 2
+roc.0.module.1.channel.51.channel: 3
+roc.0.module.1.channel.52.channel: 4
+roc.0.module.1.channel.53.channel: 5
+roc.0.module.1.channel.54.channel: 6
+roc.0.module.1.channel.55.channel: 7
+roc.0.module.1.channel.56.channel: 8
+roc.0.module.1.channel.57.channel: 9
+roc.0.module.1.channel.58.channel: 10
+roc.0.module.1.channel.59.channel: 11
+roc.0.module.1.channel.60.channel: 12
+roc.0.module.1.channel.61.channel: 13
+roc.0.module.1.channel.62.channel: 14
+roc.0.module.1.channel.63.channel: 15
+
+#fifth bank of 16
+roc.0.module.1.channel.64.channel: 16
+roc.0.module.1.channel.65.channel: 17
+roc.0.module.1.channel.66.channel: 18
+roc.0.module.1.channel.67.channel: 19
+roc.0.module.1.channel.68.channel: 20
+roc.0.module.1.channel.69.channel: 21
+roc.0.module.1.channel.70.channel: 22
+roc.0.module.1.channel.71.channel: 23
+roc.0.module.1.channel.72.channel: 24
+roc.0.module.1.channel.73.channel: 25
+roc.0.module.1.channel.74.channel: 26
+roc.0.module.1.channel.75.channel: 27
+roc.0.module.1.channel.76.channel: 28
+roc.0.module.1.channel.77.channel: 29
+roc.0.module.1.channel.78.channel: 30
+roc.0.module.1.channel.79.channel: 31
+
+#sixth bank of 16
+roc.0.module.1.channel.80.channel: 32
+roc.0.module.1.channel.81.channel: 33
+roc.0.module.1.channel.82.channel: 34
+roc.0.module.1.channel.83.channel: 35
+roc.0.module.1.channel.84.channel: 36
+roc.0.module.1.channel.85.channel: 37
+roc.0.module.1.channel.86.channel: 38
+roc.0.module.1.channel.87.channel: 39
+roc.0.module.1.channel.88.channel: 40
+roc.0.module.1.channel.89.channel: 41
+roc.0.module.1.channel.90.channel: 42
+roc.0.module.1.channel.91.channel: 43
+roc.0.module.1.channel.92.channel: 44
+roc.0.module.1.channel.93.channel: 45
+roc.0.module.1.channel.94.channel: 46
+roc.0.module.1.channel.95.channel: 47
+
+#
+# IU MAM
+#
+IU_MAM.type: REG
+IU_MAM.bus: FASTBUS
+IU_MAM.nchannels: 10
+roc.0.module.2.type: IU_MAM
+roc.0.module.2.slot: 8
+roc.0.module.2.channel.*.detector: LGD
+roc.0.module.2.channel.0.channel: 0
+roc.0.module.2.channel.1.channel: 1
+roc.0.module.2.channel.2.channel: 2
+roc.0.module.2.channel.3.channel: 3
+roc.0.module.2.channel.4.channel: 4
+roc.0.module.2.channel.5.channel: 5
+roc.0.module.2.channel.6.channel: 6
+roc.0.module.2.channel.7.channel: 7
+roc.0.module.2.channel.8.channel: 8
+roc.0.module.2.channel.9.channel: 9
+
+
+
+
+
+
+
+
+
+
+

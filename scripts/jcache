@@ -1,0 +1,74 @@
+#!/usr/bin/perl
+#
+# jcache - stage files from JLab mass storage system (mss)
+#
+# Note: This script needs to be run interactively at present
+#	because the only authentication method that works to get
+#	access to the jlab site is through keyboard-passwords.
+#
+# July 14 2000 - original version -rtj
+# Oct. 26 2000 - switched from jget to jcache -rtj
+# Dec. 6, 2002 - rewritten in perl to take advantage of pipes -rtj
+# ----------------------------------------------------------------
+
+$loginhost = "login1.jlab.org";
+$remotehost = "ifarml3.jlab.org";
+$msspath = "/mss/hallb/e94016/raw";
+$listdir = "/nfs/direct/app/radphi/mss";
+$reqsize = 20;
+
+$ssh = "ssh -l radphi $loginhost ssh $remotehost";
+
+while (@ARGV) {
+   if ($ARGV[0] =~ /-.*/) {
+      print "Usage: jcache rNNNN.evt [...]\n";
+      print "       jcache (no arguments)\n";
+      print " after creating dummy filenames in directory $listdir\n";
+      exit;
+   }
+   else {
+      $filelist[@filelist] = shift @ARGV;
+   }
+}
+
+if (@filelist == 0) {
+   @filelist = `ls $listdir`;
+}
+
+if (! open(RSH,"-|")) {
+   open(REQ,"| $ssh") || die "jcache error - cannot contact $remotehost\n";
+   while (@filelist) {
+      syswrite(REQ,"jcache -w ");
+      for ($req = 0; $req < $reqsize && @filelist > 0; $req++) {
+         ($file = shift @filelist) =~ s/\n//s;
+         if (-r "$listdir/$file") {
+            system("mv $listdir/$file $listdir/.pending");
+         }
+         syswrite(REQ,"$msspath/$file ");
+      }
+      syswrite(REQ,"\n");
+   }
+   syswrite(REQ,"exit\n");
+   wait;
+   close(REQ);
+   exit;
+}
+
+while ($response = <RSH>) {
+   print "$response";
+   if ($response =~ s/^.*{Done}.*$msspath\/(r[0-9]+.evt).*/$1/s) {
+      if (-r "$listdir/.pending/$response") {
+         system("mv $listdir/.pending/$response $listdir/.cached");
+      }
+   }
+   elsif ($response =~ s/^.*{Failed}.*$msspath\/(r[0-9]+.evt).*/$1/s) {
+      if (-r "$listdir/.pending/$response") {
+         system("mv $listdir/.pending/$response $listdir");
+      }
+   }
+   elsif ($response =~ s/^.*{denied}.*$msspath\/(r[0-9]+.evt).*/$1/s) {
+      if (-r "$listdir/.pending/$response") {
+         system("mv $listdir/.pending/$response $listdir");
+      }
+   }
+}

@@ -1,0 +1,14 @@
+MACRO hide_boxes
+ satt * seen 0
+ satt blok seen 1
+ satt cpsa seen 1
+ satt cpsb seen 1
+ satt cpsc seen 1
+ satt cpsd seen 1
+ satt cpse seen 1
+ satt upvs seen 1
+ satt wall seen 1
+ dopt hide on
+ next; draw hall 90 0 0 10 10 .06 .06
+ exec dbug none plotnow
+RETURN

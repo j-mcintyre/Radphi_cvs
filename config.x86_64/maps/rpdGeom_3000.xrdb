@@ -1,0 +1,56 @@
+#
+# RPD Geometry definitions
+#
+#
+
+rpdGeom.zeroPos: 107.64 17.61 0
+
+rpdGeom.nChannels: 18
+
+rpdGeom.E.channelZero: 6
+rpdGeom.E.pitch: 30
+rpdGeom.E.angleZero: 30
+
+
+rpdGeom.G.channelZero: 0
+rpdGeom.G.pitch: 60
+rpdGeom.G.angleZero: 45
+
+rpdGeom.channel.0.mask: 0x003
+rpdGeom.channel.1.mask: 0x00c
+rpdGeom.channel.2.mask: 0x030
+rpdGeom.channel.3.mask: 0x0c0
+rpdGeom.channel.4.mask: 0x300
+rpdGeom.channel.5.mask: 0xc00
+rpdGeom.channel.6.mask: 0x001
+rpdGeom.channel.7.mask: 0x002
+rpdGeom.channel.8.mask: 0x004
+rpdGeom.channel.9.mask: 0x008
+rpdGeom.channel.10.mask: 0x010
+rpdGeom.channel.11.mask: 0x020
+rpdGeom.channel.12.mask: 0x040
+rpdGeom.channel.13.mask: 0x080
+rpdGeom.channel.14.mask: 0x100
+rpdGeom.channel.15.mask: 0x200
+rpdGeom.channel.16.mask: 0x400
+rpdGeom.channel.17.mask: 0x800
+
+
+rpdGeom.channel.0.name: G0
+rpdGeom.channel.1.name: G1
+rpdGeom.channel.2.name: G2
+rpdGeom.channel.3.name: G3
+rpdGeom.channel.4.name: G4
+rpdGeom.channel.5.name: G5
+rpdGeom.channel.6.name: E0
+rpdGeom.channel.7.name: E1
+rpdGeom.channel.8.name: E2
+rpdGeom.channel.9.name: E3
+rpdGeom.channel.10.name: E4
+rpdGeom.channel.11.name: E5
+rpdGeom.channel.12.name: E6
+rpdGeom.channel.13.name: E7
+rpdGeom.channel.14.name: E8
+rpdGeom.channel.15.name: E9
+rpdGeom.channel.16.name: E10
+rpdGeom.channel.17.name: E11

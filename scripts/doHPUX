@@ -1,0 +1,15 @@
+#! /usr/local/bin/tcsh
+
+setenv REMOTE_TARGET hpux
+source /sgiusr1/radphi/setup
+~/bin/perl $RADPHI_HOME/scripts/doOneTarget >& $RADPHI_HOME/build.$RADPHI_MAKETARGET/build.log
+if ($status != 0) then
+  echo "Errors during build of $RADPHI_MAKETARGET target"
+endif
+
+setenv REMOTE_TARGET hpux-o
+source /sgiusr1/radphi/setup
+~/bin/perl $RADPHI_HOME/scripts/doOneTarget >& $RADPHI_HOME/build.$RADPHI_MAKETARGET/build.log
+if ($status != 0) then
+  echo "Errors during build of $RADPHI_MAKETARGET target"
+endif

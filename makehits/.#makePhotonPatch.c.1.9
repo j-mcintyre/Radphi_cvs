@@ -1,0 +1,205 @@
+/*     makePhotonPatch.c
+ *
+ *     D.S. Armstrong    March 9 2000
+ *     - original version from C. Steffen
+ *
+ *     R.T. Jones	 February 2 2001
+ *     - replaced old depth correction with theta-dependent correction
+ *       that solves for corrected energy and angle at the same time.
+ *       For more information see TechNote 2001-201.
+ */
+
+// #define OLD_DEPTH_CORRECTION   -comment out to enable new corrections
+// #define CORRECTION_7_2003
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>  
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#include <ntypes.h>
+#include <dataIO.h>
+#include <itypes.h>
+#include <iitypes.h>
+#include <mctypes.h>
+#include <lgdCluster.h>
+#include <lgdUtil.h>
+#include <lgdGeom.h>
+#include <disData.h>
+#include <pedestals.h>
+#include <calibration.h>
+#include <disIO.h>
+#include <eventType.h>
+#include <triggerType.h>
+
+vector4_t makePhotonPatch(lgd_cluster_t *cluster,vector3_t vertex){
+
+#define TARGET_TO_LGD_DISTANCE 102.9
+#define LGD_RADIATION_LENGTH 3.1
+#define LGD_SHOWER_OFFSET 3.0
+#define E_CRITICAL 0.01455
+#define PE_PERGEV_LGD 540
+#define MAX_PHOTON_ENERGY 5.6
+#define RAD_DEG 57.29578
+
+#define SQR(X) ((X)*(X))
+
+  vector3_t photon_VC; /* photon in vertex coordinates */
+  vector4_t answer;
+#ifdef OLD_DEPTH_CORRECTION
+  float radius,baseRadius,newRadius,dr;
+  float zMax;
+#else 
+  float radius,pe,pe_seen;
+  float theta,energy,zed;
+  float theta0,phi0,a,b,delta;
+  float z0,z1,z2,q,thetam;
+#endif
+  int niter = 0;
+
+  float magnitude;
+  float scale;
+
+  photon_VC.z=TARGET_TO_LGD_DISTANCE-vertex.z;
+  photon_VC.x=cluster->space.x-vertex.x;
+  photon_VC.y=cluster->space.y-vertex.y;
+
+#ifdef OLD_DEPTH_CORRECTION
+
+/* The following code was formerly used to estimate the z coordinate of
+ * the shower centroid in the LGD, under the assumption that the wall
+ * is infinite in x and y.  It has been replaced with a treatment that
+ * depends on polar angle -- for more information see TechNote 2001-201.
+ */
+
+  /* setting initial conditions */
+  radius=sqrt(SQR(photon_VC.x)+SQR(photon_VC.y));
+  baseRadius = radius;
+  newRadius = radius;
+ 
+  /* Get the depth of the shower max */
+  zMax = LGD_RADIATION_LENGTH*
+         (LGD_SHOWER_OFFSET + log(cluster->energy/E_CRITICAL));
+
+  dr = 99.0;
+  while(fabs(dr) > 0.001){
+    newRadius = baseRadius/(1+(zMax/sqrt(SQR(photon_VC.z) + SQR(radius))));
+    dr = newRadius-radius;
+    radius = newRadius;
+    niter++;
+    if (niter > 20){
+      printf("Help!  I'm stuck inside a while loop with %d iterations!",niter);
+      break;
+    }
+  }
+  /* printf("old: %f\t%f\t%f\n",photon_VC.x,photon_VC.y,photon_VC.z); */
+  photon_VC.x *= (newRadius/baseRadius);
+  photon_VC.y *= (newRadius/baseRadius);
+  /* printf("new: %f\t%f\t%f\n",photon_VC.x,photon_VC.y,photon_VC.z); */
+
+#else
+Iterator_start:
+
+/* Start of iterative loop where corrected energy,angle are solved in a
+ * self-consistent way -- for more information see TechNote 2001-201 --rtj.
+ */
+
+  energy = cluster->energy;
+  zed = TARGET_TO_LGD_DISTANCE +
+        LGD_RADIATION_LENGTH*(LGD_SHOWER_OFFSET + log(energy/E_CRITICAL));
+  radius = sqrt(SQR(photon_VC.x)+SQR(photon_VC.y));
+  theta = atan2(radius,zed) * RAD_DEG;
+  pe_seen = energy*PE_PERGEV_LGD;
+  pe = 0;
+
+  /* find the edge of the detector at this azimuth */
+
+  theta0 = 28.6;
+  phi0 = atan2(photon_VC.y,photon_VC.x)*RAD_DEG + 180;
+  phi0 -= 90*(int)((phi0+45)/90);
+  phi0 = fabs(phi0);
+  if (phi0 < 20) {
+    theta0 += 0.38e-2*SQR(phi0);
+  }
+  else {
+    theta0 += 0.21e-2*SQR(phi0-45);
+  }
+				/*	printf("Start iterating");
+				 *	printf(", energy=%f",energy);
+				 *	printf(", theta=%f",theta);
+				 *	printf(", pe=%f",pe);
+				 *	printf(", pe_seen=%f",pe_seen);
+				 *	printf("\n");
+				 */
+  while (fabs(pe-pe_seen) > 1) {
+	a = 7.4*pow(energy,1.055);
+	b = 8900*pow(energy,1.055);
+	delta = 9.95-3.0*exp(-0.22*energy);  /* approx. 6.95+0.66*energy */
+    pe = (theta0-theta)*(a + b/(SQR(theta0-theta)+SQR(delta)));
+#if defined CORRECTION_7_2003
+    pe *= 0.93695 - 0.28722*(theta/RAD_DEG) + 1.5776*SQR(theta/RAD_DEG);
+#endif
+    energy *= pe_seen/((pe>1)? pe:1);
+	z0 = TARGET_TO_LGD_DISTANCE; z1 = LGD_RADIATION_LENGTH*(LGD_SHOWER_OFFSET+log(energy/E_CRITICAL));
+/* The following formula introduces a spurious energy-dependence that affects
+ * high-energy showers.  The energy dependence should come from z1 only.
+        thetam = 7.5;
+	q = 0.015 + 0.004*energy;
+    zed = z0 + z1 - q*SQR(theta-thetam);
+ * The following agrees with the above for 1GeV showers, but has removed the
+ * spurious energy dependence on the depth at large angles.          -rtj
+ */	z2 = 8e-6;
+    zed = z0 + z1*cos(theta/RAD_DEG) - z2*pow(theta,4);
+#if defined CORRECTION_7_2003
+    if (theta < 23)
+      zed += -0.075*120*tan(theta/RAD_DEG);
+    else
+      zed += 29.1 - 0.6823*120*tan(theta/RAD_DEG);
+#endif
+    if (++niter > 1000) {
+      /*fprintf(stderr,"makePhotonPatch - maximum iteration count exceeded,");
+      fprintf(stderr," giving up!\n");*/
+      break;
+    }
+    theta = atan2(radius,zed) * RAD_DEG;
+					/*	printf("niter %d",niter);
+					 *	printf(", energy=%f",energy);
+					 *	printf(", theta=%f",theta);
+					 *	printf(", pe=%f",pe);
+					 *	printf(", pe_seen=%f",pe_seen);
+					 *	printf("\n");
+					 */
+    if (energy > MAX_PHOTON_ENERGY) {
+      break;
+    }
+  }
+  if ((theta != theta) || (energy != energy)) {
+    /*fprintf(stderr,"makePhotonPatch - iterative solution failed!\n");*/
+  }
+  photon_VC.z = zed;
+
+#endif
+
+  answer.space.x=photon_VC.x;
+  answer.space.y=photon_VC.y;
+  answer.space.z=photon_VC.z;
+
+  /* answer.space now has the proper angles; now rescale it so that those 
+     mean momenta */
+#ifdef OLD_DEPTH_CORRECTION
+  answer.t = cluster->energy;
+#else
+  answer.t = energy;
+#endif
+  magnitude=sqrt(SQR(answer.space.x)+SQR(answer.space.y)+SQR(answer.space.z));
+  scale=answer.t/magnitude;
+  answer.space.x *= scale;
+  answer.space.y *= scale;
+  answer.space.z *= scale;
+  return answer;
+}

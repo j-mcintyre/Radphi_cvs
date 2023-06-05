@@ -1,0 +1,48 @@
+echo ""
+
+    ###################################################################
+    ####   This Script will kill All Online Processes on URS1/2    ####
+    ####                                                           ####
+    #### Written By Kyle Burchesky --- University of Massachusetts ####
+    #### Date Last Updated: June 9 1998  15:53.18 EST              ####
+    ###################################################################
+
+# added scalerd killing
+
+# 
+
+echo "Really Kill All Online Systems? (y,n)"
+read a
+case $a in
+	Y) echo "Killing..."
+
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep Dispatcher | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep OLA | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep scalerd | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep onlinehisto | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep feedFromDD | cut -c10-15`
+
+		echo "Killed!";;
+      yes) echo "Killing..."
+
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep Dispatcher | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep OLA | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep scalerd | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep onlinehisto | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep feedFromDD | cut -c10-15`
+
+                echo "Killed!";;
+        y) echo "Killing..."
+
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep Dispatcher | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep OLA | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep scalerd | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep onlinehisto | cut -c10-15`
+rsh -l radphi urs2.jlab.org kill -9 `ps -Af | grep feedFromDD | cut -c10-15`
+
+                echo "Killed!";;
+	N) echo "Leaving Online untouched";;
+       no) echo "Leaving Online untouched";;
+	n) echo "Leaving Online untouched";;
+        0) echo "Null Responce, Leaving Online untouched" ;;
+esac

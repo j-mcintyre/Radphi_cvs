@@ -1,0 +1,166 @@
+camac.ncrates:2
+camac.cr.*.slot.*.module: NONE
+camac.cr.*.slot.*.alias: NONE
+
+camac.cr.0.slot.1.alias: LGD_HV
+
+# crate 0 slots 3,4,5 BSD discriminators
+# mode: 0x2 turns on burst guard, 0x1 turns on updating
+camac.cr.0.slot.3.module: LRS_3412
+camac.cr.0.slot.3.threshold: 0x8C
+camac.cr.0.slot.3.mask: 0x0
+camac.cr.0.slot.3.width: 340
+camac.cr.0.slot.3.mode: 0x2
+
+camac.cr.0.slot.4.module: LRS_3412
+camac.cr.0.slot.4.threshold: 0x8C
+camac.cr.0.slot.4.mask: 0x0
+camac.cr.0.slot.4.width: 340
+camac.cr.0.slot.4.mode: 0x2
+
+camac.cr.0.slot.5.module: LRS_3412
+camac.cr.0.slot.5.threshold: 0x8C
+camac.cr.0.slot.5.mask: 0x0
+camac.cr.0.slot.5.width: 340
+camac.cr.0.slot.5.mode: 0x2
+
+# slots 6-8 is the BSD OR; it does not respond to CAMAC commands
+
+camac.cr.0.slot.9.alias: IU_DELAY
+camac.cr.0.slot.9.module: IU_DELAY
+camac.cr.0.slot.9.delay.0: 0
+camac.cr.0.slot.9.delay.1: 15
+
+camac.cr.0.slot.11.module: LRS_2323
+camac.cr.0.slot.11.ch.0.mantissa: 1000
+camac.cr.0.slot.11.ch.0.exponent: 0x0
+camac.cr.0.slot.11.ch.0.latch: FALSE
+camac.cr.0.slot.11.ch.0.delayWidth: 0x0
+camac.cr.0.slot.11.ch.1.mantissa: 250
+camac.cr.0.slot.11.ch.1.exponent: 0x0
+camac.cr.0.slot.11.ch.1.latch: FALSE
+camac.cr.0.slot.11.ch.1.delayWidth: 0x0
+
+camac.cr.0.slot.15.alias: LATCH
+camac.cr.0.slot.15.module: JORWAY_41
+camac.cr.0.slot.15.levels: 0x8
+camac.cr.0.slot.15.rightbypass: 0x1
+camac.cr.0.slot.15.leftbypass: 0x2
+camac.cr.0.slot.15.straightbypass: 0x4
+camac.cr.0.slot.15.taggerbypass: 0x8
+camac.cr.0.slot.15.upvbypass: 0x10
+camac.cr.0.slot.15.tsgo: 0x20
+camac.cr.0.slot.15.lgdMon: 0x40
+camac.cr.0.slot.15.rpdMon: 0x80
+camac.cr.0.slot.15.ped: 0x100
+camac.cr.0.slot.15.inhibit: 0x200
+
+camac.cr.0.slot.18.module: IU_PIXEL_BOX
+camac.cr.0.slot.18.mask: 0x1ff
+camac.cr.0.slot.18.forceTrue: FALSE
+camac.cr.0.slot.18.camacMode: FALSE
+
+camac.cr.0.slot.21.module: LRS_2372
+#camac.cr.0.slot.21.Ethresh: 0x40
+#note swap of Ethresh and Mthresh:  cables flipped from MAM to MLU
+camac.cr.0.slot.21.Ethresh: 0xff
+camac.cr.0.slot.21.Mthresh: 0x40
+camac.cr.0.slot.21.operator: OR
+
+# switch out the UPV here
+camac.cr.0.slot.22.module: LRS_4516
+camac.cr.0.slot.22.stage.0: AND
+camac.cr.0.slot.22.stage.1: OR
+
+#this is the UPV threshold
+camac.cr.0.slot.23.module: LRS_3412
+camac.cr.0.slot.23.threshold: 0x8C
+camac.cr.0.slot.23.mask: 0x0
+camac.cr.0.slot.23.width: 0x140
+camac.cr.0.slot.23.mode: 0x3
+
+#this is the CPV threshold
+# mask: 0xffff turns off all channels for that 4413
+# mask: 0x0 turns on all channels for that module. 
+camac.cr.1.slot.1.module: LRS_4413
+camac.cr.1.slot.1.threshold: 100
+camac.cr.1.slot.1.mask: 0x0
+
+camac.cr.1.slot.2.module: LRS_4413
+camac.cr.1.slot.2.threshold: 100
+camac.cr.1.slot.2.mask: 0x0
+
+camac.cr.1.slot.5.module: LRS_3420
+# the following lines set the threshold for some downstream BGV channels
+camac.cr.1.slot.5.ch.0.threshold: 2
+camac.cr.1.slot.5.ch.1.threshold: 2
+camac.cr.1.slot.5.ch.2.threshold: 2
+camac.cr.1.slot.5.ch.3.threshold: 2
+camac.cr.1.slot.5.ch.4.threshold: 2
+camac.cr.1.slot.5.ch.5.threshold: 2
+camac.cr.1.slot.5.ch.6.threshold: 2
+camac.cr.1.slot.5.ch.7.threshold: 2
+# the following lines set the threshold for some upstream BGV channels
+camac.cr.1.slot.5.ch.8.threshold: 2
+camac.cr.1.slot.5.ch.9.threshold: 2
+camac.cr.1.slot.5.ch.10.threshold: 2
+camac.cr.1.slot.5.ch.11.threshold: 2
+camac.cr.1.slot.5.ch.12.threshold: 2
+camac.cr.1.slot.5.ch.13.threshold: 2
+camac.cr.1.slot.5.ch.14.threshold: 2
+camac.cr.1.slot.5.ch.15.threshold: 2
+camac.cr.1.slot.5.mask: 0x0
+camac.cr.1.slot.5.duration: 0x1
+camac.cr.1.slot.5.deadtime: 0x4
+
+camac.cr.1.slot.6.module: LRS_3420
+# the following line sets the threshold for the remaining downstream BGV channels
+camac.cr.1.slot.6.ch.*.threshold: 2
+camac.cr.1.slot.6.mask: 0x0
+camac.cr.1.slot.6.duration: 0x1
+camac.cr.1.slot.6.deadtime: 0x4
+
+camac.cr.1.slot.7.module: LRS_3420
+# the following line sets the threshold for the remaining upstream BGV channels
+camac.cr.1.slot.7.ch.*.threshold: 2
+camac.cr.1.slot.7.mask: 0x0
+camac.cr.1.slot.7.duration: 0x1
+camac.cr.1.slot.7.deadtime: 0x4
+
+camac.cr.1.slot.10.alias: TARGET_XP
+camac.cr.1.slot.10.targetMotionChannel: 0
+
+camac.cr.1.slot.12.alias: DVM
+camac.cr.1.slot.12.module: KS_3516
+camac.cr.1.slot.12.ch.*.gain : 0
+camac.cr.1.slot.12.targetPos: 3
+camac.cr.1.slot.12.norm: 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

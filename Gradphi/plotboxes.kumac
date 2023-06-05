@@ -1,0 +1,21 @@
+MACRO plotboxes
+ satt * seen 0
+ satt hall seen 1
+ satt lgd seen 1
+ satt pmtw seen 1
+ satt rpd seen 1
+ satt cel1 seen 1
+ satt wal1 seen 1
+ satt wal2 seen 1
+ satt cpv seen 1
+ satt cpva seen 1
+ satt cpvb seen 1
+ satt cpvc seen 1
+ satt cpvd seen 1
+ satt cpve seen 1
+ satt upv seen 1
+ satt way seen 1
+ satt trgt seen 1
+ dopt hide off
+ next; draw hall 90 0 0 13 10 .06 .06
+RETURN

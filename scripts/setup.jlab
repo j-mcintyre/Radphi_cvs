@@ -1,0 +1,35 @@
+#/bin/csh -f
+
+setenv RADPHI_PERL perl
+set OS = `uname`
+switch($OS)
+  case 'SunOS':
+    setenv TARGET solaris
+    setenv RADPHI_HOME /home/radphi
+    setenv RADPHI_GMAKE /usr/local/bin/make
+    setenv LD_LIBRARY_PATH /usr/local/coda/2.1/SunOS/lib:/usr/openwin/lib:/usr/dt/lib:/opt/SUNWspro/lib
+    setenv SESSION radphi1
+    breaksw
+  case 'HP-UX':
+    setenv TARGET hpux
+    setenv RADPHI_HOME /home/radphi
+    setenv RADPHI_GMAKE /usr/local/bin/gmake
+    breaksw
+endsw
+set HOST = `uname -n`
+switch($HOST)
+  case 'urs1':
+    setenv RADPHI_SCRATCH /radphi/scratch
+    setenv RADPHI_TAPEDB /radphi/tapedb	
+    breaksw; 
+  case 'jlabs2':
+    setenv RADPHI_SCRATCH /scratch/radphi
+    breaksw; 
+endsw
+
+
+if($1) then
+  set TARGET = $1
+endif
+
+source $RADPHI_HOME/scripts/setup.master

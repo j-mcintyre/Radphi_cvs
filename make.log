@@ -1,0 +1,1290 @@
+cd clib && make clean && make lib
+make[1]: Entering directory `/home/radphi/cvs/clib'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/clib'
+make[1]: Entering directory `/home/radphi/cvs/clib'
+gcc -M flip.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > flip.o.depend
+gcc -c flip.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M flip_integer.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > flip_integer.o.depend
+gcc -c flip_integer.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M flip_short.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > flip_short.o.depend
+gcc -c flip_short.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M flipint.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > flipint.o.depend
+gcc -c flipint.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M flipshort.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > flipshort.o.depend
+gcc -c flipshort.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M gauss.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > gauss.o.depend
+gcc -c gauss.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M BetaGamma.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > BetaGamma.o.depend
+gcc -c BetaGamma.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M DotProduct3.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > DotProduct3.o.depend
+gcc -c DotProduct3.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M CrossProduct3.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > CrossProduct3.o.depend
+gcc -c CrossProduct3.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M EffMass.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > EffMass.o.depend
+gcc -c EffMass.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M add3.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > add3.o.depend
+gcc -c add3.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M add4.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > add4.o.depend
+gcc -c add4.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v3sub.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v3sub.o.depend
+gcc -c v3sub.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v4sub.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v4sub.o.depend
+gcc -c v4sub.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M nanCheck.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > nanCheck.o.depend
+gcc -c nanCheck.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M lorentz.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > lorentz.o.depend
+gcc -c lorentz.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M make4vector.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make4vector.o.depend
+gcc -c make4vector.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M negatime.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > negatime.o.depend
+gcc -c negatime.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M p3vector.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > p3vector.o.depend
+gcc -c p3vector.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M p4vector.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > p4vector.o.depend
+gcc -c p4vector.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M p4vectors.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > p4vectors.o.depend
+gcc -c p4vectors.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M sum4vectors.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > sum4vectors.o.depend
+gcc -c sum4vectors.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M sum3vectors.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > sum3vectors.o.depend
+gcc -c sum3vectors.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v3diff.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v3diff.o.depend
+gcc -c v3diff.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v3mag.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v3mag.o.depend
+gcc -c v3mag.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v3magsq.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v3magsq.o.depend
+gcc -c v3magsq.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v3add.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v3add.o.depend
+gcc -c v3add.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v3sum.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v3sum.o.depend
+gcc -c v3sum.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v4add.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v4add.o.depend
+gcc -c v4add.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v4diff.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v4diff.o.depend
+gcc -c v4diff.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v4mag.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v4mag.o.depend
+gcc -c v4mag.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v4magsq.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v4magsq.o.depend
+gcc -c v4magsq.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M v4sum.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > v4sum.o.depend
+gcc -c v4sum.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M nPartMass.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > nPartMass.o.depend
+gcc -c nPartMass.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M scalerMult4V.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > scalerMult4V.o.depend
+gcc -c scalerMult4V.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M n4VectSum.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > n4VectSum.o.depend
+gcc -c n4VectSum.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Ctime.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Ctime.o.depend
+gcc -c Ctime.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M effMass.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > effMass.o.depend
+gcc -c effMass.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M ScalerMult.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > ScalerMult.o.depend
+gcc -c ScalerMult.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M ctheta.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > ctheta.o.depend
+gcc -c ctheta.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+ar rv ../lib.linux/x86_64/libclib.a flip.o flip_integer.o flip_short.o flipint.o flipshort.o gauss.o BetaGamma.o DotProduct3.o CrossProduct3.o EffMass.o add3.o add4.o v3sub.o v4sub.o nanCheck.o lorentz.o make4vector.o negatime.o p3vector.o p4vector.o p4vectors.o sum4vectors.o sum3vectors.o v3diff.o v3mag.o v3magsq.o v3add.o v3sum.o v4add.o v4diff.o v4mag.o v4magsq.o v4sum.o nPartMass.o scalerMult4V.o n4VectSum.o Ctime.o effMass.o ScalerMult.o ctheta.o
+ar: creating ../lib.linux/x86_64/libclib.a
+a - flip.o
+a - flip_integer.o
+a - flip_short.o
+a - flipint.o
+a - flipshort.o
+a - gauss.o
+a - BetaGamma.o
+a - DotProduct3.o
+a - CrossProduct3.o
+a - EffMass.o
+a - add3.o
+a - add4.o
+a - v3sub.o
+a - v4sub.o
+a - nanCheck.o
+a - lorentz.o
+a - make4vector.o
+a - negatime.o
+a - p3vector.o
+a - p4vector.o
+a - p4vectors.o
+a - sum4vectors.o
+a - sum3vectors.o
+a - v3diff.o
+a - v3mag.o
+a - v3magsq.o
+a - v3add.o
+a - v3sum.o
+a - v4add.o
+a - v4diff.o
+a - v4mag.o
+a - v4magsq.o
+a - v4sum.o
+a - nPartMass.o
+a - scalerMult4V.o
+a - n4VectSum.o
+a - Ctime.o
+a - effMass.o
+a - ScalerMult.o
+a - ctheta.o
+make[1]: Leaving directory `/home/radphi/cvs/clib'
+cd libdata && make clean && make lib
+make[1]: Entering directory `/home/radphi/cvs/libdata'
+Makefile:7: warning: overriding commands for target `clean'
+/home/radphi/cvs/makefiles/rules.make:568: warning: ignoring old commands for target `clean'
+rm -f *.o *.oo *.depend
+rm -f endianConverterAuto.c
+ 
+NOTE: the warnings about 'over-riding commands'
+and 'ignoring old commands' are a feature
+see Makefile comments for details -CPS 
+ 
+make[1]: Leaving directory `/home/radphi/cvs/libdata'
+make[1]: Entering directory `/home/radphi/cvs/libdata'
+Makefile:7: warning: overriding commands for target `clean'
+/home/radphi/cvs/makefiles/rules.make:568: warning: ignoring old commands for target `clean'
+gcc -M data.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > data.o.depend
+gcc -c data.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M dataIO.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > dataIO.o.depend
+gcc -c dataIO.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M evt_dataIO.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > evt_dataIO.o.depend
+gcc -c evt_dataIO.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M tapeIO.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > tapeIO.o.depend
+gcc -c tapeIO.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M crc.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > crc.oo.depend
+gcc -c crc.c -O1  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+mv crc.o crc.oo
+gcc -M tapeIoctl.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > tapeIoctl.o.depend
+gcc -c tapeIoctl.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+perl endianStubGen.perl
+Reading header files...
+Creating fake types...
+Generating endian-converter routines:
+Generating type converters...
+Notice: Found an array type: esr_nparticle_t: p[dptr->nparticles].
+Notice: Found an array type: lgd_reconstruct_t: cluster[dptr->next_conf_level].
+Notice: Found an array type: mc_event_t: part[dptr->nfinalVert].
+Notice: Found an array type: mc_vertex_t: part[dptr->npart].
+Notice: Found an array type: recoils_t: recoil[dptr->nrecoils].
+Generating group converters...
+Done.
+gcc -M endianConverterAuto.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > endianConverterAuto.o.depend
+gcc -c endianConverterAuto.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M endianConverter.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > endianConverter.o.depend
+gcc -c endianConverter.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M evio.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > evio.o.depend
+gcc -c evio.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M swap_util.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > swap_util.o.depend
+gcc -c swap_util.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M unpackMap.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > unpackMap.o.depend
+gcc -c unpackMap.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M disIO.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > disIO.o.depend
+gcc -c disIO.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M dataSeekTape.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > dataSeekTape.o.depend
+gcc -c dataSeekTape.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M unpackData.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > unpackData.o.depend
+gcc -c unpackData.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M libdecode.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > libdecode.o.depend
+gcc -c libdecode.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M thawData.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > thawData.o.depend
+gcc -c thawData.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M pedestals.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > pedestals.o.depend
+gcc -c pedestals.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M tapedb.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > tapedb.o.depend
+gcc -c tapedb.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M calibration.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > calibration.o.depend
+gcc -c calibration.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M libwrapper.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > libwrapper.o.depend
+gcc -c libwrapper.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M detector_params.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > detector_params.o.depend
+gcc -c detector_params.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M fitting.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > fitting.o.depend
+gcc -c fitting.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+ar rv ../lib.linux/x86_64/libdata.a data.o dataIO.o evt_dataIO.o tapeIO.o crc.oo tapeIoctl.o endianConverterAuto.o endianConverter.o evio.o swap_util.o unpackMap.o disIO.o dataSeekTape.o unpackData.o libdecode.o thawData.o pedestals.o tapedb.o calibration.o libwrapper.o detector_params.o fitting.o
+ar: creating ../lib.linux/x86_64/libdata.a
+a - data.o
+a - dataIO.o
+a - evt_dataIO.o
+a - tapeIO.o
+a - crc.oo
+a - tapeIoctl.o
+a - endianConverterAuto.o
+a - endianConverter.o
+a - evio.o
+a - swap_util.o
+a - unpackMap.o
+a - disIO.o
+a - dataSeekTape.o
+a - unpackData.o
+a - libdecode.o
+a - thawData.o
+a - pedestals.o
+a - tapedb.o
+a - calibration.o
+a - libwrapper.o
+a - detector_params.o
+a - fitting.o
+make[1]: Leaving directory `/home/radphi/cvs/libdata'
+cd mapmanager && make clean && make && make exe-install
+make[1]: Entering directory `/home/radphi/cvs/mapmanager'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/mapmanager'
+make[1]: Entering directory `/home/radphi/cvs/mapmanager'
+RADPHI_HOME\t /home/radphi/cvs
+LIBDIR\t\t ../lib.linux/x86_64
+MAKETARGET\t linux
+VPATH\t\t /usr/local/cern/pro/lib:../lib.linux/x86_64/:/home/radphi/cvs/lib.linux/x86_64
+ARCHFLAGS\t
+CC\t\t gcc
+CFLAGS\t\t -D_FILE_OFFSET_BITS=64
+CDBG\t\t -g
+CCFLAGS\t\t
+INCLUDE\t\t -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15 -DLINUX
+make[1]: Leaving directory `/home/radphi/cvs/mapmanager'
+make[1]: Entering directory `/home/radphi/cvs/mapmanager'
+gcc -M mapcreate.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapcreate.o.depend
+gcc -c mapcreate.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_create.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_create.o.depend
+gcc -c map_create.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_add_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_add_item.o.depend
+gcc -c map_add_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_add_item1.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_add_item1.o.depend
+gcc -c map_add_item1.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_rem_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_rem_item.o.depend
+gcc -c map_rem_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_rem_sub.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_rem_sub.o.depend
+gcc -c map_rem_sub.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_next_sub.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_next_sub.o.depend
+gcc -c map_next_sub.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_next_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_next_item.o.depend
+gcc -c map_next_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_put_int.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_put_int.o.depend
+gcc -c map_put_int.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_put_float.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_put_float.o.depend
+gcc -c map_put_float.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_put_char.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_put_char.o.depend
+gcc -c map_put_char.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_get_int.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_get_int.o.depend
+gcc -c map_get_int.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_get_float.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_get_float.o.depend
+gcc -c map_get_float.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_get_char.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_get_char.o.depend
+gcc -c map_get_char.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_fnd_int.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_fnd_int.o.depend
+gcc -c map_fnd_int.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_fnd_float.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_fnd_float.o.depend
+gcc -c map_fnd_float.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_fillname.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_fillname.o.depend
+gcc -c map_fillname.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_find_pred.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_find_pred.o.depend
+gcc -c map_find_pred.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_error.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_error.o.depend
+gcc -c map_error.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_syserror.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_syserror.o.depend
+gcc -c map_syserror.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_warn.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_warn.o.depend
+gcc -c map_warn.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_log_mess.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_log_mess.o.depend
+gcc -c map_log_mess.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read.o.depend
+gcc -c map_read.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write.o.depend
+gcc -c map_write.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_add_sub.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_add_sub.o.depend
+gcc -c map_add_sub.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite.o.depend
+gcc -c map_overwrite.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_find_same.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_find_same.o.depend
+gcc -c map_find_same.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_time_pred.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_time_pred.o.depend
+gcc -c map_time_pred.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_dump.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_dump.o.depend
+gcc -c map_dump.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_find_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_find_item.o.depend
+gcc -c map_find_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_stat_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_stat_item.o.depend
+gcc -c map_stat_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_open_close.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_open_close.o.depend
+gcc -c map_open_close.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_find_sub.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_find_sub.o.depend
+gcc -c map_find_sub.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_fix_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_fix_item.o.depend
+gcc -c map_fix_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_fix_sub.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_fix_sub.o.depend
+gcc -c map_fix_sub.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_fix_head.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_fix_head.o.depend
+gcc -c map_fix_head.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_stat_head.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_stat_head.o.depend
+gcc -c map_stat_head.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_rem_arr.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_rem_arr.o.depend
+gcc -c map_rem_arr.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_add_item_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_add_item_.o.depend
+gcc -c map_add_item_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_put_int_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_put_int_.o.depend
+gcc -c map_put_int_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_put_flo_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_put_flo_.o.depend
+gcc -c map_put_flo_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_get_int_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_get_int_.o.depend
+gcc -c map_get_int_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_get_flo_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_get_flo_.o.depend
+gcc -c map_get_flo_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_fnd_int_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_fnd_int_.o.depend
+gcc -c map_fnd_int_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_fnd_flo_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_fnd_flo_.o.depend
+gcc -c map_fnd_flo_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_stat_item_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_stat_item_.o.depend
+gcc -c map_stat_item_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_rem_item_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_rem_item_.o.depend
+gcc -c map_rem_item_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_rem_sub_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_rem_sub_.o.depend
+gcc -c map_rem_sub_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_rem_arr_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_rem_arr_.o.depend
+gcc -c map_rem_arr_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_dump_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_dump_.o.depend
+gcc -c map_dump_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_log_mess_.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_log_mess_.o.depend
+gcc -c map_log_mess_.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mapf_add_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapf_add_item.o.depend
+gcc -c mapf_add_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mapf_get_float.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapf_get_float.o.depend
+gcc -c mapf_get_float.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mapf_get_int.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapf_get_int.o.depend
+gcc -c mapf_get_int.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mapf_put_float.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapf_put_float.o.depend
+gcc -c mapf_put_float.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mapf_put_int.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapf_put_int.o.depend
+gcc -c mapf_put_int.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mapf_rem_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapf_rem_item.o.depend
+gcc -c mapf_rem_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mapf_stat_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapf_stat_item.o.depend
+gcc -c mapf_stat_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mapf_get_char.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapf_get_char.o.depend
+gcc -c mapf_get_char.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mapf_put_char.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapf_put_char.o.depend
+gcc -c mapf_put_char.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read_int.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read_int.o.depend
+gcc -c map_read_int.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read_float.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read_float.o.depend
+gcc -c map_read_float.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read_char.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read_char.o.depend
+gcc -c map_read_char.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read_pointer.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read_pointer.o.depend
+gcc -c map_read_pointer.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read_name.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read_name.o.depend
+gcc -c map_read_name.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read_table.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read_table.o.depend
+gcc -c map_read_table.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read_nametable.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read_nametable.o.depend
+gcc -c map_read_nametable.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read_subsystem.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read_subsystem.o.depend
+gcc -c map_read_subsystem.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read_arrayheader.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read_arrayheader.o.depend
+gcc -c map_read_arrayheader.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read_subtableheader.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read_subtableheader.o.depend
+gcc -c map_read_subtableheader.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_read_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_read_item.o.depend
+gcc -c map_read_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write_int.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write_int.o.depend
+gcc -c map_write_int.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write_float.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write_float.o.depend
+gcc -c map_write_float.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write_char.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write_char.o.depend
+gcc -c map_write_char.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write_pointer.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write_pointer.o.depend
+gcc -c map_write_pointer.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write_name.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write_name.o.depend
+gcc -c map_write_name.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write_table.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write_table.o.depend
+gcc -c map_write_table.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write_nametable.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write_nametable.o.depend
+gcc -c map_write_nametable.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write_subsystem.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write_subsystem.o.depend
+gcc -c map_write_subsystem.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write_arrayheader.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write_arrayheader.o.depend
+gcc -c map_write_arrayheader.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write_subtableheader.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write_subtableheader.o.depend
+gcc -c map_write_subtableheader.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_write_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_write_item.o.depend
+gcc -c map_write_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite_int.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite_int.o.depend
+gcc -c map_overwrite_int.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite_float.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite_float.o.depend
+gcc -c map_overwrite_float.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite_char.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite_char.o.depend
+gcc -c map_overwrite_char.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite_pointer.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite_pointer.o.depend
+gcc -c map_overwrite_pointer.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite_name.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite_name.o.depend
+gcc -c map_overwrite_name.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite_table.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite_table.o.depend
+gcc -c map_overwrite_table.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite_nametable.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite_nametable.o.depend
+gcc -c map_overwrite_nametable.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite_subsystem.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite_subsystem.o.depend
+gcc -c map_overwrite_subsystem.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite_arrayheader.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite_arrayheader.o.depend
+gcc -c map_overwrite_arrayheader.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite_subtableheader.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite_subtableheader.o.depend
+gcc -c map_overwrite_subtableheader.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M map_overwrite_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_overwrite_item.o.depend
+gcc -c map_overwrite_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+ar rv ../lib.linux/x86_64/libmapmanager.a map_create.o map_add_item.o map_add_item1.o map_rem_item.o map_rem_sub.o map_next_sub.o map_next_item.o map_put_int.o map_put_float.o map_put_char.o map_get_int.o map_get_float.o map_get_char.o map_fnd_int.o map_fnd_float.o map_fillname.o map_find_pred.o map_error.o map_syserror.o map_warn.o map_log_mess.o map_read.o map_write.o map_add_sub.o map_overwrite.o map_find_same.o map_time_pred.o map_dump.o map_find_item.o map_stat_item.o map_open_close.o map_find_sub.o map_fix_item.o map_fix_sub.o map_fix_head.o map_stat_head.o map_rem_arr.o map_add_item_.o map_put_int_.o map_put_flo_.o map_get_int_.o map_get_flo_.o map_fnd_int_.o map_fnd_flo_.o map_stat_item_.o map_rem_item_.o map_rem_sub_.o map_rem_arr_.o map_dump_.o map_log_mess_.o mapf_add_item.o mapf_get_float.o mapf_get_int.o mapf_put_float.o mapf_put_int.o mapf_rem_item.o mapf_stat_item.o mapf_get_char.o mapf_put_char.o map_read_int.o map_read_float.o map_read_char.o map_read_pointer.o map_read_name.o map_read_table.o map_read_nametable.o map_read_subsystem.o map_read_arrayheader.o map_read_subtableheader.o map_read_item.o map_write_int.o map_write_float.o map_write_char.o map_write_pointer.o map_write_name.o map_write_table.o map_write_nametable.o map_write_subsystem.o map_write_arrayheader.o map_write_subtableheader.o map_write_item.o map_overwrite_int.o map_overwrite_float.o map_overwrite_char.o map_overwrite_pointer.o map_overwrite_name.o map_overwrite_table.o map_overwrite_nametable.o map_overwrite_subsystem.o map_overwrite_arrayheader.o map_overwrite_subtableheader.o map_overwrite_item.o	
+ar: creating ../lib.linux/x86_64/libmapmanager.a
+a - map_create.o
+a - map_add_item.o
+a - map_add_item1.o
+a - map_rem_item.o
+a - map_rem_sub.o
+a - map_next_sub.o
+a - map_next_item.o
+a - map_put_int.o
+a - map_put_float.o
+a - map_put_char.o
+a - map_get_int.o
+a - map_get_float.o
+a - map_get_char.o
+a - map_fnd_int.o
+a - map_fnd_float.o
+a - map_fillname.o
+a - map_find_pred.o
+a - map_error.o
+a - map_syserror.o
+a - map_warn.o
+a - map_log_mess.o
+a - map_read.o
+a - map_write.o
+a - map_add_sub.o
+a - map_overwrite.o
+a - map_find_same.o
+a - map_time_pred.o
+a - map_dump.o
+a - map_find_item.o
+a - map_stat_item.o
+a - map_open_close.o
+a - map_find_sub.o
+a - map_fix_item.o
+a - map_fix_sub.o
+a - map_fix_head.o
+a - map_stat_head.o
+a - map_rem_arr.o
+a - map_add_item_.o
+a - map_put_int_.o
+a - map_put_flo_.o
+a - map_get_int_.o
+a - map_get_flo_.o
+a - map_fnd_int_.o
+a - map_fnd_flo_.o
+a - map_stat_item_.o
+a - map_rem_item_.o
+a - map_rem_sub_.o
+a - map_rem_arr_.o
+a - map_dump_.o
+a - map_log_mess_.o
+a - mapf_add_item.o
+a - mapf_get_float.o
+a - mapf_get_int.o
+a - mapf_put_float.o
+a - mapf_put_int.o
+a - mapf_rem_item.o
+a - mapf_stat_item.o
+a - mapf_get_char.o
+a - mapf_put_char.o
+a - map_read_int.o
+a - map_read_float.o
+a - map_read_char.o
+a - map_read_pointer.o
+a - map_read_name.o
+a - map_read_table.o
+a - map_read_nametable.o
+a - map_read_subsystem.o
+a - map_read_arrayheader.o
+a - map_read_subtableheader.o
+a - map_read_item.o
+a - map_write_int.o
+a - map_write_float.o
+a - map_write_char.o
+a - map_write_pointer.o
+a - map_write_name.o
+a - map_write_table.o
+a - map_write_nametable.o
+a - map_write_subsystem.o
+a - map_write_arrayheader.o
+a - map_write_subtableheader.o
+a - map_write_item.o
+a - map_overwrite_int.o
+a - map_overwrite_float.o
+a - map_overwrite_char.o
+a - map_overwrite_pointer.o
+a - map_overwrite_name.o
+a - map_overwrite_table.o
+a - map_overwrite_nametable.o
+a - map_overwrite_subsystem.o
+a - map_overwrite_arrayheader.o
+a - map_overwrite_subtableheader.o
+a - map_overwrite_item.o
+gcc   -o mapcreate mapcreate.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+gcc -M mapdump.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapdump.o.depend
+gcc -c mapdump.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc   -o mapdump mapdump.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+gcc -M mapmerge.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapmerge.o.depend
+gcc -c mapmerge.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc   -o mapmerge mapmerge.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+gcc -M maptoascii.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > maptoascii.o.depend
+gcc -c maptoascii.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc   -o maptoascii maptoascii.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+gcc -M mapfrascii.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapfrascii.o.depend
+gcc -c mapfrascii.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc   -o mapfrascii mapfrascii.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+gcc -M mapfixit.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapfixit.o.depend
+gcc -c mapfixit.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc   -o mapfixit mapfixit.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+gcc -M mapPutItem.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mapPutItem.o.depend
+gcc -c mapPutItem.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc  -o mapPutItem mapPutItem.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+gcc -M map_create_float_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_create_float_item.o.depend
+gcc -c map_create_float_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc   -o map_create_float_item map_create_float_item.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+gcc -M map_create_int_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_create_int_item.o.depend
+gcc -c map_create_int_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc   -o map_create_int_item map_create_int_item.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+gcc -M map_remove_array.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_remove_array.o.depend
+gcc -c map_remove_array.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc   -o map_remove_array map_remove_array.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+gcc -M map_create_char_item.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_create_char_item.o.depend
+gcc -c map_create_char_item.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc   -o map_create_char_item map_create_char_item.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+gcc -M map_fill_char_item_with_zeros.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > map_fill_char_item_with_zeros.o.depend
+gcc -c map_fill_char_item_with_zeros.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc   -o map_fill_char_item_with_zeros map_fill_char_item_with_zeros.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a
+make[1]: Leaving directory `/home/radphi/cvs/mapmanager'
+cd libParam && make clean && make lib && make exe-install
+make[1]: Entering directory `/home/radphi/cvs/libParam'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/libParam'
+make[1]: Entering directory `/home/radphi/cvs/libParam'
+gcc -M param.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > param.o.depend
+gcc -c param.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M paramMM.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > paramMM.o.depend
+gcc -c paramMM.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+ar rv ../lib.linux/x86_64/libparam.a param.o paramMM.o
+ar: creating ../lib.linux/x86_64/libparam.a
+a - param.o
+a - paramMM.o
+make[1]: Leaving directory `/home/radphi/cvs/libParam'
+make[1]: Entering directory `/home/radphi/cvs/libParam'
+gcc -M xrdbToMap.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > xrdbToMap.o.depend
+gcc -c xrdbToMap.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc  -D_FILE_OFFSET_BITS=64 -o xrdbToMap xrdbToMap.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a -lpthread
+gcc -M xrdbFromMap.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > xrdbFromMap.o.depend
+gcc -c xrdbFromMap.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc  -D_FILE_OFFSET_BITS=64 -o xrdbFromMap xrdbFromMap.o ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libdata.a -lpthread
+make[1]: Leaving directory `/home/radphi/cvs/libParam'
+cd libUtil && make clean && make lib
+make[1]: Entering directory `/home/radphi/cvs/libUtil'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/libUtil'
+make[1]: Entering directory `/home/radphi/cvs/libUtil'
+gcc -M average.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > average.o.depend
+gcc -c average.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M linearfit.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > linearfit.o.depend
+gcc -c linearfit.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M cern_X.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > cern_X.o.depend
+gcc -c cern_X.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M cern_fit.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > cern_fit.o.depend
+gcc -c cern_fit.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M cern_noX.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > cern_noX.o.depend
+gcc -c cern_noX.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M cern_minuit.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > cern_minuit.o.depend
+gcc -c cern_minuit.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M particles.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > particles.o.depend
+gcc -c particles.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mtime.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mtime.o.depend
+gcc -c mtime.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mwait.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mwait.o.depend
+gcc -c mwait.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M encoderHandle.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > encoderHandle.o.depend
+gcc -c encoderHandle.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+ar rv ../lib.linux/x86_64/libUtil.a average.o linearfit.o cern_X.o cern_fit.o cern_noX.o cern_minuit.o particles.o mtime.o mwait.o encoderHandle.o
+ar: creating ../lib.linux/x86_64/libUtil.a
+a - average.o
+a - linearfit.o
+a - cern_X.o
+a - cern_fit.o
+a - cern_noX.o
+a - cern_minuit.o
+a - particles.o
+a - mtime.o
+a - mwait.o
+a - encoderHandle.o
+make[1]: Leaving directory `/home/radphi/cvs/libUtil'
+cd libBGV && make clean && make lib
+make[1]: Entering directory `/home/radphi/cvs/libBGV'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/libBGV'
+make[1]: Entering directory `/home/radphi/cvs/libBGV'
+gcc -M bgvClusterize.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > bgvClusterize.o.depend
+gcc -c bgvClusterize.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M makePhotonBGV.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > makePhotonBGV.o.depend
+gcc -c makePhotonBGV.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M MCsmearBGV.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > MCsmearBGV.o.depend
+gcc -c MCsmearBGV.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+ar rv ../lib.linux/x86_64/libBGV.a bgvClusterize.o makePhotonBGV.o MCsmearBGV.o
+ar: creating ../lib.linux/x86_64/libBGV.a
+a - bgvClusterize.o
+a - makePhotonBGV.o
+a - MCsmearBGV.o
+make[1]: Leaving directory `/home/radphi/cvs/libBGV'
+cd libCPV && make clean && make lib
+make[1]: Entering directory `/home/radphi/cvs/libCPV'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/libCPV'
+make[1]: Entering directory `/home/radphi/cvs/libCPV'
+gcc -M cpvGeom.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > cpvGeom.o.depend
+gcc -c cpvGeom.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+ar rv ../lib.linux/x86_64/libCPV.a cpvGeom.o
+ar: creating ../lib.linux/x86_64/libCPV.a
+a - cpvGeom.o
+make[1]: Leaving directory `/home/radphi/cvs/libCPV'
+cd libHv && make clean && make lib
+make[1]: Entering directory `/home/radphi/cvs/libHv'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/libHv'
+make[1]: Entering directory `/home/radphi/cvs/libHv'
+gcc -M Hv_attributes.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_attributes.o.depend
+gcc -c Hv_attributes.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_balloon.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_balloon.o.depend
+gcc -c Hv_balloon.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_barplot.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_barplot.o.depend
+gcc -c Hv_barplot.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_box.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_box.o.depend
+gcc -c Hv_box.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_button.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_button.o.depend
+gcc -c Hv_button.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_buttongroup.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_buttongroup.o.depend
+gcc -c Hv_buttongroup.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_callback.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_callback.o.depend
+gcc -c Hv_callback.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_choice.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_choice.o.depend
+gcc -c Hv_choice.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_color.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_color.o.depend
+gcc -c Hv_color.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_colorbutton.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_colorbutton.o.depend
+gcc -c Hv_colorbutton.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_compound.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_compound.o.depend
+gcc -c Hv_compound.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_configure.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_configure.o.depend
+gcc -c Hv_configure.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_connect.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_connect.o.depend
+gcc -c Hv_connect.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_container.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_container.o.depend
+gcc -c Hv_container.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_dialogs_w32.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_dialogs_w32.o.depend
+gcc -c Hv_dialogs_w32.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_dlogmenus.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_dlogmenus.o.depend
+gcc -c Hv_dlogmenus.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_dlogs.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_dlogs.o.depend
+gcc -c Hv_dlogs.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_dlogsupport.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_dlogsupport.o.depend
+gcc -c Hv_dlogsupport.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_drag.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_drag.o.depend
+gcc -c Hv_drag.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_draw.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_draw.o.depend
+gcc -c Hv_draw.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_drawsupport.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_drawsupport.o.depend
+gcc -c Hv_drawsupport.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_drawtools.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_drawtools.o.depend
+gcc -c Hv_drawtools.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_feedback.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_feedback.o.depend
+gcc -c Hv_feedback.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_fonts.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_fonts.o.depend
+gcc -c Hv_fonts.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_fractdone.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_fractdone.o.depend
+gcc -c Hv_fractdone.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_gateway.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_gateway.o.depend
+gcc -c Hv_gateway.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_gateway_xm.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_gateway_xm.o.depend
+gcc -c Hv_gateway_xm.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_gateway_w32.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_gateway_w32.o.depend
+gcc -c Hv_gateway_w32.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_histo.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_histo.o.depend
+gcc -c Hv_histo.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_init.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_init.o.depend
+gcc -c Hv_init.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_io.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_io.o.depend
+gcc -c Hv_io.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_items.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_items.o.depend
+gcc -c Hv_items.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_led.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_led.o.depend
+gcc -c Hv_led.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_linklist.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_linklist.o.depend
+gcc -c Hv_linklist.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_mapitem.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_mapitem.o.depend
+gcc -c Hv_mapitem.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_mapmath.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_mapmath.o.depend
+gcc -c Hv_mapmath.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_mapreader.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_mapreader.o.depend
+gcc -c Hv_mapreader.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_math.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_math.o.depend
+gcc -c Hv_math.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_menubutton.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_menubutton.o.depend
+gcc -c Hv_menubutton.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_menus.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_menus.o.depend
+gcc -c Hv_menus.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_offscreen.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_offscreen.o.depend
+gcc -c Hv_offscreen.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_opengl_w32.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_opengl_w32.o.depend
+gcc -c Hv_opengl_w32.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_optionbutton.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_optionbutton.o.depend
+gcc -c Hv_optionbutton.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_pic.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_pic.o.depend
+gcc -c Hv_pic.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_plotsupport.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_plotsupport.o.depend
+gcc -c Hv_plotsupport.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_pointer.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_pointer.o.depend
+gcc -c Hv_pointer.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_postscript.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_postscript.o.depend
+gcc -c Hv_postscript.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_print.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_print.o.depend
+gcc -c Hv_print.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_privdraw.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_privdraw.o.depend
+gcc -c Hv_privdraw.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_psdraw.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_psdraw.o.depend
+gcc -c Hv_psdraw.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_radiodlogs.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_radiodlogs.o.depend
+gcc -c Hv_radiodlogs.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_rainbowscale.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_rainbowscale.o.depend
+gcc -c Hv_rainbowscale.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_rectsupport.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_rectsupport.o.depend
+gcc -c Hv_rectsupport.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_region.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_region.o.depend
+gcc -c Hv_region.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_scroll.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_scroll.o.depend
+gcc -c Hv_scroll.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_separator.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_separator.o.depend
+gcc -c Hv_separator.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_slider.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_slider.o.depend
+gcc -c Hv_slider.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_standard.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_standard.o.depend
+gcc -c Hv_standard.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_textentryitem.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_textentryitem.o.depend
+gcc -c Hv_textentryitem.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_textitem.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_textitem.o.depend
+gcc -c Hv_textitem.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_undo.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_undo.o.depend
+gcc -c Hv_undo.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_utilities.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_utilities.o.depend
+gcc -c Hv_utilities.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_views.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_views.o.depend
+gcc -c Hv_views.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_virtual.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_virtual.o.depend
+gcc -c Hv_virtual.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_wheel.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_wheel.o.depend
+gcc -c Hv_wheel.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_worldimage.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_worldimage.o.depend
+gcc -c Hv_worldimage.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_worldline.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_worldline.o.depend
+gcc -c Hv_worldline.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_worldpolygon.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_worldpolygon.o.depend
+gcc -c Hv_worldpolygon.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_worldrect.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_worldrect.o.depend
+gcc -c Hv_worldrect.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_worldwedge.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_worldwedge.o.depend
+gcc -c Hv_worldwedge.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_xyplot.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_xyplot.o.depend
+gcc -c Hv_xyplot.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_xyplotedit.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_xyplotedit.o.depend
+gcc -c Hv_xyplotedit.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Hv_xyplotio.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Hv_xyplotio.o.depend
+gcc -c Hv_xyplotio.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+ar rv ../lib.linux/x86_64/libHv.a Hv_attributes.o Hv_balloon.o Hv_barplot.o Hv_box.o Hv_button.o Hv_buttongroup.o Hv_callback.o Hv_choice.o Hv_color.o Hv_colorbutton.o Hv_compound.o Hv_configure.o Hv_connect.o Hv_container.o Hv_dialogs_w32.o Hv_dlogmenus.o Hv_dlogs.o Hv_dlogsupport.o Hv_drag.o Hv_draw.o Hv_drawsupport.o Hv_drawtools.o Hv_feedback.o Hv_fonts.o Hv_fractdone.o Hv_gateway.o Hv_gateway_xm.o Hv_gateway_w32.o Hv_histo.o Hv_init.o Hv_io.o Hv_items.o Hv_led.o Hv_linklist.o Hv_mapitem.o Hv_mapmath.o Hv_mapreader.o Hv_math.o Hv_menubutton.o Hv_menus.o Hv_offscreen.o Hv_opengl_w32.o Hv_optionbutton.o Hv_pic.o Hv_plotsupport.o Hv_pointer.o Hv_postscript.o Hv_print.o Hv_privdraw.o Hv_psdraw.o Hv_radiodlogs.o Hv_rainbowscale.o Hv_rectsupport.o Hv_region.o Hv_scroll.o Hv_separator.o Hv_slider.o Hv_standard.o Hv_textentryitem.o Hv_textitem.o Hv_undo.o Hv_utilities.o Hv_views.o Hv_virtual.o Hv_wheel.o Hv_worldimage.o Hv_worldline.o Hv_worldpolygon.o Hv_worldrect.o Hv_worldwedge.o Hv_xyplot.o Hv_xyplotedit.o Hv_xyplotio.o
+ar: creating ../lib.linux/x86_64/libHv.a
+a - Hv_attributes.o
+a - Hv_balloon.o
+a - Hv_barplot.o
+a - Hv_box.o
+a - Hv_button.o
+a - Hv_buttongroup.o
+a - Hv_callback.o
+a - Hv_choice.o
+a - Hv_color.o
+a - Hv_colorbutton.o
+a - Hv_compound.o
+a - Hv_configure.o
+a - Hv_connect.o
+a - Hv_container.o
+a - Hv_dialogs_w32.o
+a - Hv_dlogmenus.o
+a - Hv_dlogs.o
+a - Hv_dlogsupport.o
+a - Hv_drag.o
+a - Hv_draw.o
+a - Hv_drawsupport.o
+a - Hv_drawtools.o
+a - Hv_feedback.o
+a - Hv_fonts.o
+a - Hv_fractdone.o
+a - Hv_gateway.o
+a - Hv_gateway_xm.o
+a - Hv_gateway_w32.o
+a - Hv_histo.o
+a - Hv_init.o
+a - Hv_io.o
+a - Hv_items.o
+a - Hv_led.o
+a - Hv_linklist.o
+a - Hv_mapitem.o
+a - Hv_mapmath.o
+a - Hv_mapreader.o
+a - Hv_math.o
+a - Hv_menubutton.o
+a - Hv_menus.o
+a - Hv_offscreen.o
+a - Hv_opengl_w32.o
+a - Hv_optionbutton.o
+a - Hv_pic.o
+a - Hv_plotsupport.o
+a - Hv_pointer.o
+a - Hv_postscript.o
+a - Hv_print.o
+a - Hv_privdraw.o
+a - Hv_psdraw.o
+a - Hv_radiodlogs.o
+a - Hv_rainbowscale.o
+a - Hv_rectsupport.o
+a - Hv_region.o
+a - Hv_scroll.o
+a - Hv_separator.o
+a - Hv_slider.o
+a - Hv_standard.o
+a - Hv_textentryitem.o
+a - Hv_textitem.o
+a - Hv_undo.o
+a - Hv_utilities.o
+a - Hv_views.o
+a - Hv_virtual.o
+a - Hv_wheel.o
+a - Hv_worldimage.o
+a - Hv_worldline.o
+a - Hv_worldpolygon.o
+a - Hv_worldrect.o
+a - Hv_worldwedge.o
+a - Hv_xyplot.o
+a - Hv_xyplotedit.o
+a - Hv_xyplotio.o
+make[1]: Leaving directory `/home/radphi/cvs/libHv'
+cd libLGD && make clean && make lib
+make[1]: Entering directory `/home/radphi/cvs/libLGD'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/libLGD'
+make[1]: Entering directory `/home/radphi/cvs/libLGD'
+gcc -M lgdGeom.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > lgdGeom.o.depend
+gcc -c lgdGeom.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M lgdClusterIU.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > lgdClusterIU.o.depend
+gcc -c lgdClusterIU.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+g++  -c -M lgdClusterUC.cxx  -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > lgdClusterUC.o.depend
+g++ -c lgdClusterUC.cxx -g   -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M lgdfGeom.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > lgdfGeom.o.depend
+gcc -c lgdfGeom.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M lgdUtil.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > lgdUtil.o.depend
+gcc -c lgdUtil.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M esum.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > esum.o.depend
+gcc -c esum.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M lgdHole.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > lgdHole.o.depend
+gcc -c lgdHole.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+ar rv ../lib.linux/x86_64/libLGD.a lgdGeom.o lgdClusterIU.o lgdClusterUC.o lgdfGeom.o lgdUtil.o esum.o lgdHole.o
+ar: creating ../lib.linux/x86_64/libLGD.a
+a - lgdGeom.o
+a - lgdClusterIU.o
+a - lgdClusterUC.o
+a - lgdfGeom.o
+a - lgdUtil.o
+a - esum.o
+a - lgdHole.o
+make[1]: Leaving directory `/home/radphi/cvs/libLGD'
+cd taggerdata && make clean && make
+make[1]: Entering directory `/home/radphi/cvs/taggerdata'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/taggerdata'
+make[1]: Entering directory `/home/radphi/cvs/taggerdata'
+RADPHI_HOME\t /home/radphi/cvs
+LIBDIR\t\t ../lib.linux/x86_64
+MAKETARGET\t linux
+VPATH\t\t /usr/local/cern/pro/lib:../lib.linux/x86_64/:/home/radphi/cvs/lib.linux/x86_64
+ARCHFLAGS\t
+CC\t\t gcc
+CFLAGS\t\t -D_FILE_OFFSET_BITS=64
+CDBG\t\t -g
+CCFLAGS\t\t
+INCLUDE\t\t -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15 -DLINUX
+make[1]: Leaving directory `/home/radphi/cvs/taggerdata'
+cd makehits && make clean && make lib
+make[1]: Entering directory `/home/radphi/cvs/makehits'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/makehits'
+make[1]: Entering directory `/home/radphi/cvs/makehits'
+gcc -M -DLGD_CLUSTERIZER_UC makeHits.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > makeHits.o.depend
+gcc -c makeHits.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC setup_makeHits.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > setup_makeHits.o.depend
+gcc -c setup_makeHits.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_lgd_hits.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_lgd_hits.o.depend
+gcc -c make_lgd_hits.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_bsd_hits.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_bsd_hits.o.depend
+gcc -c make_bsd_hits.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_photons.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_photons.o.depend
+gcc -c make_photons.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_lgd_clusters.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_lgd_clusters.o.depend
+gcc -c make_lgd_clusters.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_bsd_pixels.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_bsd_pixels.o.depend
+gcc -c make_bsd_pixels.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_bgv_hits.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_bgv_hits.o.depend
+gcc -c make_bgv_hits.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_cpv_hits.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_cpv_hits.o.depend
+gcc -c make_cpv_hits.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_upv_hits.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_upv_hits.o.depend
+gcc -c make_upv_hits.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_mesons.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_mesons.o.depend
+gcc -c make_mesons.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_tagger_hits.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_tagger_hits.o.depend
+gcc -c make_tagger_hits.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_time_list.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_time_list.o.depend
+gcc -c make_time_list.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC makePhotonPatch.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > makePhotonPatch.o.depend
+gcc -c makePhotonPatch.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC setup_global_utility_structures.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > setup_global_utility_structures.o.depend
+gcc -c setup_global_utility_structures.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_recoil.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_recoil.o.depend
+gcc -c make_recoil.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_tagger_clusters.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_tagger_clusters.o.depend
+gcc -c make_tagger_clusters.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_tagger_photons.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_tagger_photons.o.depend
+gcc -c make_tagger_photons.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M -DLGD_CLUSTERIZER_UC make_bgv_clusters.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > make_bgv_clusters.o.depend
+gcc -c make_bgv_clusters.c -g  -D_FILE_OFFSET_BITS=64 -DLGD_CLUSTERIZER_UC -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+ar rv ../lib.linux/x86_64/libmakehits.a makeHits.o setup_makeHits.o make_lgd_hits.o make_bsd_hits.o make_photons.o make_lgd_clusters.o make_bsd_pixels.o make_bgv_hits.o make_cpv_hits.o make_upv_hits.o make_mesons.o make_tagger_hits.o make_time_list.o makePhotonPatch.o setup_global_utility_structures.o make_recoil.o make_tagger_clusters.o make_tagger_photons.o make_bgv_clusters.o
+ar: creating ../lib.linux/x86_64/libmakehits.a
+a - makeHits.o
+a - setup_makeHits.o
+a - make_lgd_hits.o
+a - make_bsd_hits.o
+a - make_photons.o
+a - make_lgd_clusters.o
+a - make_bsd_pixels.o
+a - make_bgv_hits.o
+a - make_cpv_hits.o
+a - make_upv_hits.o
+a - make_mesons.o
+a - make_tagger_hits.o
+a - make_time_list.o
+a - makePhotonPatch.o
+a - setup_global_utility_structures.o
+a - make_recoil.o
+a - make_tagger_clusters.o
+a - make_tagger_photons.o
+a - make_bgv_clusters.o
+echo ../lib.linux/x86_64
+../lib.linux/x86_64
+make[1]: Leaving directory `/home/radphi/cvs/makehits'
+cd tapeWriter && make clean && make
+make[1]: Entering directory `/home/radphi/cvs/tapeWriter'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/tapeWriter'
+make[1]: Entering directory `/home/radphi/cvs/tapeWriter'
+gcc -M wrapFile.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > wrapFile.o.depend
+gcc -c wrapFile.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc  -O1  -o wrapFile wrapFile.o ../lib.linux/x86_64/libdata.a -lpthread
+gcc -M labelTape.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > labelTape.o.depend
+gcc -c labelTape.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc  -O1  -o labelTape labelTape.o ../lib.linux/x86_64/libdata.a ../lib.linux/x86_64/libUtil.a -lpthread
+gcc -M countEvents.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > countEvents.o.depend
+gcc -c countEvents.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc  -O1  -o countEvents countEvents.o ../lib.linux/x86_64/libdata.a -lpthread
+gcc -M compact.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > compact.o.depend
+gcc -c compact.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc  -O1  -o compact compact.o ../lib.linux/x86_64/libmakehits.a ../lib.linux/x86_64/libLGD.a ../lib.linux/x86_64/libBGV.a ../lib.linux/x86_64/libdata.a ../lib.linux/x86_64/libUtil.a ../lib.linux/x86_64/libclib.a ../lib.linux/x86_64/libparam.a ../lib.linux/x86_64/libmapmanager.a \
+	`/usr/local/cern/pro/bin/cernlib packlib` \
+	 -lXpm -lXm -lXmu -lXt -lSM -lICE -lXext -lX11 -lXp -ldl -lnsl -lgfortran -lnsl -ldl -lresolv -lm -lpthread -lstdc++
+gcc -M partition.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > partition.o.depend
+gcc -c partition.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc  -O1  -o partition partition.o ../lib.linux/x86_64/libdata.a ../lib.linux/x86_64/libUtil.a ../lib.linux/x86_64/libclib.a ../lib.linux/x86_64/libparam.a ../lib.linux/x86_64/libmapmanager.a \
+        `/usr/local/cern/pro/bin/cernlib packlib` \
+	 -lXpm -lXm -lXmu -lXt -lSM -lICE -lXext -lX11 -lXp -ldl -lnsl -lgfortran -lnsl -ldl -lresolv -lm -lpthread -lstdc++
+make[1]: Leaving directory `/home/radphi/cvs/tapeWriter'
+cd Event && make clean && make && make
+make[1]: Entering directory `/home/radphi/cvs/Event'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/Event'
+make[1]: Entering directory `/home/radphi/cvs/Event'
+gcc -M main.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > main.o.depend
+gcc -c main.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M Event.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > Event.o.depend
+gcc -c Event.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M init.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > init.o.depend
+gcc -c init.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M feedback.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > feedback.o.depend
+gcc -c feedback.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M setup.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > setup.o.depend
+gcc -c setup.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M draw.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > draw.o.depend
+gcc -c draw.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M input.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > input.o.depend
+gcc -c input.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gfortran  -o Event main.o Event.o init.o feedback.o setup.o draw.o input.o ../lib.linux/x86_64/libHv.a ../lib.linux/x86_64/libmakehits.a ../lib.linux/x86_64/libLGD.a ../lib.linux/x86_64/libBGV.a ../lib.linux/x86_64/libdata.a ../lib.linux/x86_64/libUtil.a ../lib.linux/x86_64/libparam.a ../lib.linux/x86_64/libmapmanager.a -lnsl -lXpm -lXm -lXmu -lXt -lSM -lICE -lXext -lX11 -lXp -ldl -lm -lpthread \
+        -L/usr/local/cern/pro/lib -lmathlib -lkernlib -lstdc++
+../lib.linux/x86_64/libHv.a(Hv_print.o): In function `Hv_PrinterSetup':
+/home/radphi/cvs/libHv/Hv_print.c:250: warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+make[1]: Leaving directory `/home/radphi/cvs/Event'
+make[1]: Entering directory `/home/radphi/cvs/Event'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/radphi/cvs/Event'
+cd Gradphi && make clean && make all
+make[1]: Entering directory `/home/radphi/cvs/Gradphi'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/Gradphi'
+make[1]: Entering directory `/home/radphi/cvs/Gradphi'
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ gxint.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ gustep.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ gukine.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ uginit.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ uglast.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ guout.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ gsvertx.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ major.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ matdef.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ meddef.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ uhinit.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ gutrev.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ detector.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ lgd.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ lgpmt.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ rpd.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ cpv.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ upv.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ trgt.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placelgd.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placerpd.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placecpv.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placeupv.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placetrgt.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ sensitive.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ angles.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placebrad.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placeclas.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placecols.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placeepip.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placegtub.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placehole.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placewall.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placeweep.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ beampipe.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ beamtube.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ clasmgnt.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ clastgt.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ collim.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ herccover.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ radiator.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ leadwall.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ shield.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ sweepmgnt.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ dnut.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placednut.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placecover.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ lgdframe.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placeframe.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ platform.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placeplatform.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ savehits.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ upvhits.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ rpdhits.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ cpvhits.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ lgdhits.F
+gcc -M triggered.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > triggered.o.depend
+gcc -c triggered.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M inputEvents.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > inputEvents.o.depend
+gcc -c inputEvents.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M outputEvents.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > outputEvents.o.depend
+gcc -c outputEvents.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M LGDsave.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > LGDsave.o.depend
+gcc -c LGDsave.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M RPDsave.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > RPDsave.o.depend
+gcc -c RPDsave.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M CPVsave.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > CPVsave.o.depend
+gcc -c CPVsave.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M UPVsave.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > UPVsave.o.depend
+gcc -c UPVsave.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M sort.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > sort.o.depend
+gcc -c sort.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M timeAnalysis.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > timeAnalysis.o.depend
+gcc -c timeAnalysis.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ bsd.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ bgv.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ bsdhits.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ bgvhits.F
+gcc -M BSDsave.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > BSDsave.o.depend
+gcc -c BSDsave.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M timeAnalysisBSD.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > timeAnalysisBSD.o.depend
+gcc -c timeAnalysisBSD.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placebsd.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ placebgv.F
+gcc -M BGVsave.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > BGVsave.o.depend
+gcc -c BGVsave.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M timeAnalysisCPV.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > timeAnalysisCPV.o.depend
+gcc -c timeAnalysisCPV.c -g  -g     -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ ratestudy.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ cerenkov.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ background.F
+gfortran -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG -c -fno-second-underscore -I. -I../include -I/home/radphi/cvs/include -DLINUX -I/usr/local/cern/pro/include/ gxphys.F
+gcc -g     -c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX -I/usr/local/cern/pro/include/ timel.c
+ar rv ../lib.linux/x86_64/libgradphi.a gustep.o gukine.o uginit.o uglast.o guout.o gsvertx.o major.o matdef.o meddef.o uhinit.o gutrev.o detector.o lgd.o lgpmt.o rpd.o cpv.o upv.o trgt.o placelgd.o placerpd.o placecpv.o placeupv.o placetrgt.o sensitive.o angles.o placebrad.o placeclas.o placecols.o placeepip.o placegtub.o placehole.o placewall.o placeweep.o beampipe.o beamtube.o clasmgnt.o clastgt.o collim.o herccover.o radiator.o leadwall.o shield.o sweepmgnt.o dnut.o placednut.o placecover.o lgdframe.o placeframe.o platform.o placeplatform.o savehits.o upvhits.o rpdhits.o cpvhits.o lgdhits.o triggered.o inputEvents.o outputEvents.o LGDsave.o RPDsave.o CPVsave.o UPVsave.o sort.o timeAnalysis.o bsd.o bgv.o bsdhits.o bgvhits.o BSDsave.o timeAnalysisBSD.o placebsd.o placebgv.o BGVsave.o timeAnalysisCPV.o ratestudy.o cerenkov.o background.o gxphys.o timel.o
+ar: creating ../lib.linux/x86_64/libgradphi.a
+a - gustep.o
+a - gukine.o
+a - uginit.o
+a - uglast.o
+a - guout.o
+a - gsvertx.o
+a - major.o
+a - matdef.o
+a - meddef.o
+a - uhinit.o
+a - gutrev.o
+a - detector.o
+a - lgd.o
+a - lgpmt.o
+a - rpd.o
+a - cpv.o
+a - upv.o
+a - trgt.o
+a - placelgd.o
+a - placerpd.o
+a - placecpv.o
+a - placeupv.o
+a - placetrgt.o
+a - sensitive.o
+a - angles.o
+a - placebrad.o
+a - placeclas.o
+a - placecols.o
+a - placeepip.o
+a - placegtub.o
+a - placehole.o
+a - placewall.o
+a - placeweep.o
+a - beampipe.o
+a - beamtube.o
+a - clasmgnt.o
+a - clastgt.o
+a - collim.o
+a - herccover.o
+a - radiator.o
+a - leadwall.o
+a - shield.o
+a - sweepmgnt.o
+a - dnut.o
+a - placednut.o
+a - placecover.o
+a - lgdframe.o
+a - placeframe.o
+a - platform.o
+a - placeplatform.o
+a - savehits.o
+a - upvhits.o
+a - rpdhits.o
+a - cpvhits.o
+a - lgdhits.o
+a - triggered.o
+a - inputEvents.o
+a - outputEvents.o
+a - LGDsave.o
+a - RPDsave.o
+a - CPVsave.o
+a - UPVsave.o
+a - sort.o
+a - timeAnalysis.o
+a - bsd.o
+a - bgv.o
+a - bsdhits.o
+a - bgvhits.o
+a - BSDsave.o
+a - timeAnalysisBSD.o
+a - placebsd.o
+a - placebgv.o
+a - BGVsave.o
+a - timeAnalysisCPV.o
+a - ratestudy.o
+a - cerenkov.o
+a - background.o
+a - gxphys.o
+a - timel.o
+gxint -v pro -g 321 -m -d Motif -o gradphi++.x -L../lib.linux/x86_64 \
+	 	-ldata -lpthread -- \
+		-Wl,-uuginit_,-uuglast_,-ugutrev_,-ugustep_,-uguout_,-ugukine_,-ugxphys_,-ugxcs_,-export-dynamic -g     -DCERNLIB_MOTIF -D_FILE_OFFSET_BITS=64 -DCERNLIB_CG gxint.o  ../lib.linux/x86_64/libgradphi.a \
+
+******************************************************
+* loading interactive Geant
+*   creating          : gradphi++.x
+*   loader used       : gfortran
+*   user library path :  -L../lib.linux/x86_64
+*   user libraries    :  -ldata -lpthread
+*   Cern libraries    : geant321 pawlib graflib/Motif packlib mathlib
+*   gxint used        : user supplied
+******************************************************
+make[1]: Leaving directory `/home/radphi/cvs/Gradphi'
+#cd MonteCarlo && make clean && make
+cd calibration && make clean && make
+make[1]: Entering directory `/home/radphi/cvs/calibration'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/calibration'
+make[1]: Entering directory `/home/radphi/cvs/calibration'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/radphi/cvs/calibration'
+cd RODD && make clean && make
+make[1]: Entering directory `/home/radphi/cvs/RODD'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/RODD'
+make[1]: Entering directory `/home/radphi/cvs/RODD'
+gcc -M main.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > main.o.depend
+gcc -c main.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M commands.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > commands.o.depend
+gcc -c commands.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M runs.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > runs.o.depend
+gcc -c runs.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M errors.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > errors.o.depend
+gcc -c errors.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M parse.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > parse.o.depend
+gcc -c parse.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M process.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > process.o.depend
+gcc -c process.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -g  -o rodd main.o commands.o runs.o errors.o parse.o process.o ../lib.linux/x86_64/libmakehits.a ../lib.linux/x86_64/libLGD.a ../lib.linux/x86_64/libBGV.a ../lib.linux/x86_64/libdata.a ../lib.linux/x86_64/libUtil.a ../lib.linux/x86_64/libparam.a ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libclib.a \
+	`/usr/local/cern/pro/bin/cernlib packlib mathlib` \
+	-lXpm -lXm -lXmu -lXt -lSM -lICE -lXext -lX11 -lXp -ldl -lgfortran -lnsl -ldl -lresolv -lm -lnsl -lpthread -lstdc++
+make[1]: Leaving directory `/home/radphi/cvs/RODD'
+cd Examples && make clean && make
+make[1]: Entering directory `/home/radphi/cvs/Examples'
+rm -f *.o *.oo *.depend
+make[1]: Leaving directory `/home/radphi/cvs/Examples'
+make[1]: Entering directory `/home/radphi/cvs/Examples'
+gcc -M readRaw.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > readRaw.o.depend
+gcc -c readRaw.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc  -D_FILE_OFFSET_BITS=64 -o readRaw readRaw.o ../lib.linux/x86_64/libdata.a \
+	-lpthread
+gcc -M dumpEvent.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > dumpEvent.o.depend
+gcc -c dumpEvent.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc  -D_FILE_OFFSET_BITS=64 -o dumpEvent dumpEvent.o ../lib.linux/x86_64/libdata.a \
+	-lpthread
+gcc -M ntuple.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > ntuple.o.depend
+gcc -c ntuple.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M ntdef.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > ntdef.o.depend
+gcc -c ntdef.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M hidef.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > hidef.o.depend
+gcc -c hidef.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gfortran    -g -o ntuplet ntuplet.F ntuple.o ntdef.o hidef.o ../lib.linux/x86_64/libmakehits.a ../lib.linux/x86_64/libBGV.a ../lib.linux/x86_64/libLGD.a ../lib.linux/x86_64/libUtil.a ../lib.linux/x86_64/libdata.a ../lib.linux/x86_64/libparam.a ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libclib.a \
+	`/usr/local/cern/pro/bin/cernlib pawlib graflib grafX11 packlib mathlib` \
+	-lnsl -lXpm -lXm -lXmu -lXt -lSM -lICE -lXext -lX11 -lXp -ldl \
+	-lpthread -lstdc++
+gcc -M mctuple.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mctuple.o.depend
+gcc -c mctuple.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gcc -M mcdef.c -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX > mcdef.o.depend
+gcc -c mcdef.c -g  -D_FILE_OFFSET_BITS=64 -I. -I../include -I/home/radphi/cvs/include -I/home/radphi/cvs/include/CC -DFUNCPROTO=15  -DLINUX
+gfortran    -g -o mctuplet mctuplet.F mctuple.o mcdef.o hidef.o ../lib.linux/x86_64/libmakehits.a ../lib.linux/x86_64/libBGV.a ../lib.linux/x86_64/libLGD.a ../lib.linux/x86_64/libUtil.a ../lib.linux/x86_64/libdata.a ../lib.linux/x86_64/libparam.a ../lib.linux/x86_64/libmapmanager.a ../lib.linux/x86_64/libclib.a \
+	`/usr/local/cern/pro/bin/cernlib pawlib graflib grafX11 packlib mathlib` \
+	 -lnsl -lXpm -lXm -lXmu -lXt -lSM -lICE -lXext -lX11 -lXp -ldl \
+	 -lpthread -lstdc++
+make[1]: Leaving directory `/home/radphi/cvs/Examples'

@@ -1,0 +1,11 @@
+#! gnumake
+
+SYSTEMS := mapmanager.build libdata.build libLGD.build libRPD.build libUtil.build libwabbit.build libParam.build camac.build camacControl.build lgdControl.build tapeWriter.build 
+
+%.build: 
+	$(RADPHI_HOME)/scripts/checkdir $(HOME)/$* $*
+	cd $(HOME)/$*; gnumake lib exe exe-install
+
+HOME =  $(RADPHI_HOME)/build.$(RADPHI_MAKETARGET)
+
+all: $(SYSTEMS)

@@ -1,0 +1,12 @@
+*** Begin of history file: Mon Aug 31 14:48:13 2020
+/wc#setorigin 0 30 30
+wc#setorigin 0 30 30
+wc#dcut hall x 0 10 10 .1 .1
+wc#dcut hall x 0 10 10 .3 .3
+next;
+wc#dcut hall x 0 10 10 .3 .3
+wc#pick
+wc#pick
+wc#pick
+exit
+*** End   of history file: Mon Aug 31 14:50:14 2020

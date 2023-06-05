@@ -1,0 +1,3 @@
+10.0 this is the min allowed distance from center to cluster
+52.0  "   "   "  max    "       "      "     "    "     "
+10.0 min allowed inter-cluster separation

@@ -1,0 +1,12 @@
+endianConverterAuto.c: \
+	endianConverterAuto.h\
+	/home/radphi/cvs/include/disData.h\
+	/home/radphi/cvs/include/itypes.h\
+	/home/radphi/cvs/include/libBGV.h\
+	/home/radphi/cvs/include/iitypes.h\
+	/home/radphi/cvs/include/esr.h\
+	/home/radphi/cvs/include/disData.h\
+	/home/radphi/cvs/include/lgdCluster.h\
+	/home/radphi/cvs/include/mctypes.h\
+	/home/radphi/cvs/include/tapeData.h\
+

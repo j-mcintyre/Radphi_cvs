@@ -1,0 +1,20 @@
+\#
+# Trigger daemon config file'
+#
+#
+
+triggerd.lgdMon.useit: TRUE
+triggerd.lgdMon.inhibit: FALSE
+triggerd.lgdMon.freq: 1
+
+triggerd.rpdMon.useit: FALSE
+triggerd.rpdMon.inhibit: FALSE
+triggerd.rpdMon.freq: 60
+
+triggerd.bt.useit: TRUE
+triggerd.bt.inhibit: TRUE
+triggerd.bt.freq: 20
+
+triggerd.ped.useit: TRUE
+triggerd.ped.inhibit: FALSE
+triggerd.ped.freq: 1

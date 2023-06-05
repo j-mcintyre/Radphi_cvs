@@ -1,0 +1,19 @@
+#! /usr/local/bin/perl
+
+
+$modFile = "$ENV{'RADPHI_HOME'}/scripts/etc/build.modules";
+open(MODFILE,$modFile) || die "Failed to open $modFile\n";
+$nMod=0;
+while(<MODFILE>){
+    chop;
+    $modules[$nMod++] = $_;
+}
+foreach $module (@modules){
+    $dir = "$ENV{\"RADPHI_HOME\"}/build.$ENV{\"RADPHI_MAKETARGET\"}/$module";
+    chdir($dir);
+    system("pwd");
+    $status = system("$ENV{\"RADPHI_GMAKE\"} GLIB=1 lib exe exe-install");
+    if($status){
+	exit(1);
+    }
+}

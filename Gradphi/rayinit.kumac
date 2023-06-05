@@ -1,0 +1,7 @@
+MACRO rayinit prec=4 fill=50 box=10000 boy=10000 boz=10000
+next
+dopt rayt on
+dopt mapp [prec]
+satt * fill [fill]
+valcut [box] [boy] [boz]
+tim

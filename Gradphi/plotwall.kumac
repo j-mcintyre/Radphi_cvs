@@ -1,0 +1,7 @@
+MACRO hide_boxes
+ satt * seen 0
+ satt pmtl seen 1
+ satt blok seen 1
+ dopt hide on
+ next; draw lgd 40 40 0 10 10 .12 .12
+RETURN

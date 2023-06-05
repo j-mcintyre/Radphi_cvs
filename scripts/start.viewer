@@ -1,0 +1,4 @@
+#!/bin/sh
+xterm -title $1 -e tail -10000f $1 &
+
+

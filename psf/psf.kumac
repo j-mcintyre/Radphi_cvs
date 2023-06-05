@@ -1,0 +1,374 @@
+MACRO title deg=5 att=166 size=0.36
+ string = MC showers at [Q]=[deg]^0! L?att!=[att] cm
+ exec label text=[string] size=[size]
+RETURN
+
+MACRO efit size=0.3
+ opt utitl
+ set hcol 1; hi/pl 24 
+ set hcol 4; hi/pl 22 s
+ set hcol 2; hi/pl 300 s
+ atitle 'E "m#GeV"n#' '' ! 000 
+ string = E?[g]! 
+ exec label text=[string] size=[size] key=2 keycol=1
+ string = E?IMG! 
+ exec label text=[string] size=[size] key=2 keycol=4
+ string = E?FIT!
+ exec label text=[string] size=[size] key=2 keycol=2
+ set hcol 1
+ opt htitl
+RETURN 
+
+MACRO rfit 
+ opt stat
+ opt utitl
+ hi/pl 303(0.:6.)
+ atitle 'R "m#cm"n#' '' ! 000
+ opt htitl
+ opt nstat 
+RETURN
+
+MACRO eprof id=500
+ hi/pl [id]
+ fu/pl x 0 5 s
+ atitle '"m#GeV"n#' '"m#GeV"n#' ! 000
+RETURN
+
+MACRO rprof id=501
+ hi/pl [id]
+ atitle '"m#GeV"n#' '"m#cm"n#' ! 000
+RETURN
+
+
+MACRO theta ll=0.0 ul=0.4 size=0.3
+ opt utitl 
+ set hcol 1; hi/pl 26([ll]:[ul]) 
+ set hcol 2; hi/pl 306([ll]:[ul]) s 
+ atitle '[Q] "m#rad"n#' '' ! 000
+ exec label text='[g]' size=[size] key=2 keycol=1
+ exec label text='fit' size=[size] key=2 keycol=2
+ set hcol 1
+ opt htitl
+RETURN
+
+MACRO fig1 lun=nt d=5 a=166 ll=0.0 ul=0.5 s=0.3
+size 20 20
+set csiz 0.36
+zone 2 2
+cd //[lun]/[d]deg
+exec efit size=[s]
+exec rfit 
+exec eprof id=508 
+exec theta ll=[ll] ul=[ul] size=[s]
+exec title deg=[d] att=[a] size=[s]
+size 
+zone
+set csiz 0.26
+RETURN
+
+MACRO fig2 lun=nt d=5 a=166 s=.36 
+ cd //[lun]/[d]deg
+ zone 2 2
+ exec eprof id=504
+ exec rprof id=505
+ exec eprof id=500
+ exec rprof id=501
+ exec title deg=[d] att=[a] size=[s]
+ zone
+RETURN
+
+MACRO rfig
+
+
+RETURN
+
+MACRO efig
+
+
+RETURN
+
+MACRO resfig
+
+
+RETURN
+
+MACRO profiles
+hi/cr/prof 508 'TheFit vs TheMC' 20 0. 1. 0. 2.
+hi/cr/prof 509 'PhiFit vs PhiMC' 40 -1. 1. -2. 2.
+
+RETURN
+
+MACRO slice b=10000 t=10 e=0
+ exec bcol base=[b] theta=[t] eslice=[e]
+RETURN
+
+MACRO normas b=10000 t=10 es=9
+ slices=[es]-1
+ do i=0,[slices]
+  message Base [b] theta [t] slice [i] of [slices]
+  exec norma base=[b] theta=[t] eslice=[i]
+ enddo
+RETURN
+
+MACRO norma base=10000 theta=10 eslice=0
+
+offset = 100*[theta] + [eslice]
+lgd = [base]   + [offset]
+psf = [base]*2 + [offset]
+err = [base]*3 + [offset]
+dif = [base]*4 + [offset]
+difbin = [base]*5 + [offset]
+chi = [base]*6 + [offset]
+lgdbin = [base]*8 + [offset]
+psfbin = [base]*9 + [offset]
+
+
+entr = $hinfo([chi],'ENTRIES')
+if ([entr].le.0) then
+  message "WARNING - no entries in HID [chi] for slice [eslice]
+  exitm
+endif
+message "Normalize slice [eslice] with [entr] entries"
+
+add [lgd] [psf] [dif] 1 -1
+add [lgd] [lgd] [lgd]0 1/[entr] 0
+add [psf] [psf] [psf]0 1/[entr] 0
+add [err] [err] [err]0 1/[entr] 0
+add [dif] [dif] [dif]0 1/[entr] 0
+
+RETURN
+
+MACRO bcol base=10000 theta=10 eslice=0
+* Collored box view for the given slice
+* opt zfl1
+ opt nbox
+ opt utitle
+ size 16 16
+ zone  2 2
+ set ymgu 1.5
+ set ymgl 1.5
+ set xmgr 2.
+ set xmgl 1.0
+ set xwin 2.5
+ set cwid .2
+ set cmmg .2
+ set cval 0.2
+ set xval .1
+ lgd = ([base]*1 + 100*[theta] + [eslice])*10
+ psf = ([base]*2 + 100*[theta] + [eslice])*10
+ err = ([base]*3 + 100*[theta] + [eslice])*10
+ dif = ([base]*4 + 100*[theta] + [eslice])*10
+ if ( $hexist([lgd]).eq.0 ) then 
+  message "ERROR - histogram [lgd] does not exist!"
+  exitm
+ endif
+ hi/pl [lgd] colz
+ hi/pl [lgd] sbox
+ atitle 'Lgd data' '' ! 222
+ set xval 100.
+ hi/pl [psf] colz
+ hi/pl [psf] sbox
+ atitle 'PSF fit' '' ! 222
+ set xval .1
+ hi/pl [err] colz
+ atitle 'Errors' '' ! 222
+ set xval 100.
+ hi/pl [dif] colz
+ hi/pl [lgd] sbox
+ atitle 'Data-Fit difference' '' ! 222
+
+RETURN
+
+MACRO report th=0 en=0 pict=0
+
+opt utit
+opt zfl1
+opt nbox
+entr = $hinfo(300,'ENTRIES')
+message "Entry [entr]"
+
+add 200 201 203 1 -1
+add 200 201 204 -1 1
+add 200 200 2000 1/[entr] 0
+add 201 201 2001 1/[entr] 0
+add 202 202 2002 1/[entr] 0
+add 203 203 2003 1/[entr] 0
+add 204 204 2004 1/[entr] 0
+
+
+if ([pict].eq.1) then 
+  size 15 10
+  zone 2 1
+  opt stat
+  set stat 1110
+  set xmgl 2.5
+  set xmgr 0.5
+  set csiz 0.4
+  set yhti .8
+  set hcol 1; hi/pl 24(:1.5)
+  set hcol 2; hi/pl 300 s
+  atitle 'Energy distribution"m#GeV"n#' '' 
+  opt nstat
+  set hcol 1; hi/pl 500(:1.5)
+  fu/pl x 0 6 s
+  atitle 'Energy profile "m#GeV"n#' '' 
+  exec label text='Isolated photons at [Q]=25?0!' size=0.36
+  exec label text='photons' key=3 keycol=1
+  exec label text='PSF fit' key=3 keycol=2
+  opt nstat
+  opt nfit
+endif
+
+
+if ([pict].eq.2) then 
+  size 15 10
+  zone 2 1
+  opt stat
+  set stat 1110
+  set xmgl 2.5
+  set xmgr 0.5
+  set csiz 0.4
+  set yhti .8
+  set hcol 1; hi/pl 303
+  atitle 'Radial width"m#cm"n#' '' 
+  opt nstat
+  set hcol 1; hi/pl 501
+  atitle 'Radial width profile "m#cm"n#' '' 
+  exec label text='Isolated photons at [Q]=25?0!' size=0.36
+  opt nstat
+  opt nfit
+endif
+
+
+if ([pict].eq.31) then 
+ size 15 12
+ zone 3 1
+ set csiz 0.35
+ set xmgl 1.5
+ set xmgr .5
+ set xwin 1.5
+ set xval 0.2
+ hi/pl 30 
+ hi/pl 31
+ hi/pl 32
+endif
+
+if ([pict].eq.3) then 
+ opt nstat
+ size 30 20
+ zone 2 1
+ set vsiz 0.45
+ set tsiz 0.45
+ set asiz 0.45
+ hi/pl 200 box
+ opt utitle
+ hi/pl 201 box
+ atitle 'PSF fit' '' ! 222
+ pi/print box.eps
+ opt htitle
+endif
+
+if ([pict].eq.4) then 
+ opt nstat
+ size 20 14
+ zone 2 1
+ set xwin 2
+ set xmgl 2
+ set xmgr 0.5
+ set vsiz .3
+ set tsiz .3
+ set yval 0.2
+ lego 2000 25 25
+* set yval 100
+ lego 2001 25 25
+* set yval 0.4
+endif
+
+if ([pict].eq.5) then 
+ opt nstat
+ opt utitl
+ size 15 15
+ set xmgl 1.0
+ set xmgr 2.0
+ set ymgu 0.5
+ set ymgl 2.0
+ hi/pl 2000 colz
+ atitle 'LGD data' '' ! 222
+ pi/print cbox_data.eps
+ hi/pl 2001 colz
+ atitle 'PSF fit' '' ! 222
+ pi/print cbox_psf.eps
+ hi/pl 2002 colz
+ atitle 'Sigma2 ' '' ! 222
+ pi/print cbox_s2.eps
+ hi/pl 2004 colz
+ atitle 'Fit - Data' '' ! 222
+ pi/print cbox_diff.eps
+endif
+
+if ([pict].eq.52) then 
+ size 16 16
+ set xmgl 1.5
+ set xmgr 3.
+ hi/pl 2004 colz
+ hi/pl 2000 sbox
+ atitle 'Fit-Data (3.0 GeV)' '' ! 222
+endif
+
+if ([pict].eq.51) then 
+* opt zfl1
+ opt nbox
+ size 16 16
+ zone  2 2
+ set ymgu 1.5
+ set ymgl 1.5
+ set xmgr 2.
+ set xmgl 1.0
+ set xwin 2.5
+ set cwid .2
+ set cmmg .2
+ set cval 0.2
+ set xval .1
+ hi/pl 2000 colz
+ hi/pl 2000 sbox
+ atitle 'Lgd data' '' ! 222
+ set xval 100.
+ hi/pl 2001 colz
+ hi/pl 2001 sbox
+ atitle 'PSF fit' '' ! 222
+ set xval .1
+ hi/pl 2002 colz
+ atitle 'Errors' '' ! 222
+ set xval 100.
+ hi/pl 2004 colz
+ hi/pl 2000 sbox
+ atitle 'Fit-Data difference' '' ! 222
+endif
+
+if ([pict].eq.6) then 
+ size 20 14
+ zone 2 1
+ set xwin 2
+ set xmgl 2
+ set xmgr 0.5
+ set vsiz .3
+ set tsiz .3
+ set yval 0.2
+ lego 2003 25 25
+* set yval 100
+ lego 2004 25 25
+* set yval 0.4
+endif
+
+size
+zone
+set * 0
+opt * 
+RETURN
+
+MACRO unset
+set *0
+opt *
+RETURN
+
+

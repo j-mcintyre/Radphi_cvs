@@ -1,0 +1,9 @@
+#!/apps/bin/perl
+#source /u/home/radphi/setup;
+$run=system("get_run_number >/dev/null");
+$cmd="/u/home/radphi/mapmanager/mapGetInt /u/home/radphi/config/maps/adc_control.map DOR low_thresh_LGD $run >/dev/null";
+$rtn=system($cmd);
+$DOR_thresh=($rtn)/(256);
+print("The DOR threshold is: ");
+print($DOR_thresh);
+print("\n");

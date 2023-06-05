@@ -1,0 +1,16 @@
+#! /usr/local/bin/perl
+
+
+
+$SIG{'INT'} = 'handler';
+$SIG{'QUIT'} = 'handler';
+
+$msg =  "\"Initial revision by $ENV{'USER'}\@$ENV{'HOST'}\"";
+
+$cmd = "cvs -d :pserver:radphi\@jlabs1.jlab.org:/group/radphi/cvs import -m $msg @ARGV init orig";
+system($cmd);
+
+
+sub handler{
+    exit(0);
+}

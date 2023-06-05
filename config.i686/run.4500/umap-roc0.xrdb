@@ -1,0 +1,362 @@
+#
+# This is the UMAP database for the VME ROC (ROC2)
+#
+#   new version for March 1998 run period - R.T.Jones
+#
+roc.0.address: 2
+roc.0.nmodules: 2
+roc.0.module.*.bus: VME
+#
+roc.0.module.*.channel.*.detector: SCALER
+#
+# 16-channel Lecroy ECL scaler
+#
+LRS_1151.nchannels: 16
+LRS_1151.bus: VME
+LRS_1151.type: SCALER
+roc.0.module.0.type: LRS_1151
+roc.0.module.0.slot: 6
+roc.0.module.0.channel.0.channel: 96
+roc.0.module.0.channel.0.name:		tagR16
+roc.0.module.0.channel.0.description:	tagger R16
+roc.0.module.0.channel.1.channel: 97
+roc.0.module.0.channel.1.name:		tagR15
+roc.0.module.0.channel.1.description:	tagger R15
+roc.0.module.0.channel.2.channel: 98
+roc.0.module.0.channel.2.name:		tagR14
+roc.0.module.0.channel.2.description:	tagger R14
+roc.0.module.0.channel.3.channel: 99
+roc.0.module.0.channel.3.name:		tagR13
+roc.0.module.0.channel.3.description:	tagger R13
+roc.0.module.0.channel.4.channel: 100
+roc.0.module.0.channel.4.name:		tagR12
+roc.0.module.0.channel.4.description:	tagger R12
+roc.0.module.0.channel.5.channel: 101
+roc.0.module.0.channel.5.name:		tagR11
+roc.0.module.0.channel.5.description:	tagger R11
+roc.0.module.0.channel.6.channel: 102
+roc.0.module.0.channel.6.name:		tagR10
+roc.0.module.0.channel.6.description:	tagger R10
+roc.0.module.0.channel.7.channel: 103
+roc.0.module.0.channel.7.name:		tagR9
+roc.0.module.0.channel.7.description:	tagger R9
+roc.0.module.0.channel.8.channel: 104
+roc.0.module.0.channel.8.name:		tagR8
+roc.0.module.0.channel.8.description:	tagger R8
+roc.0.module.0.channel.9.channel: 105
+roc.0.module.0.channel.9.name:		tagR7
+roc.0.module.0.channel.9.description:	tagger R7
+roc.0.module.0.channel.10.channel: 106
+roc.0.module.0.channel.10.name:		tagR6
+roc.0.module.0.channel.10.description:	tagger R6
+roc.0.module.0.channel.11.channel: 107
+roc.0.module.0.channel.11.name:		tagR5
+roc.0.module.0.channel.11.description:	tagger R5
+roc.0.module.0.channel.12.channel: 108
+roc.0.module.0.channel.12.name:		tagR4
+roc.0.module.0.channel.12.description:	tagger R4
+roc.0.module.0.channel.13.channel: 109
+roc.0.module.0.channel.13.name:		tagR3
+roc.0.module.0.channel.13.description:	tagger R3
+roc.0.module.0.channel.14.channel: 110
+roc.0.module.0.channel.14.name:		tagR2
+roc.0.module.0.channel.14.description:	tagger R2
+roc.0.module.0.channel.15.channel: 111
+roc.0.module.0.channel.15.name:		tagR1
+roc.0.module.0.channel.15.description:	tagger R1
+#
+# block of 32-channel Struck scalers (3)
+#
+STK_7200.nchannels: 96
+STK_7200.bus: VME
+STK_7200.type: SCALER
+roc.0.module.1.type: STK_7200
+roc.0.module.1.slot: 0
+roc.0.module.1.channel.0.channel: 0
+roc.0.module.1.channel.0.name:		tagOR
+roc.0.module.1.channel.0.description:	tagger OR
+roc.0.module.1.channel.1.channel: 1
+roc.0.module.1.channel.1.name:		rpdOR
+roc.0.module.1.channel.1.description:	rpd OR
+roc.0.module.1.channel.2.channel: 2
+roc.0.module.1.channel.2.name:		rpdORliv
+roc.0.module.1.channel.2.description:	rpd OR live
+roc.0.module.1.channel.3.channel: 3
+roc.0.module.1.channel.3.name:		lev1trig
+roc.0.module.1.channel.3.description:	level 1 trigger
+roc.0.module.1.channel.4.channel: 4
+roc.0.module.1.channel.4.name:		levl2acc
+roc.0.module.1.channel.4.description:	level 2 accept
+roc.0.module.1.channel.5.channel: 5
+roc.0.module.1.channel.5.name:		lev2pass
+roc.0.module.1.channel.5.description:	level 2 pass
+roc.0.module.1.channel.6.channel: 6
+roc.0.module.1.channel.6.name:		lev2fail
+roc.0.module.1.channel.6.description:	level 2 fail
+roc.0.module.1.channel.7.channel: 7
+roc.0.module.1.channel.7.name:		cpvOR
+roc.0.module.1.channel.7.description:	cpv OR
+roc.0.module.1.channel.8.channel: 8
+roc.0.module.1.channel.8.name:		targCtr
+roc.0.module.1.channel.8.description:	target counter
+roc.0.module.1.channel.9.channel: 9
+roc.0.module.1.channel.9.name:		EventLiv
+roc.0.module.1.channel.9.description:	events live
+roc.0.module.1.channel.10.channel: 10
+roc.0.module.1.channel.10.name:		events
+roc.0.module.1.channel.10.description:	events all
+roc.0.module.1.channel.11.channel: 11
+roc.0.module.1.channel.11.name:		upvOR
+roc.0.module.1.channel.11.description:	upv OR
+roc.0.module.1.channel.12.channel: 12
+roc.0.module.1.channel.12.name:		tr1Pass
+roc.0.module.1.channel.12.description:	Esum pass
+roc.0.module.1.channel.13.channel: 13
+roc.0.module.1.channel.13.name:		tr2Pass
+roc.0.module.1.channel.13.description:	M2 pass
+roc.0.module.1.channel.14.channel: 14
+roc.0.module.1.channel.14.name:		allPass
+roc.0.module.1.channel.14.description:	all pass
+roc.0.module.1.channel.15.channel: 15
+roc.0.module.1.channel.15.name:		clock
+roc.0.module.1.channel.15.description:	100Hz clock
+roc.0.module.1.channel.16.channel: 16
+roc.0.module.1.channel.16.name:		SN17
+roc.0.module.1.channel.16.description:	SN17 unused
+roc.0.module.1.channel.17.channel: 17
+roc.0.module.1.channel.17.name:		SN18
+roc.0.module.1.channel.17.description:	SN18 unused
+roc.0.module.1.channel.18.channel: 18
+roc.0.module.1.channel.18.name:		SN19
+roc.0.module.1.channel.18.description:	SN19 usused
+roc.0.module.1.channel.19.channel: 19
+roc.0.module.1.channel.19.name:		SN20
+roc.0.module.1.channel.19.description:	SN20 unused
+roc.0.module.1.channel.20.channel: 20
+roc.0.module.1.channel.20.name:		SN21
+roc.0.module.1.channel.20.description:	SN21 unused
+roc.0.module.1.channel.21.channel: 21
+roc.0.module.1.channel.21.name:		SN22
+roc.0.module.1.channel.21.description:	SN22 unused
+roc.0.module.1.channel.22.channel: 22
+roc.0.module.1.channel.22.name:		SN23
+roc.0.module.1.channel.22.description:	SN23 unused
+roc.0.module.1.channel.23.channel: 23
+roc.0.module.1.channel.23.name:		SN24
+roc.0.module.1.channel.23.description:	SN24 unused
+roc.0.module.1.channel.24.channel: 24
+roc.0.module.1.channel.24.name:		SN25
+roc.0.module.1.channel.24.description:	SN25 unused
+roc.0.module.1.channel.25.channel: 25
+roc.0.module.1.channel.25.name:		SN26
+roc.0.module.1.channel.25.description:	SN26 unused
+roc.0.module.1.channel.26.channel: 26
+roc.0.module.1.channel.26.name:		SN27
+roc.0.module.1.channel.26.description:	SN27 unused
+roc.0.module.1.channel.27.channel: 27
+roc.0.module.1.channel.27.name:		SN28
+roc.0.module.1.channel.27.description:	SN28 unused
+roc.0.module.1.channel.28.channel: 28
+roc.0.module.1.channel.28.name:		SN29
+roc.0.module.1.channel.28.description:	SN29 unused
+roc.0.module.1.channel.29.channel: 29
+roc.0.module.1.channel.29.name:		SN30
+roc.0.module.1.channel.29.description:	SN30 unused
+roc.0.module.1.channel.30.channel: 30
+roc.0.module.1.channel.30.name:		SN31
+roc.0.module.1.channel.30.description:	SN31 unused
+roc.0.module.1.channel.31.channel: 31
+roc.0.module.1.channel.31.name:		SN32
+roc.0.module.1.channel.31.description:	SN32 unused
+roc.0.module.1.channel.32.channel: 32
+roc.0.module.1.channel.32.name:		rpdG0E
+roc.0.module.1.channel.32.description:	rpd G0_E
+roc.0.module.1.channel.33.channel: 33
+roc.0.module.1.channel.33.name:		rpdG1E
+roc.0.module.1.channel.33.description:	rpd G1_E
+roc.0.module.1.channel.34.channel: 34
+roc.0.module.1.channel.34.name:		rpdG2E
+roc.0.module.1.channel.34.description:	rpd G2_E
+roc.0.module.1.channel.35.channel: 35
+roc.0.module.1.channel.35.name:		SR4
+roc.0.module.1.channel.35.description:	SR4 unused
+roc.0.module.1.channel.36.channel: 36
+roc.0.module.1.channel.36.name:		rpdG4E
+roc.0.module.1.channel.36.description:	rpd G4_E
+roc.0.module.1.channel.37.channel: 37
+roc.0.module.1.channel.37.name:		rpdG5E
+roc.0.module.1.channel.37.description:	rpd G5_E
+roc.0.module.1.channel.38.channel: 38
+roc.0.module.1.channel.38.name:		rpdG3E
+roc.0.module.1.channel.38.description:	rpd G3_E
+roc.0.module.1.channel.39.channel: 39
+roc.0.module.1.channel.39.name:		SR8
+roc.0.module.1.channel.39.description:	SR8 unused
+roc.0.module.1.channel.40.channel: 40
+roc.0.module.1.channel.40.name:		upv0
+roc.0.module.1.channel.40.description:	upv 0
+roc.0.module.1.channel.41.channel: 41
+roc.0.module.1.channel.41.name:		upv1
+roc.0.module.1.channel.41.description:	upv 1
+roc.0.module.1.channel.42.channel: 42
+roc.0.module.1.channel.42.name:		upv2
+roc.0.module.1.channel.42.description:	upv 2
+roc.0.module.1.channel.43.channel: 43
+roc.0.module.1.channel.43.name:		upv3
+roc.0.module.1.channel.43.description:	upv 3
+roc.0.module.1.channel.44.channel: 44
+roc.0.module.1.channel.44.name:		upv4
+roc.0.module.1.channel.44.description:	upv 4
+roc.0.module.1.channel.45.channel: 45
+roc.0.module.1.channel.45.name:		upv5
+roc.0.module.1.channel.45.description:	upv 5
+roc.0.module.1.channel.46.channel: 46
+roc.0.module.1.channel.46.name:		upv6
+roc.0.module.1.channel.46.description:	upv 6
+roc.0.module.1.channel.47.channel: 47
+roc.0.module.1.channel.47.name:		upv7
+roc.0.module.1.channel.47.description:	upv 7
+roc.0.module.1.channel.48.channel: 48
+roc.0.module.1.channel.48.name:		rpdG0
+roc.0.module.1.channel.48.description:	rpd G0
+roc.0.module.1.channel.49.channel: 49
+roc.0.module.1.channel.49.name:		rpdG1
+roc.0.module.1.channel.49.description:	rpd G1
+roc.0.module.1.channel.50.channel: 50
+roc.0.module.1.channel.50.name:		rpdG2
+roc.0.module.1.channel.50.description:	rpd G2
+roc.0.module.1.channel.51.channel: 51
+roc.0.module.1.channel.51.name:		SR20
+roc.0.module.1.channel.51.description:	SR20 unused
+roc.0.module.1.channel.52.channel: 52
+roc.0.module.1.channel.52.name:		rpdG4
+roc.0.module.1.channel.52.description:	rpd G4
+roc.0.module.1.channel.53.channel: 53
+roc.0.module.1.channel.53.name:		rpdG5
+roc.0.module.1.channel.53.description:	rpd G5
+roc.0.module.1.channel.54.channel: 54
+roc.0.module.1.channel.54.name:		rpdG3
+roc.0.module.1.channel.54.description:	rpd G3
+roc.0.module.1.channel.55.channel: 55
+roc.0.module.1.channel.55.name:		SR24
+roc.0.module.1.channel.55.description:	SR24 unused
+roc.0.module.1.channel.56.channel: 56
+roc.0.module.1.channel.56.name:		SR25
+roc.0.module.1.channel.56.description:	SR25 unused
+roc.0.module.1.channel.57.channel: 57
+roc.0.module.1.channel.57.name:		SR26
+roc.0.module.1.channel.57.description:	SR26 unused
+roc.0.module.1.channel.58.channel: 58
+roc.0.module.1.channel.58.name:		SR27
+roc.0.module.1.channel.58.description:	SR27 unused
+roc.0.module.1.channel.59.channel: 59
+roc.0.module.1.channel.59.name:		SR28
+roc.0.module.1.channel.59.description:	SR28 unused
+roc.0.module.1.channel.60.channel: 60
+roc.0.module.1.channel.60.name:		SR29
+roc.0.module.1.channel.60.description:	SR29 unused
+roc.0.module.1.channel.61.channel: 61
+roc.0.module.1.channel.61.name:		SR30
+roc.0.module.1.channel.61.description:	SR30 unused
+roc.0.module.1.channel.62.channel: 62
+roc.0.module.1.channel.62.name:		SR31
+roc.0.module.1.channel.62.description:	SR31 unused
+roc.0.module.1.channel.63.channel: 63
+roc.0.module.1.channel.63.name:		SR32
+roc.0.module.1.channel.63.description:	SR32 unused
+roc.0.module.1.channel.64.channel: 64
+roc.0.module.1.channel.64.name:		cpv13
+roc.0.module.1.channel.64.description:	cpv 13
+roc.0.module.1.channel.65.channel: 65
+roc.0.module.1.channel.65.name:		cpv17
+roc.0.module.1.channel.65.description:	cpv 17
+roc.0.module.1.channel.66.channel: 66
+roc.0.module.1.channel.66.name:		SV3
+roc.0.module.1.channel.66.description:	SV3 unused
+roc.0.module.1.channel.67.channel: 67
+roc.0.module.1.channel.67.name:		cpv19
+roc.0.module.1.channel.67.description:	cpv 19
+roc.0.module.1.channel.68.channel: 68
+roc.0.module.1.channel.68.name:		cpv25
+roc.0.module.1.channel.68.description:	cpv 25
+roc.0.module.1.channel.69.channel: 69
+roc.0.module.1.channel.69.name:		cpv23
+roc.0.module.1.channel.69.description:	cpv 23
+roc.0.module.1.channel.70.channel: 70
+roc.0.module.1.channel.70.name:		cpv29
+roc.0.module.1.channel.70.description:	cpv 29
+roc.0.module.1.channel.71.channel: 71
+roc.0.module.1.channel.71.name:		cpv27
+roc.0.module.1.channel.71.description:	cpv 27
+roc.0.module.1.channel.72.channel: 72
+roc.0.module.1.channel.72.name:		cpv11
+roc.0.module.1.channel.72.description:	cpv 11
+roc.0.module.1.channel.73.channel: 73
+roc.0.module.1.channel.73.name:		cpv5
+roc.0.module.1.channel.73.description:	cpv 5
+roc.0.module.1.channel.74.channel: 74
+roc.0.module.1.channel.74.name:		cpv7
+roc.0.module.1.channel.74.description:	cpv 7
+roc.0.module.1.channel.75.channel: 75
+roc.0.module.1.channel.75.name:		cpv9
+roc.0.module.1.channel.75.description:	cpv 9
+roc.0.module.1.channel.76.channel: 76
+roc.0.module.1.channel.76.name:		SV13
+roc.0.module.1.channel.76.description:	SV13 unused
+roc.0.module.1.channel.77.channel: 77
+roc.0.module.1.channel.77.name:		cpv1
+roc.0.module.1.channel.77.description:	cpv 1
+roc.0.module.1.channel.78.channel: 78
+roc.0.module.1.channel.78.name:		cpv15
+roc.0.module.1.channel.78.description:	cpv 15
+roc.0.module.1.channel.79.channel: 79
+roc.0.module.1.channel.79.name:		cpv16
+roc.0.module.1.channel.79.description:	cpv 16
+roc.0.module.1.channel.80.channel: 80
+roc.0.module.1.channel.80.name:		cpv8
+roc.0.module.1.channel.80.description:	cpv 8
+roc.0.module.1.channel.81.channel: 81
+roc.0.module.1.channel.81.name:		cpv21
+roc.0.module.1.channel.81.description:	cpv 21
+roc.0.module.1.channel.82.channel: 82
+roc.0.module.1.channel.82.name:		cpv6
+roc.0.module.1.channel.82.description:	cpv 6
+roc.0.module.1.channel.83.channel: 83
+roc.0.module.1.channel.83.name:		cpv26
+roc.0.module.1.channel.83.description:	cpv 26
+roc.0.module.1.channel.84.channel: 84
+roc.0.module.1.channel.84.name:		cpv14
+roc.0.module.1.channel.84.description:	cpv 14
+roc.0.module.1.channel.85.channel: 85
+roc.0.module.1.channel.85.name:		cpv28
+roc.0.module.1.channel.85.description:	cpv 28
+roc.0.module.1.channel.86.channel: 86
+roc.0.module.1.channel.86.name:		cpv20
+roc.0.module.1.channel.86.description:	cpv 20
+roc.0.module.1.channel.87.channel: 87
+roc.0.module.1.channel.87.name:		cpv12
+roc.0.module.1.channel.87.description:	cpv 12
+roc.0.module.1.channel.88.channel: 88
+roc.0.module.1.channel.88.name:		cpv24
+roc.0.module.1.channel.88.description:	cpv 24
+roc.0.module.1.channel.89.channel: 89
+roc.0.module.1.channel.89.name:		cpv4
+roc.0.module.1.channel.89.description:	cpv 4
+roc.0.module.1.channel.90.channel: 90
+roc.0.module.1.channel.90.name:		cpv10
+roc.0.module.1.channel.90.description:	cpv 10
+roc.0.module.1.channel.91.channel: 91
+roc.0.module.1.channel.91.name:		cpv0
+roc.0.module.1.channel.91.description:	cpv 0
+roc.0.module.1.channel.92.channel: 92
+roc.0.module.1.channel.92.name:		cpv3
+roc.0.module.1.channel.92.description:	cpv 3
+roc.0.module.1.channel.93.channel: 93
+roc.0.module.1.channel.93.name:		cpv22
+roc.0.module.1.channel.93.description:	cpv 22
+roc.0.module.1.channel.94.channel: 94
+roc.0.module.1.channel.94.name:		cpv18
+roc.0.module.1.channel.94.description:	cpv 18
+roc.0.module.1.channel.95.channel: 95
+roc.0.module.1.channel.95.name:		cpv2
+roc.0.module.1.channel.95.description:	cpv 2

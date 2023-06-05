@@ -1,0 +1,20 @@
+#
+# CPV Geometry file
+#
+
+cpvGeom.nChannels: 12
+cpvGeom.H.channelZero: 0
+cpvGeom.V.channelZero: 10
+
+cpvGeom.channel.0.name: H0
+cpvGeom.channel.1.name: H1
+cpvGeom.channel.2.name: H2
+cpvGeom.channel.3.name: H3
+cpvGeom.channel.4.name: H4
+cpvGeom.channel.5.name: H5
+cpvGeom.channel.6.name: H6
+cpvGeom.channel.7.name: H7
+cpvGeom.channel.8.name: H8
+cpvGeom.channel.9.name: H9
+cpvGeom.channel.10.name: V0
+cpvGeom.channel.11.name: V1

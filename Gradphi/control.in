@@ -1,0 +1,77 @@
+C This is the control file for the GEANT simulation
+C Parameters defined in this file control the kind
+C and extent of simulation that is performed.  The
+C full list of options is given in section base-40
+C of the GEANT manual
+
+c The following two lines generate single-track events provided that
+c events.in does not contain an input file name starting in column 1.
+c The meaning of the arguments is as follows.
+c KINE ipart momentum theta phi delta_momentum delta_theta delta_phi
+c  - ipart = GEANT particle type of primary track + 100
+c  - momentum = initial track momentum, central value (GeV/c)
+c  - theta = initial track polar angle, central value (degrees)
+c  - phi = initial track azimuthal angle, central value (degrees)
+c  - delta_momentum = spread in initial track momentum, full width (GeV/c)
+c  - delta_theta = spread in initial track polar angle, full width (degrees)
+c  - delta_phi = spread in initial track azimuthal angle, full width (degrees)
+c SCAP vertex_x vertex_y vertex_z
+c  - vertex_[x,y,z] = coordinates of primary vertex in MRS (cm)
+KINE 101 0.3 35. 0. 0. 0. 360.
+SCAP 0. 0. 1.
+
+c The following two lines generate electrons inside the bremsstrahlung
+c radiator.  In conjunction with DIAGNOSE_BREMSSTRAHLUNG in gustep.F
+c this was used to simulate a full bremsstrahlung beam, resulting in
+c the following normalization for a tagged beam of 50M tags/s in the
+c tagging window from 4.37 to 5.36 GeV.
+c       tagged rate on target: 		44.7e6
+c	generated events per beam s:	3.92e9
+c	beam time per generated event:	0.255 ns
+c	generated events per lgd gate:	494
+c These average rates can be used to estimate how much background must
+c be added to the signal to obtain an accurate bg noise estimate in MC.
+cKINE 103 5.65 0. 0. 0. 0. 0.
+cSCAP 0. 0. -3996.
+
+c The following line controls the rate of background bremsstrahlung photons
+c that are overlayed on each event in the simulation, in addition to the
+c particles produced by the standard generation mechanism.  This rate of
+c background production is applied for the duration of the ADC gate.  A
+c value of 3.92 corresponds to nominal Radphi running conditions at a
+c tagged photon rate of 50MHz.  To disable the generation of random
+c background, comment this line out or set the value to zero.  Background
+c is not generated for one-track simulations that are produced using the
+c KINE c directive (see above).
+cBGRATE 3.92
+
+c The following line controls the cutoffs for tracking of particles.
+c CUTS cutgam cutele cutneu cuthad cutmuo bcute bcutm dcute dcutm ppcutm tofmax
+c  - cutgam = Cut for gammas (0.001 GeV)
+c  - cutele = Cut for electrons (0.001 GeV)
+c  - cutneu = Cut for neutral hadrons (0.01 GeV)
+c  - cuthad = Cut for charged hadrons (0.01 GeV)
+c  - cutmuo = Cut for muons (0.01 GeV)
+c  - bcute  = Cut for electron brems. (CUTGAM)
+c  - bcutm  = Cut for muon brems. (CUTGAM)
+c  - dcute  = Cut for electron delta-rays. (10 TeV)
+c  - dcutm  = Cut for muon delta-rays. (10 TeV)
+c  - ppcutm = Cut for e+e- pairs by muons. (0.01 GeV)
+c  - tofmax = Time of flight cut (1.E+10 sec)
+c  - gcuts  = 5 user words (0.)
+CUTS 1e-4 1e-4 1e-3 1e-3 1e-4
+
+SWIT 0 0 0 0 0 0 0 0 0 0
+
+RNDM 116
+
+ABAN 0
+CKOV 1
+LABS 1
+
+TRIG 100
+DEBUG 1000
+
+RUNG 9999
+
+END

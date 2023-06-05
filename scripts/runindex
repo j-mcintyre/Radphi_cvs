@@ -1,0 +1,283 @@
+#!/usr/local/bin/perl
+#.................................................
+# runindex
+#
+# Searchable index to the Radphi online logbook
+#
+# Richard Jones
+# July 18, 1999
+# v1.0
+#.................................................
+     
+use CGI;
+use SDBM_File;
+use Fcntl;
+use POSIX;
+
+@path_info = split('/',$ENV{'PATH_INFO'});
+$classname = $path_info[1];
+
+$SDBMfilename = "/home/radphi/runbook.dbm";
+tie (%dbase, 'SDBM_File', $SDBMfilename, &O_RDONLY, 0644);
+
+%month = qw(Jan 0 Feb 1 Mar 2 Apr 3 May 4 Jun 5
+            Jul 6 Aug 7 Sep 8 Oct 9 Nov 10 Dec 11);
+%year  = qw(1996 96 1997 97 1998 98 1999 99 2000 100
+            2001 101 2002 102 2003 103 2004 104 2005 105);
+
+$query = new CGI;
+$query->autoEscape(0);
+
+print $query->header('text/html');
+
+print
+   $query->start_html(-title=>'Radphi Run Index',
+                      -author=>'jonesrt@uconnvm.uconn.edu',
+                      -BGCOLOR=>'80e0f0'),"\n",
+   "<H1 ALIGN=CENTER> Radphi Online Logbook</H1>\n";
+
+# Check if a form is being submitted
+$action = $query->param('Submit');
+if ("$action" eq 'Search') 
+{
+   process_submitted_form($query);
+}
+
+print
+   $query->startform,
+   "<TABLE WIDTH=600 ALIGN=CENTER>\n",
+   "<TR><TD><NOBR>",
+   $query->submit(-name=>'Submit',
+                  -value=>'Search'),
+   " for up to ",
+   $query->textfield(-name=>"runCount",
+                     -default=>"  10",
+                     -size=>4,
+                     -maxlength=>4),
+   " runs starting at run ",
+   $query->textfield(-name=>"runStart",
+                     -default=>"",
+                     -size=>5,
+                     -maxlength=>5),
+   " with specified beam energy ",
+   $query->textfield(-name=>"energySpec",
+                     -default=>"",
+                     -size=>4,
+                     -maxlength=>4),
+   "GeV",
+   "</NOBR></TD></TR>\n",
+   "<TR><TD><NOBR>",
+   "between ",
+   $query->popup_menu(-name=>"monthStart",
+                      -values=>[0,1,2,3,4,5,6,7,8,9,10,11],
+                      -labels=>{0=>"Jan", 1=>"Feb", 2=>"Mar",
+                                3=>"Apr", 4=>"May", 5=>"Jun",
+                                6=>"Jul", 7=>"Aug", 8=>"Sep",
+                                9=>"Oct",10=>"Nov",11=>"Dec"},
+                      -default=>"0"),
+   " ",
+   $query->textfield(-name=>"dayStart",
+                     -default=>" 1",
+                     -size=>2,
+                     -maxlength=>3),
+   ", ",
+   $query->popup_menu(-name=>"yearStart",
+                      -values=>[96,97,98,99,100,101,102,103,104,105],
+                      -labels=>{96=>"1996", 97=>"1997", 98=>"1998",
+                                99=>"1999",100=>"2000",101=>"2001",
+                               102=>"2002",103=>"2003",104=>"2004",
+                               105=>"2005"},
+                      -default=>"96"),
+   " at ",
+   $query->textfield(-name=>"timeStart",
+                     -default=>"00:00",
+                     -size=>5,
+                     -maxlength=>5),
+   " and ",
+   $query->popup_menu(-name=>"monthStop",
+                      -values=>[0,1,2,3,4,5,6,7,8,9,10,11],
+                      -labels=>{0=>"Jan", 1=>"Feb", 2=>"Mar",
+                                3=>"Apr", 4=>"May", 5=>"Jun",
+                                6=>"Jul", 7=>"Aug", 8=>"Sep",
+                                9=>"Oct",10=>"Nov",11=>"Dec"},
+                      -default=>"11"),
+   " ",
+   $query->textfield(-name=>"dayStop",
+                     -default=>"31",
+                     -size=>2,
+                     -maxlength=>3),
+   ", ",
+   $query->popup_menu(-name=>"yearStop",
+                      -values=>[96,97,98,99,100,101,102,103,104,105],
+                      -labels=>{96=>"1996", 97=>"1997", 98=>"1998",
+                                99=>"1999",100=>"2000",101=>"2001",
+                               102=>"2002",103=>"2003",104=>"2004",
+                               105=>"2005"},
+                      -default=>"105"),
+   " at ",
+   $query->textfield(-name=>"timeStop",
+                     -default=>"23:59",
+                     -size=>5,
+                     -maxlength=>5),
+   "</NOBR></TD></TR>\n",
+   "<TR><TD><NOBR>",
+   "whose trigger specification contains the expression ",
+   $query->textfield(-name=>"triggerExpr",
+                     -default=>"",
+                     -size=>27,
+                     -maxlength=>80),
+   "</NOBR></TD></TR>\n",
+   "<TR><TD><NOBR>",
+   "and whose comment contains the expression ",
+   $query->textfield(-name=>"commentExpr",
+                     -default=>"",
+                     -size=>30,
+                     -maxlength=>80),
+   "</NOBR></TD></TR>\n",
+   "<TR><TD>",
+   "</TD></TR>",
+   "</TABLE>\n",
+   $query->end_form,"\n",
+   $query->end_html,"\n";
+
+# End of main
+
+sub process_submitted_form
+{
+   my($query) = @_;
+
+   $entry = $query->param('runCount');
+   if ($entry =~ /^ *\d\d* *$/)
+   {
+      $runCount = $entry;
+   }
+   else
+   {
+      $runCount = 0;
+   }
+   $entry = $query->param('runStart');
+   if ($entry =~ /^ *\d\d* *$/)
+   {
+      $runStart = $entry;
+   }
+   else
+   {
+      $runStart = 0;
+   }
+   $entry = $query->param('dayStart');
+   if ($entry =~ /^ *\d\d* *$/)
+   {
+      $dayStart = $entry;
+   }
+   else
+   {
+      $dayStart = 0;
+   }
+   $entry = $query->param('timeStart');
+   if ($entry =~ /^ *\d\d*:\d\d* *$/)
+   {
+      ($hour, $min) = split(":",$entry);
+   }
+   elsif ($entry =~ /^ *\d\d* *$/)
+   {
+      ($hour, $min) = ($entry, 0);
+      
+   }
+   else
+   {
+      ($hour, $min) = (0, 0);
+   }
+   $wday = 0;
+   $yday = 0;
+   $time0 = mktime(0, $min, $hour, $dayStart,
+                   $query->param('monthStart'),
+                   $query->param('yearStart'),
+                   $wday,$yday,-1);
+   $entry = $query->param('dayStop');
+   if ($entry =~ /^ *\d\d* *$/)
+   {
+      $dayStop = $entry;
+   }
+   else
+   {
+      $dayStop = 0;
+   }
+   $entry = $query->param('timeStop');
+   if ($entry =~ /^ *\d\d*:\d\d* *$/)
+   {
+      ($hour, $min) = split(":",$entry);
+   }
+   elsif ($entry =~ /^ *\d\d* *$/)
+   {
+      ($hour, $min) = ($entry, 0);
+      
+   }
+   else
+   {
+      ($hour, $min) = (0, 0);
+   }
+   $time1 = mktime(0, $min, $hour, $dayStop,
+                   $query->param('monthStop'),
+                   $query->param('yearStop'),
+                   $wday,$yday,-1);
+   $energySpec = $query->param('energySpec');
+   $triggerExpr = $query->param('triggerExpr');
+   $commentExpr = $query->param('commentExpr');
+
+   @runList = sort(keys %dbase);
+   ($run0, $junk) = split('\.',$runList[0]);
+   ($run1, $junk) = split('\.',$runList[$#runList]);
+
+   $#runList = -1;
+   $run0 = ($runStart > $run0) ? $runStart : $run0;
+   RUN: for ($run=$run0;$run<=$run1;$run++)
+   {
+      next RUN if (! $dbase{"$run.date"});
+      next RUN if ($dbase{"$run.date"} < $time0);
+      last RUN if ($dbase{"$run.date"} > $time1);
+      if ("$energySpec")
+      {
+         next RUN if ($dbase{"$run.energy"} !~ /$energySpec/)
+      }
+      if ("$triggerExpr")
+      {
+         next RUN if ($dbase{"$run.trigger"} !~ /$triggerExpr/)
+      }
+      if ("$commentExpr")
+      {
+         next RUN if ($dbase{"$run.comment"} !~ /$commentExpr/)
+      }
+      $runList[++$#runList] = $run;
+      $query->param("runStart",$run+1);
+      last RUN if ($#runList == $runCount-1);
+   }
+   if ($#runList < 0)
+   {
+      print "<P ALIGN=CENTER>\n",
+            "&nbsp;<BR>&nbsp;<BR>&nbsp;<BR>\n",
+            "This search returned no entries<BR>\n";
+      return;
+   }
+
+   print "<TABLE ALIGN=CENTER BGCOLOR=ffffff ",
+         "CELLPADDING=3 BORDER=4>\n",
+         "<TR><TH>Run</TH><TH>Energy</TH>\n",
+         "<TH>Trigger</TH><TH>File</TH>\n",
+         "<TH>Date</TH><TH>Archive</TH></TR>\n";
+   foreach $run (@runList)
+   {
+      print "<TR>\n",
+            "<TD ALIGN=CENTER VALIGN=CENTER ROWSPAN=2>$run</TD>\n",
+            "<TD ALIGN=CENTER>",$dbase{"$run.energy"},"</TD>\n",
+            "<TD>",$dbase{"$run.trigger"},"</TD>\n",
+            "<TD>",$dbase{"$run.filename"},
+            " (",$dbase{"$run.size"},") </TD>\n",
+            "<TD>",ctime($dbase{"$run.date"}),"</TD>\n",
+            "<TD ALIGN=CENTER>",$dbase{"$run.archive"},"</TD>\n",
+            "</TR>\n",
+            "<TR>\n",
+            "<TD COLSPAN=5>&nbsp;",$dbase{"$run.comment"},"</TD>\n",
+            "</TR>\n";
+   }
+   print "</TABLE>\n";
+}

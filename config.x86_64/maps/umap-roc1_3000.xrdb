@@ -1,0 +1,106 @@
+#
+# This is the UMAP database for the VME ROC (ROC2)
+#
+#    
+roc.1.address: 2
+roc.1.nmodules: 3
+roc.1.module.*.bus: VME
+
+roc.1.module.*.channel.*.detector: SCALER
+#
+# STRUCK NIM 7200
+#
+roc.1.module.0.type: STK_7200
+roc.1.module.0.slot: 5
+roc.1.module.0.channel.0.channel:0
+roc.1.module.0.channel.1.channel:1
+roc.1.module.0.channel.2.channel:2
+roc.1.module.0.channel.3.channel:3
+roc.1.module.0.channel.4.channel:4
+roc.1.module.0.channel.5.channel:5
+roc.1.module.0.channel.6.channel:6
+roc.1.module.0.channel.7.channel:7
+roc.1.module.0.channel.8.channel:8
+roc.1.module.0.channel.9.channel:9
+roc.1.module.0.channel.10.channel:10
+roc.1.module.0.channel.11.channel:11
+roc.1.module.0.channel.12.channel:12
+roc.1.module.0.channel.13.channel:13
+roc.1.module.0.channel.14.channel:14
+roc.1.module.0.channel.15.channel:15
+roc.1.module.0.channel.16.channel:16
+roc.1.module.0.channel.17.channel:17
+roc.1.module.0.channel.18.channel:18
+roc.1.module.0.channel.19.channel:19
+roc.1.module.0.channel.20.channel:20
+roc.1.module.0.channel.21.channel:21
+roc.1.module.0.channel.22.channel:22
+roc.1.module.0.channel.23.channel:23
+roc.1.module.0.channel.24.channel:24
+roc.1.module.0.channel.25.channel:25
+roc.1.module.0.channel.26.channel:26
+roc.1.module.0.channel.27.channel:27
+roc.1.module.0.channel.28.channel:28
+roc.1.module.0.channel.29.channel:29
+roc.1.module.0.channel.30.channel:30
+roc.1.module.0.channel.31.channel:31
+#
+# STRUCK ECL 7200
+#
+roc.1.module.1.type: STK_7200
+roc.1.module.1.slot: 3
+roc.1.module.1.channel.0.channel:32
+roc.1.module.1.channel.1.channel:33
+roc.1.module.1.channel.2.channel:34
+roc.1.module.1.channel.3.channel:35
+roc.1.module.1.channel.4.channel:36
+roc.1.module.1.channel.5.channel:37
+roc.1.module.1.channel.6.channel:38
+roc.1.module.1.channel.7.channel:39
+roc.1.module.1.channel.8.channel:40
+roc.1.module.1.channel.9.channel:41
+roc.1.module.1.channel.10.channel:42
+roc.1.module.1.channel.11.channel:43
+roc.1.module.1.channel.12.channel:44
+roc.1.module.1.channel.13.channel:45
+roc.1.module.1.channel.14.channel:46
+roc.1.module.1.channel.15.channel:47
+roc.1.module.1.channel.16.channel:48
+roc.1.module.1.channel.17.channel:49
+roc.1.module.1.channel.18.channel:50
+roc.1.module.1.channel.19.channel:51
+roc.1.module.1.channel.20.channel:52
+roc.1.module.1.channel.21.channel:53
+roc.1.module.1.channel.22.channel:54
+roc.1.module.1.channel.23.channel:55
+roc.1.module.1.channel.24.channel:56
+roc.1.module.1.channel.25.channel:57
+roc.1.module.1.channel.26.channel:58
+roc.1.module.1.channel.27.channel:59
+roc.1.module.1.channel.28.channel:60
+roc.1.module.1.channel.29.channel:61
+roc.1.module.1.channel.30.channel:62
+roc.1.module.1.channel.31.channel:63
+
+
+#
+# LRS Scaler
+#
+roc.1.module.2.type: LRS_1151
+roc.1.module.2.slot: 6
+roc.1.module.2.channel.0.channel:64
+roc.1.module.2.channel.1.channel:65
+roc.1.module.2.channel.2.channel:66
+roc.1.module.2.channel.3.channel:67
+roc.1.module.2.channel.4.channel:68
+roc.1.module.2.channel.5.channel:69
+roc.1.module.2.channel.6.channel:70
+roc.1.module.2.channel.7.channel:71
+roc.1.module.2.channel.8.channel:72
+roc.1.module.2.channel.9.channel:73
+roc.1.module.2.channel.10.channel:74
+roc.1.module.2.channel.11.channel:75
+roc.1.module.2.channel.12.channel:76
+roc.1.module.2.channel.13.channel:77
+roc.1.module.2.channel.14.channel:78
+roc.1.module.2.channel.15.channel:79

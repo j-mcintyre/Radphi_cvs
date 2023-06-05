@@ -1,0 +1,58 @@
+MACRO mctuple filename=initialize count=10000 start=0 id=10
+  if [filename]=initialize then
+    exec mctuple#init
+    exitm
+  elseif $index(read_mctuple,'exec mctuple') = 0 then
+    exec mctuple#init opt=quiet
+  endif
+  if $substring([1],1,1)='/' then
+    cmd=ls  [1]
+  else
+    cmd=ls work/[1]
+  endif
+  list=$shell([cmd])
+  if $index([list],'$shell')=0 then
+    do n=1,$words([list],' ')
+      file=$word([list],[n],1,' ')
+      if ([count].gt.0) then
+        call=mctuple($quote([file]),[id],[count],[start])
+        count = $icall([call])
+      endif
+    enddo
+  endif
+  hrout [id]
+RETURN
+
+MACRO init opt=announce use='guclvtbxpm'
+  if $index(read_mctuple,'exec mctuple') > 0 then
+    if [opt]=announce then
+      message 'usage: mctuple <filename or pattern>'
+      message ' as in:   mctuple r51*.evt'
+    endif
+  else
+    alias/create read_mctuple 'exec mctuple' A
+    h/file 92 mctuple.hbook 4096 n
+    init='init '//[use]//' '
+    call mctuple.sl($quote([init]),0,0,0)
+    if ([opt]=announce) then
+      message 'Ntuple initialization complete.'
+      message 'To read in mctuple do: exec mctuple <filename or pattern>'
+      message 'To select certain run/time ranges, do: cut 1 <your cut>'
+    endif
+  endif
+RETURN
+
+MACRO reset opt=announce
+  if $index(read_mctuple,'exec mctuple') = 0 then
+    if [opt]=announce then
+      message 'usage: mctuple <filename or pattern>'
+      message ' as in:   mctuple r51*.evt'
+    endif
+  else
+    alias/delete read_mctuple
+    close 92
+    if ([opt]=announce) then
+      message 'Ntuple has been reset'
+    endif
+  endif
+RETURN 

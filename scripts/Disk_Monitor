@@ -1,0 +1,100 @@
+#!wish -f
+#Kyle's little monitor thingamajiggy
+#written by Kyle Ri Burchesky and Erin Jo Rischette
+
+frame .f1 
+frame .f2
+frame .f3
+frame .f4
+frame .f5
+frame .f6
+frame .f7
+frame .f8
+frame .f9
+frame .f10
+
+pack .f1 .f2 .f3 .f4 .f5 .f6 .f7 .f8 .f9 .f10 -side top 
+
+label .data1  -textvariable data1
+label .data2 -textvariable data2
+label .data3 -textvariable data3
+label .data4 -textvariable data4
+label .data5 -textvariable data5
+label .data6 -textvariable data6
+label .data7 -textvariable data7
+label .data8 -textvariable data8
+label .curdisk -textvariable curdisk
+label .runnumber -textvariable runnumber
+label .runny -text "Run"
+label .runnx -text "is"
+label .size -textvariable size
+label .byte -text "Megabytes."
+
+label .dat1 -text "Data 1 is"
+label .dat11 -text "% Full."
+label .dat2 -text "Data 2 is"
+label .dat22 -text "% Full."
+label .dat3 -text "Data 3 is"
+label .dat33 -text "% Full."
+label .dat4 -text "Data 4 is"
+label .dat44 -text "% Full."
+label .dat5 -text "Data 5 is"
+label .dat55 -text "% Full."
+label .dat6 -text "Data 6 is"
+label .dat66 -text "% Full."
+label .dat7 -text "Data 7 is"
+label .dat77 -text "% Full."
+label .dat8 -text "Data 8 is"
+label .dat88 -text "% Full."
+label .time -textvariable time
+label .sug -text "Suggested Max: 250 Megabytes"
+
+#set curdisk [exec df -k | grep data > tmp1 ; sleep 1 ; df -k | grep data > tmp2 ; diff tmp1 tmp2 | grep data | head -1 | cut -f3 -da ;rm tmp1 tmp2]
+
+set a [exec df -k | grep data > tmp1]
+
+
+pack .dat1 .data1 .dat11 -in .f1 -side left
+pack .dat2 .data2 .dat22 -in .f2 -side left
+pack .dat3 .data3 .dat33 -in .f3 -side left
+pack .dat4 .data4 .dat44 -in .f4 -side left
+pack .dat5 .data5 .dat55 -in .f5 -side left
+pack .dat6 .data6 .dat66 -in .f6 -side left
+pack .dat7 .data7 .dat77 -in .f7 -side left
+pack .dat8 .data8 .dat88 -in .f8 -side left
+pack .runny .runnumber .runnx .size .byte -in .f9 -side left
+pack .sug -in .f10 -side left
+pack .time  -side bottom
+
+#.b -bg red
+
+set i 42
+
+while {$i > 0} {
+
+set data1 [exec df -k | grep data1 | cut -c48-70 | cut -f1 -d%]
+set data2 [exec df -k | grep data2 | cut -c48-70 | cut -f1 -d%]
+set data3 [exec df -k | grep data3 | cut -c48-70 | cut -f1 -d%]
+set data4 [exec df -k | grep data4 | cut -c48-70 | cut -f1 -d%]
+set data5 [exec df -k | grep data5 | cut -c48-70 | cut -f1 -d%]
+set data6 [exec df -k | grep data6 | cut -c48-70 | cut -f1 -d%]
+set data7 [exec df -k | grep data7 | cut -c48-70 | cut -f1 -d%]
+set data8 [exec df -k | grep data8 | cut -c48-70 | cut -f1 -d%]
+set time [exec date]
+set runnumber [exec ls -l /data1 /data2 /data3 /data4 /data5 /data6 /data7 /data8 | grep evt | cut -f2 -d: | cut -c5-8 | sort | tail -1]
+
+#set size [exec ls -l /data1 /data2 /data3 /data4 /data5 /data6 /data7 /data8 | grep $runnumber | cut -c31-42]
+set size [exec ls -s /data1 /data2 /data3 /data4 /data5 /data6 /data7 /data8 | grep $runnumber | cut -f1 -dr]
+catch {set size [expr $size*512/1024/1024]}
+#update
+#after 10000
+
+for {set n 0} {$n < 10} {incr n} {
+    update
+    after 1000
+    
+}
+   
+
+
+}

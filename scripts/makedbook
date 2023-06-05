@@ -1,0 +1,29 @@
+#!/usr/local/bin/perl -w
+#
+# makedbook:  build the radphi run logbook database from an ascii dump
+#
+# v1.0:   Oct. 12, 2000		original version  -RTJ
+# 
+#====================================================================
+
+use Fcntl;
+use DB_File;
+use POSIX;
+
+$dbfile = "/home/radphi/runbook.db";
+tie (%dbase, 'DB_File', $dbfile, O_RDWR|O_CREAT, 0664);
+
+@text = <>;
+$l=0;
+while ($l < @text) {
+   chop $text[$l];
+   ($key, $value) = split(/\|/,$text[$l++]);
+   if ("$key") {
+      $dbase{$key} = "$value";
+   }
+   else {
+      print "ERROR: blank key found!";
+   }
+}
+
+untie (%dbase);

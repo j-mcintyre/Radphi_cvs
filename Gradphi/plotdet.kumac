@@ -1,0 +1,80 @@
+MACRO plotdet
+  color_table 7 .9 .9 .95
+  satt * seen 1
+  satt hall seen 0
+  satt lgd seen 0
+  satt pmtw seen 0
+  satt bgv seen 0
+  satt bsd seen 0
+  satt cel1 seen 0
+  satt wal1 seen 0
+  satt wal2 seen 0
+  satt cpv seen 0
+  satt cpva seen 0
+  satt cpvb seen 0
+  satt cpvc seen 0
+  satt cpvd seen 0
+  satt cpve seen 0
+  satt upv seen 0
+  satt upva seen 0
+  satt way  seen 0
+  satt hfro seen 0 
+  satt hsid seen 0 
+  satt htop seen 0 
+  satt * fill 7;
+  satt GTUB colo 7
+  satt WIND colo 5
+  satt TRGT colo 6
+  satt CLAS colo 2
+  satt BRAD colo 2
+  satt UPVS colo 5
+  satt CPSA colo 5
+  satt CPSB colo 5
+  satt CPSC colo 5
+  satt CPSD colo 5
+  satt CPSE colo 5
+  satt HOLE seen 0
+  satt APER seen 0
+  satt WALL seen 0
+  satt PCOL colo 4
+  satt SCOL colo 4
+  satt SMAG colo 6
+  satt BGVS colo 4
+  satt BVLG seen 0
+  satt BSR1 colo 3
+  satt BSR2 colo 3
+  satt BSR3 colo 3
+  satt BSDS colo 3
+  satt BSST colo 3
+  satt BSSO colo 3
+  satt BSSI colo 3
+  satt BSDS colo 3
+  satt BLOK colo 2
+  satt BLKC colo 2
+  satt WAL1 seen 0
+  satt WAL2 seen 0
+  satt GBX1 seen 0
+  satt GBX2 seen 0
+  satt LGB1 seen 0
+  satt LGB2 seen 0
+  satt DNUT colo 6
+  satt FRTR colo 7
+  satt FRHR colo 7
+  satt FRSD colo 7
+  satt HTOP colo 7
+  satt HSID colo 7
+  satt PLA1 colo 7
+  satt PLA2 colo 7
+  satt GGAS colo 7
+  gra/set ltyp 1
+  dopt hide on
+  dopt shad on
+  dopt edge on
+  glob/import cvol
+  if ([cvol].ne.'set') then
+    glob/cre cvol set
+    cvol/box * 2 1000 2 1000 -1000 130
+    cvol/box GTUB 1000 1001 1000 1001 1000 1001
+  endif
+  next; draw hall 120 20 0 12 10 .05 .05
+RETURN

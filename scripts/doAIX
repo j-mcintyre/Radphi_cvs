@@ -1,0 +1,15 @@
+#!/bin/csh
+
+setenv REMOTE_TARGET aix
+source /radphi/setup
+$RADPHI_HOME/scripts/doOneTarget >& $RADPHI_HOME/build.$RADPHI_MAKETARGET/build.log
+if ($status != 0) then
+  echo "Errors during build of $RADPHI_MAKETARGET target"
+endif
+
+setenv REMOTE_TARGET aix-o
+source /radphi/setup
+$RADPHI_HOME/scripts/doOneTarget >& $RADPHI_HOME/build.$RADPHI_MAKETARGET/build.log
+if ($status != 0) then
+  echo "Errors during build of $RADPHI_MAKETARGET target"
+endif

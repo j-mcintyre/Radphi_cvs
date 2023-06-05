@@ -1,0 +1,21 @@
+#!/usr/local/bin/perl -w
+#
+# dumpdbook:  dumps the radphi run logbook database in ascii format
+#
+# v1.0:   Oct. 12, 2000		original version  -RTJ
+# 
+#====================================================================
+
+use Fcntl;
+#use SDBM_File;
+use DB_File;
+use POSIX;
+
+#$dbmfile = "/home/radphi/runbook.dbm";
+#tie (%dbase, 'SDBM_File', $dbmfile, O_RDONLY, 0664);
+$dbfile = "/home/radphi/runbook.db";
+tie (%dbase, 'DB_File', $dbfile, O_RDONLY, 0664);
+
+for $key (keys %dbase) {
+   print "$key|".$dbase{$key}."\n";
+}

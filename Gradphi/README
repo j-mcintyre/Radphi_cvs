@@ -1,0 +1,48 @@
+                              G R A D P H I
+                              -------------
+
+The Radphi MonteCarlo is divided into three stages:
+
+          (1) generation
+          (2) simulation
+          (3) analysis
+
+Each of these stages is carried out in a separate program.  The passing
+of data from one stage to another takes place through data files in
+a standard format called Itape.
+
+Example:
+
+(1) There is a simple event generator called mcwrap that provides a
+general facility of generating most reactions of interest to Radphi.
+It is located in the MonteCarlo folder distributed through cvs.  To
+run it for the first time, check out MonteCarlo and build mcwrap.
+To set up the parameters for the simulation, edit the file decayt.dat
+in the same directory to enable the reactions of interest and select
+how many events of each kind.  
+
+     mcwrap -cgenerated_data
+
+will output the events to the file generated_data.itape which may be
+fed into Gradphi for simulation in the detector.
+
+(2) Assuming that you have already checked out Gradphi and built the
+executable with make, perform the following steps to do a simulation.
+Edit the file events.in and list the generated_data.itape file on the
+first line.  Make any changes to control.in to set up the parameters
+for GEANT, and then start the simulation with the command gradphi.x
+or gradphi++.x for the interactive version.  In the latter case, you
+will need to type the command TRIG nnnn to start the simulation of
+nnnn events from the input file.  Subsequent TRIG commands will
+continue to read events from the input file until it is exhausted.
+The output from the simulation will go to output.itape.
+
+
+(3) The output.itape file is now ready for analysis with the same set
+of tools that are used for the analysis of raw data.  Note that the
+present implementation does not write the RAW data group, but it may
+be produced by the user from the information in the level-ii unpacked
+groups that the MonteCarlo ordinarily provides.  Along with the
+simulated detector data, the original event specification from the
+event generator is carried along with the event for reference at
+later stages in the analysis.

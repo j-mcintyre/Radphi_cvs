@@ -1,0 +1,110 @@
+MACRO scalers filename=initialize count=100 id=80
+  if [filename]=initialize then
+    exec scalers#init
+    exitm
+  elseif $index(read_scalers,'exec scalers') = 0 then
+    exec scalers#init opt=quiet
+  endif
+  if $substring([1],1,1)='/' then
+    cmd=ls  [1]
+  else
+    cmd=ls work/[1]
+  endif
+  list=$shell([cmd])
+  if $index([list],'$shell')=0 then
+    do n=1,$words([list],' ')
+      file=$word([list],[n],1,' ')
+      if ([count].gt.0) then
+        call=scalers($quote([file]),[id],[count],0)
+        count = $icall([call])
+      endif
+    enddo
+  else
+    exitm
+  endif
+  if $index('undefined scalerID',scalerID) > 0 then
+    if $fexist('spanl.kumac') <> 0 then
+      exec spanl
+    endif
+  endif
+  alias/create scalerID [id] A
+  if $hexist([id]) <> 0 then
+    hrout [id]
+  endif
+RETURN
+
+MACRO use id=80
+  alias/create scalerID [id] A
+RETURN
+
+MACRO lookat var title seconds=clock/100. norm=tagOR/194e3 cut=$1
+  mtyp=$grafinfo('mtyp'); set mtyp 20
+  pmci=$grafinfo('pmci'); set pmci 2
+  xval=$grafinfo('xval'); set xval 0.2
+  xlab=$grafinfo('xlab'); set xlab 1.6
+  vsiz=$grafinfo('vsiz'); set vsiz .25
+  zone 1 2
+  opt htit
+  tit=$word([title],1,1,_)
+  if $words([title],_) > 1 then
+    tit=[tit]//'*'//$word([title],2,1,_)
+  endif
+  n/pl scalerID.[var]/([seconds]+1e-20)%run+seq/100. [cut] ! ! ! n
+  xmin=$hinfo(1000000,'xmin')
+  xmax=$hinfo(1000000,'xmax')
+  ymax=$hinfo(1000000,'ymax')
+  2dhist 1000001 $quote([tit]) 1 [xmin] [xmax] 1 0 [ymax]
+  n/pl scalerID.[var]/([seconds]+1e-20)%run+seq/100. [cut] -1000001
+  h/del 1000001
+  atitle '' 'rate (Hz)'
+  n/pl scalerID.[var]/([norm]+1e-20)%run+seq/100. [cut] ! ! ! n
+  xmin=$hinfo(1000000,'xmin')
+  xmax=$hinfo(1000000,'xmax')
+  ymax=$hinfo(1000000,'ymax')
+  2dhist 1000001 $quote([tit]) 1 [xmin] [xmax] 1 0 [ymax]
+  n/pl scalerID.[var]/([norm]+1e-20)%run+seq/100. [cut] -1000001
+  atitle '' rate/[norm]
+  h/del 1000001
+  set mtyp [mtyp]
+  set pmci [pmci]
+  set xval [xval]
+  set xlab [xlab]
+  set vsiz [vsiz]
+  zone 1 1
+RETURN
+
+MACRO init opt=announce hbook=scalers.hbook
+  if $index(read_scalers,'exec scalers') > 0 then
+    if [opt]=announce then
+      message 'usage: scalers <filename or pattern>'
+      message ' as in:   scalers run*.itape'
+    endif
+  else
+    alias/create read_scalers 'exec scalers' A
+    h/file 94 [hbook] 4096 n
+    call scalers.sl('init',0,0,0)
+    if ([opt]=announce) then
+      message 'Scalers display initialization complete.'
+      message 'To read in scalers do: exec scalers <filename or pattern>'
+      message 'To select certain run/seq ranges, do: cut 1 <your cut>'
+    endif
+    cut 1 (seq>0)
+  endif
+RETURN
+
+MACRO reset opt=announce
+  if $index(read_scalers,'exec scalers') = 0 then
+    if [opt]=announce then
+      message 'usage: scalers <filename or pattern>'
+      message ' as in:   scalers run*.itape'
+    endif
+  else
+    alias/delete read_scalers
+    alias/delete scalerID
+    close 94
+    panel 0 C
+    if ([opt]=announce) then
+      message 'Scalers display reset'
+    endif
+  endif
+RETURN

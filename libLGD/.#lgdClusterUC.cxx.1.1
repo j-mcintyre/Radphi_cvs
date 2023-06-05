@@ -1,0 +1,322 @@
+extern "C" {
+#include <math.h>
+#include <stdlib.h>
+#include <lgdGeom.h>
+#include <lgdCluster.h>
+}
+
+#include <lgdClusterUC.h>
+
+#if ! defined MIN_CLUSTER_BLOCK_COUNT
+# define MIN_CLUSTER_BLOCK_COUNT 2
+#endif
+
+#define SQR(x) (x)*(x)
+
+extern "C" {
+
+void sortzv_(float* const a, int* index, const int* const n,
+             const int* const mode, const int* const nway,
+             const int* const nsort);
+
+
+/* Clusterize the hits given in <hits>. Returns cluster info
+ * int <userClusterHits> and <clusters>.  These structures are
+ * allocated below if the pointers are null on entry.
+ */
+
+int lgdClusterizeUC(lgd_hits_t *hits,lgd_hits_t **userClusterHits,
+		    lgd_clusters_t **userClusters)
+{
+   float a[999];
+   for (int ih = 0; ih < hits->nhits; ih++) {
+      a[ih] = hits->hit[ih].energy;
+   }
+   int iord[999];
+   const int one=1, zero=0;
+   sortzv_(a,iord,&hits->nhits,&one,&one,&zero);
+
+   LGDcluster* clusterList[999];
+   int clusterCount = 0;
+   for (int iter=0; iter < 10; iter++) {
+      for (int ic = 0; ic < clusterCount; ic++) {
+         clusterList[ic]->resetHits();
+      }
+      for (int oh = 0; oh < hits->nhits; oh++) {
+         int ih = iord[oh]-1;
+         double expected[999];
+         double totalExpected = 0;
+         for (int ic = 0; ic < clusterCount; ic++) {
+            totalExpected += expected[ic] = clusterList[ic]->expected(ih);
+         }
+         if (hits->hit[ih].energy > 2*totalExpected) {
+           clusterList[clusterCount] = new LGDcluster(hits);
+           clusterList[clusterCount]->addHit(ih,1.);
+           clusterList[clusterCount]->update();
+           ++clusterCount;
+         }
+         else {
+            for (int ic = 0; ic < clusterCount; ic++) {
+               if (expected[ic] < 0.1*totalExpected) {
+                  continue;
+               }
+               else if (expected[ic] == totalExpected) {
+                  clusterList[ic]->addHit(ih,1.);
+               }
+               else if ((clusterList[ic]->getHits() > 0) ||
+                        (expected[ic] > totalExpected/2)) {
+                  clusterList[ic]->addHit(ih,expected[ic]/totalExpected);
+               }
+               else {
+                  clusterList[ic]->update();
+               }
+            }
+         }
+      }
+      bool somebody_changed = false;
+      for (int ic = 0; ic < clusterCount; ic++) {
+         somebody_changed |= clusterList[ic]->update();
+      }
+      if (! somebody_changed) 
+         break;
+   }
+   
+   if (*userClusters == 0) {
+      *userClusters = 
+          (lgd_clusters_t*) malloc(sizeof(lgd_clusters_t)*clusterCount);
+   }
+   (*userClusters)->nClusters = 0;
+   int totalBlockCount = 0;
+   for (int ic = 0; ic < clusterCount; ic++) {
+      int blockCount = clusterList[ic]->getHits();
+      (*userClusters)->nClusters += (blockCount < MIN_CLUSTER_BLOCK_COUNT)? 0:1;
+      totalBlockCount += blockCount;
+   }
+   if (*userClusterHits == 0) {
+      *userClusterHits = 
+          (lgd_hits_t*) malloc(sizeof(lgd_hits_t)*totalBlockCount);
+   }
+
+   int nch = 0;
+   int ncl = 0;
+   for (int ic = 0; (ic < clusterCount) && (ncl < 8); ic++) {
+      int hitlist[999];
+      int blockCount = clusterList[ic]->getHits(hitlist,hits->nhits);
+      if (blockCount < MIN_CLUSTER_BLOCK_COUNT) {
+         continue;
+      }
+      else {
+         for (int ih = 0; ih < blockCount; ih++) {
+           (*userClusterHits)->hit[nch+ih].channel = 
+                      hits->hit[hitlist[ih]].channel;
+           (*userClusterHits)->hit[nch+ih].energy =
+                      hits->hit[hitlist[ih]].energy;
+         }
+         (*userClusters)->cluster[ncl].nBlocks = blockCount;
+         (*userClusters)->cluster[ncl].firstBlock = nch;
+         (*userClusters)->cluster[ncl].flags = 0;
+         (*userClusters)->cluster[ncl].energy = clusterList[ic]->getEnergy();
+         (*userClusters)->cluster[ncl].space = clusterList[ic]->getCentroid();
+         (*userClusters)->cluster[ncl].width = clusterList[ic]->getRMS();
+         delete clusterList[ic];
+         nch += blockCount;
+         ++ncl;
+      }
+   }
+   (*userClusterHits)->nhits = nch;
+   (*userClusters)->nClusters = ncl;
+}
+}
+
+LGDcluster::LGDcluster(const lgd_hits_t* const hits)
+{
+   fHitlist = hits;
+   if (hits->nhits > 0) {
+      fHit = new int[hits->nhits];
+      fHitf = new double[hits->nhits];
+   }
+   else {
+      fHit = 0;
+      fHitf = 0;
+   }
+   fNhits = 0;
+   fEnergy = 0;
+   fCentroid.x = 0;
+   fCentroid.y = 0;
+   fCentroid.z = 0;
+   fRMS = 0;
+}
+
+LGDcluster::~LGDcluster()
+{
+   if (fHit) {
+      delete [] fHit;
+   }
+   if (fHitf) {
+      delete [] fHitf;
+   }
+}
+
+int LGDcluster::addHit(const int ihit, const double frac)
+{
+   if ((fNhits < fHitlist->nhits) &&
+       (ihit < fHitlist->nhits)) {
+      fHit[fNhits] = ihit;
+      fHitf[fNhits] = frac;
+      ++fNhits;
+      return 0;
+   }
+   else {
+      return 1;
+   }
+}
+
+double LGDcluster::getEnergy() const
+{
+   return fEnergy;
+}
+
+vector3_t LGDcluster::getCentroid() const
+{
+   return fCentroid;
+}
+
+double LGDcluster::getRMS() const
+{
+   return fRMS;
+}
+
+int LGDcluster::getHits(int hitlist[], const int nhits) const
+{
+   int ih;
+   for (ih = 0; (ih < fNhits) && (ih < nhits); ih++) {
+      hitlist[ih] = fHit[ih];
+   }
+   return ih;
+}
+
+int LGDcluster::getHits() const
+{
+   return fNhits;
+}
+
+void LGDcluster::resetHits()
+{
+   fNhits = 0;
+}
+
+bool LGDcluster::update()
+{
+   float energy = 0;
+   for (int oh = 0; oh < fNhits; oh++) {
+      int ih = fHit[oh];
+      double frac = fHitf[oh];
+      energy += fHitlist->hit[ih].energy*frac;
+   }
+
+  /* This complicated centroid algorithm was copied from
+   * Scott Teige's lgdClusterIU.c code -- don't ask [rtj]
+   */
+   vector3_t centroid;
+   centroid.x = 0;
+   centroid.y = 0;
+   centroid.z = 0;
+   double weight = 0.0;
+   double weightSum = 0.0;
+   double centerWeight = 0.0;
+   double neighborMaxWeight = 0.0;
+   double logFraction = exp(-0.23*(energy));
+   double currentOffset = log(energy)/7.0 + 3.7;
+   vector3_t centerBlock;
+   for (int oh = 0; oh < fNhits; oh++) {
+      int ih = fHit[oh];
+      double frac = fHitf[oh];
+      vector3_t block;
+      lgdLocalCoord(fHitlist->hit[ih].channel,&block);
+   /*
+    * Find the weight - offset determines minimum energy of block
+    * to be used in weighting, since negative weights are thrown out
+    */
+      weight = currentOffset + log(fHitlist->hit[ih].energy*frac/energy);
+      if (oh == 0) {
+         centerWeight = weight;
+         lgdLocalCoord(fHitlist->hit[ih].channel,&centerBlock);
+      }
+      else {
+         neighborMaxWeight =
+               (neighborMaxWeight < weight)? weight:neighborMaxWeight;
+      }
+      if (weight > 0) {
+         centroid.x += block.x*weight;
+         centroid.y += block.y*weight;
+         weightSum += weight;
+      }
+   }
+   /*
+    * Now patch up the center block's weight if it's got a neighbor
+    * in the cluster that had positive weight
+    */
+   if (neighborMaxWeight > 0) {
+      centroid.x += (logFraction-1)*(centerWeight-neighborMaxWeight)
+                           *centerBlock.x;
+      centroid.y += (logFraction-1)*(centerWeight-neighborMaxWeight)
+                           *centerBlock.y;
+      weightSum += (logFraction-1)*(centerWeight-neighborMaxWeight);
+   }
+   centroid.x /= weightSum;
+   centroid.y /= weightSum;
+
+   float RMS = 0;
+   for (int oh = 0; oh < fNhits; oh++) {
+      int ih = fHit[oh];
+      double frac = fHitf[oh];
+      vector3_t block;
+      lgdLocalCoord(fHitlist->hit[ih].channel,&block);
+      RMS += fHitlist->hit[ih].energy*frac
+             *(SQR(block.x-centroid.x)+SQR(block.y-centroid.y));
+   }
+   RMS /= energy;
+
+   bool something_changed = false;
+   if (energy != fEnergy) {
+      fEnergy = energy;
+      something_changed = true;
+   }
+   if ((centroid.x != fCentroid.x) ||
+       (centroid.y != fCentroid.y)) {
+      fCentroid = centroid;
+      something_changed = true;
+   }
+   if (RMS != fRMS) {
+      fRMS = RMS;
+      something_changed = true;
+   }
+   return something_changed;
+}
+
+double LGDcluster::expected(const int ihit) const
+{
+   if (ihit >= fHitlist->nhits) {
+      return 0;
+   }
+   vector3_t r;
+   lgdLocalCoord(fHitlist->hit[ihit].channel,&r);
+   double dist = sqrt(SQR(r.x-fCentroid.x)+SQR(r.y-fCentroid.y));
+   double theta = atan2(sqrt(SQR(fCentroid.x)+SQR(fCentroid.y)),120.);
+   double phi = atan2(fCentroid.y,fCentroid.x);
+   double u0 = sqrt(SQR(fCentroid.x)+SQR(fCentroid.y));   
+   double v0 = 0;
+   double u = r.x*cos(phi)+r.y*sin(phi);
+   double v =-r.x*sin(phi)+r.y*cos(phi);
+   double vVar = SQR(4.0);
+   double uVar = vVar+SQR(15*theta);
+   double rtail = 3.0+fEnergy;
+   double expect;
+
+   if (fEnergy == 0)
+      return 0;
+   expect = fEnergy;
+   expect *= 0.8*exp(-0.5*(SQR((SQR(u-u0)/uVar)+SQR(SQR(v-v0)/vVar))))
+            +0.5*exp(-dist/rtail);
+   return expect;
+}

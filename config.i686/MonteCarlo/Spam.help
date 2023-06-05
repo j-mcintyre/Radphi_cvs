@@ -1,0 +1,94 @@
+#
+# Spam help file, version 0.1
+#
+
+%% main_window
+MAIN WINDOW
+
+  The Main Window is divided into 5 major sections: the menu bar, the setup 
+area, the output area, the action area, and the info area.
+
+MENU BAR
+
+File Menu
+  
+  Load - load a new resource file. This clears the output area, resets all 
+particles to their default values, then loads the new database. Unsaved 
+changes will be lost.
+  New - resets everything to default values. Unsaved changes will be lost.
+  Save - save the contents of the output area. 
+  Save As - save the contents of the output area to a different file, which
+will become the default.  
+  Quit - exit Spam. Unsaved changes will be lost.
+
+Configure Menu
+ 
+  Command - set the command to be run when the "Run" button is pressed. The 
+present syntax of this command is a bit confusing, so see the help for that 
+window for an explanation.
+  Show Execution Window - makes the output window for commands visible.
+Usefull when you get rid of this window and want it back without running a 
+new command.
+
+SETUP AREA
+
+Beam - 
+  Configure the beam momentum and spatial distributions.
+Momentum Transfer -
+  Configure the t distribution.
+Reaction -
+  Specify beam,target,product and recoil particle types.
+Config -
+  A catch all. Everything that does not fall into another catagory
+  ends up here.
+Particles -
+  Define the properties of the various particles.
+
+OUTPUT AREA
+  
+  This shows the current database file that will be saved, or used when the 
+"Run" command is executed.  This area is editable, so the user can add 
+comments to files before saving them.  Note, however, that changes to the 
+commands in the file will not be reflected in the rest of the program. This
+area is simply written to, and eventually saved. It is not used for 
+configuring Spam.
+
+ACTION AREA
+
+Build -
+  Use the information the user has entered and build a database file. The 
+contents of the proposed file will be displayed in the output area.  
+
+Run -
+  Run the command specified in Configure->Command. The contents of the output
+area are used for the creation of the input file, i.e. you must "Build", then
+"Run".
+
+INFO AREA
+
+  This section gives messages to let you know what Spam is doing - loading 
+files, running a command, etc.
+
+%% beam_config
+
+CONFIGURE BEAM
+
+  In all cases, all prompted values must be set. I think most of the options
+are self-explanatory.  In order for changes to take affect, the "Apply" 
+button must be hit. The "Cancel" button dismisses the window without saving 
+changes. The "Reset" button sets all items the their last saved values. Make 
+sure you get the units right!
+
+%% transfer_config
+
+CONFIGURE TRANSFER
+
+  In all cases, all prompted values must be set. Note that in most cases, "t"
+actaully refers to |t|. The "Cancel" button dismisses the window without 
+saving changes. The "Reset" button sets all items the their last saved values.
+Make sure you get the units right!
+
+%% setup_reaction
+
+  Pretty much what it looks like. Remember to hit "Apply" for your changes
+to take affect. 'Nuff said.

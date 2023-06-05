@@ -1,0 +1,49 @@
+echo ""
+
+    ###################################################################
+    ####      This Script will kill All CODA Processes on URS1     ####
+    ####                                                           ####
+    #### Written By Kyle Burchesky --- University of Massachusetts ####
+    #### Date Last Updated: June 5 1998  14:59.07 EST              ####
+    ###################################################################
+
+# 
+
+echo "Really Kill All Data Acquisition? (y,n)"
+read a
+case $a in
+	Y) echo "Killing..."
+		kill -9 `ps -Af | grep coda_eb | cut -c10-15`
+		kill -9 `ps -Af | grep coda_er | cut -c10-15`
+		kill -9 `ps -Af | grep runcontrol | cut -c10-15`
+		kill -9 `ps -Af | grep rcServer | cut -c10-15`
+		kill -9 `ps -Af | grep ddmon | cut -c10-15`
+		kill -9 `ps -Af | grep cedit | cut -c10-15`
+		kill -9 `ps -Af | grep dbe | cut -c10-15`
+	 	dd_cleanup
+		echo "Killed!";;
+      yes) echo "Killing..."
+                kill -9 `ps -Af | grep coda_eb | cut -c10-15`
+                kill -9 `ps -Af | grep coda_er | cut -c10-15`
+                kill -9 `ps -Af | grep runcontrol | cut -c10-15`
+                kill -9 `ps -Af | grep rcServer | cut -c10-15`
+                kill -9 `ps -Af | grep ddmon | cut -c10-15`
+                kill -9 `ps -Af | grep cedit | cut -c10-15`
+                kill -9 `ps -Af | grep dbe | cut -c10-15`
+                dd_cleanup
+                echo "Killed!";;
+        y) echo "Killing..."
+                kill -9 `ps -Af | grep coda_eb | cut -c10-15`
+                kill -9 `ps -Af | grep coda_er | cut -c10-15`
+                kill -9 `ps -Af | grep runcontrol | cut -c10-15`
+                kill -9 `ps -Af | grep rcServer | cut -c10-15`
+                kill -9 `ps -Af | grep ddmon | cut -c10-15`
+                kill -9 `ps -Af | grep cedit | cut -c10-15`
+                kill -9 `ps -Af | grep dbe | cut -c10-15`
+                dd_cleanup
+                echo "Killed!";;
+	N) echo "Leaving DAQ untouched";;
+       no) echo "Leaving DAQ untouched";;
+	n) echo "Leaving DAQ untouched";;
+        0) echo "Null Responce, Leaving DAQ untouched" ;;
+esac

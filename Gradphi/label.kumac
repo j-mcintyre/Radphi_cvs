@@ -1,0 +1,99 @@
+MACRO label text key=0 size=0.25 col=1 keycol=1 align=ll x=999 y=999
+  global/import lab*
+  nt=$grafinfo('nt')
+  selnt 1
+  if ([labx] = '[labx]') then
+    global/create labx 10 'x position for next label'
+    global/create laby 10 'y position for next label'
+    global/create labtext '' 'text for label'
+  endif
+  if ([x] = 999) then
+    message click on the location for text, then hit right button
+    vlocate tmpx tmpy ! 1
+  elseif ([y] <> 999) then
+    v/cre tmpx(1) r [x]
+    v/cre tmpy(1) r [y]
+  else
+    v/cre tmp(1)
+  endif
+  len=$vdim(tmpx,1)
+  if ([len] > 0) then
+    labx=$sigma(tmpx([len]))
+    laby=$sigma(tmpy([len]))
+  else
+    laby=[laby]-(2*[size])
+  endif
+  graph/set txci [col]
+  if ($len([text]) = 0) then
+    read text "text for legend?"
+  endif
+  labtext=[text]
+  if ([key] > 0) then
+    graph/set csiz [size]
+    if ([key] < 20) then
+      graph/set plci [keycol]
+      hplot/key [labx] [laby] [key] [labtext] 1 W
+    else
+      graph/set pmci [keycol]
+      hplot/key [labx] [laby] [key] [labtext]
+    endif
+    vec/del tmp*
+    selnt [nt]
+    exitm
+  endif
+  case $lower([align]) in
+    (ll) graph/set txal 10
+    (lc) graph/set txal 20
+    (lr) graph/set txal 30
+    (ml) graph/set txal 13
+    (mc) graph/set txal 23
+    (mr) graph/set txal 33
+    (ul) graph/set txal 11
+    (uc) graph/set txal 21
+    (ur) graph/set txal 31
+  endcase
+  graph/set chhe [size]
+  itx [labx] [laby] [labtext]
+  graph/set txci 1
+  vec/del tmp*
+  selnt [nt]
+RETURN
+
+MACRO arrow size=.1
+  message click on the arrow endpoints, tail first
+  vlocate tmpx tmpy
+  arrow $sigma(tmpx(1)) $sigma(tmpx(2)) $sigma(tmpy(1)) $sigma(tmpy(2)) [size]
+RETURN
+
+MACRO undo col=0
+  global/import lab*
+  nt=$grafinfo(nt)
+  selnt 1
+  graph/set txci [col]
+  itx [labx] [laby] [labtext]
+  graph/set txci 1
+  selnt [nt]
+  if ([col] = 0) then
+    laby=[laby]+(2*[size])
+  endif
+RETURN
+
+MACRO axis x0=-999 x1=-999 y0=-999 y1=-999 w0=0 w1=1 ndiv=510
+  selnt 10
+  u0=$grafinfo(wnxmin)
+  u1=$grafinfo(wnxmax)
+  v0=$grafinfo(wnymin)
+  v1=$grafinfo(wnymax)
+  laof=$sigma(([u1]-[u0])/50.)
+  lasi=$sigma(([v1]-[v0])/45.)
+  set lasi [lasi]
+  if ([x0].ne.-999) then
+    set laof [lasi]
+    axis [x0] [x1] [v1] [v1] [w0] [w1] [ndiv] -dh
+  elseif ([y0].ne.-999) then
+    set laof [laof]
+    axis [u1] [u1] [y0] [y1] [w0] [w1] [ndiv] +dhl
+  else
+    message "usage: label#axis < x0=xxx x1=xxx | y0=yyy y1=yyy > w0=www w1=www"
+  endif
+RETURN

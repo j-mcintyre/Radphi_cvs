@@ -1,0 +1,444 @@
+/* 2001 June 22 
+   Craig Steffen */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+#include <string.h>
+#include <math.h>
+
+#include <itypes.h> 
+#include <iitypes.h>
+#include <eventType.h>
+#include <ntypes.h> 
+
+#include <disData.h>
+#include <pedestals.h>
+#include <calibration.h> 
+#include <makeHits.h>
+#include <mctypes.h>
+
+/* #define DEBUGGING 1 */
+
+int make_tagger_clusters(itape_header_t *event, tagger_clusters_t *p_clusters,
+			 int max_clusters){
+  tagger_hits_t *tag_hits=NULL;
+  tagger_clusters_t *tag_clusters=NULL;
+  tagger_clusters_t *tag_clusters2=NULL;
+  time_list_t *time_list=NULL;
+  mc_event_t *mc_event=NULL;
+  int cluster,current_N_left_clusters;
+  int current_cluster;
+  int i,j,k;
+  int has_been_attached;
+  int ref_index;
+  float time_interval;
+
+#ifdef DEBUGGING
+  fprintf(stderr,"make_tagger_clusters: begin \n");
+#endif
+
+  if(p_clusters==NULL){
+    tag_clusters=malloc(sizeof_tagger_clusters_t(max_clusters));
+    tag_clusters->maxclusters=max_clusters;
+  }
+  else{
+    tag_clusters=p_clusters;
+    fprintf(stderr,"make_tagger_clusters: giving a non-null tagger cluster\n");
+    fprintf(stderr,"is not really supported.  Sorry.\n");
+    return(1);
+  }
+  tag_clusters2=malloc(sizeof_tagger_clusters_t(max_clusters));
+  if(tag_clusters==NULL || tag_clusters2==NULL){
+    fprintf(stderr,"HELP!  make_tagger_clusters can't allocate memory!\n");
+    return(1);
+  }
+  tag_clusters->nclusters=0;
+  tag_clusters2->nclusters=0;
+  tag_clusters2->maxclusters=max_clusters;
+  for(i=0;i<tag_clusters->maxclusters;i++){
+    tag_clusters->cluster[i].nreferences=0;
+    tag_clusters2->cluster[i].nreferences=0;
+  }
+  if((tag_hits=data_getGroup(event,GROUP_TAGGER_HITS,(int)NULL))==NULL){
+    /* we have two choices here; it could be a non-physics event, or a Monte
+       Carlo event.  First, we check for a MC event: */
+    if(mc_event=data_getGroup(event,GROUP_MC_EVENT,(int)NULL)){
+      free(tag_clusters);
+      free(tag_clusters2);
+      return(generate_tagger_cluster_for_MC_event(event,max_clusters));
+    }
+    /* we didn't return, so it's not Monte Carlo event.  We'll just quietly
+       exit: */
+#ifdef DEBUGGING 
+    fprintf(stderr,"make_tagger_clusters: no tag_hits group.  Quietly exiting.\n");
+#endif
+    free(tag_clusters);
+    free(tag_clusters2);
+    return(0);
+  }
+  if((time_list = data_getGroup(event,GROUP_TIME_LIST,(int)NULL))==NULL){
+    fprintf(stderr,"Failed to get time_list for make_tagger_clusters\n");
+    return(1);
+  }
+#ifdef DEBUGGING 
+    fprintf(stderr,"make_tagger_clusters: now have tag_hits and time_list.\n");
+#endif
+
+  /* Let's call each time a TDC fired an 'instance'.  We're now going to
+   * go through the tagger hits, and for each left instance, we'll create
+   * a new tagger cluster, that has that left instance's information in it.
+   * We leave the right information blank for the moment.
+   */
+ 
+#ifdef DEBUGGING
+  fprintf(stderr,"make_tagger_clusters: entering loops hits=%2d\n",
+	  tag_hits->nhits);
+#endif
+
+  for(i=0;i<tag_hits->nhits;i++){
+    for(j=0;j<tag_hits->hit[i].times[0];j++){
+#ifdef DEBUGGING
+      fprintf(stderr,"make_tagger_clusters: loop i=%2d j=%2d \n",i,j);
+#endif
+      /* the jth left hit in that tagger element */
+      if(tag_clusters->nclusters>=tag_clusters->maxclusters){
+	fprintf(stderr,"make_tagger_clusters: exceeded max number of tagger ");
+	fprintf(stderr,"clusters!  Returning error code.\n");
+	return(1);
+      }
+      else{
+	cluster=tag_clusters->nclusters;
+#ifdef DEBUGGING
+      fprintf(stderr,"make_tagger_clusters: cluster=%2d, nreferences=%2d\n",
+	      cluster,tag_clusters->cluster[cluster].nreferences);
+#endif
+	tag_clusters->cluster[cluster].
+	  reference[tag_clusters->cluster[cluster].nreferences].hit_index=i;
+	tag_clusters->cluster[cluster].
+	  reference[tag_clusters->cluster[cluster].nreferences].side_index=
+	  TAGGER_SIDE_INDEX_LEFT;
+	tag_clusters->cluster[cluster].
+	  reference[tag_clusters->cluster[cluster].nreferences].instance=j;
+	(tag_clusters->cluster[cluster].nreferences)++;
+	/* this "reference" is the index necessary to figure what the time 
+	   of this "instance" is.  We now have the instance, but we need to
+	   copy over the relevant channel information */
+	tag_clusters->cluster[cluster].channel=tag_hits->hit[i].channel;
+	tag_clusters->cluster[cluster].energy=
+	  (tagger_fraction_by_channel[tag_hits->hit[i].channel])*
+	  RADPHI_ELECTRON_BEAM_ENERGY;
+#ifdef DEBUGGING
+      fprintf(stderr,"make_tagger_clusters: timelist index=%4d\n",
+	      ((tag_hits->hit[i].tindex[0])+j));
+#endif	
+	tag_clusters->cluster[cluster].time=
+	  time_list->element[(tag_hits->hit[i].tindex[0])+j].le;
+	(tag_clusters->nclusters)++;
+      }
+    }    /* for(j=0;j<tag_hits->hit[i].times[0];j++)  */
+  }      /* for(i=0;i<tag_hits->nhits;i++)            */
+
+  /* Ok, so thus far, every left instance in the tagger has its own cluster,
+   * and we've ignored both the right tagger channels and the possibility of
+   * adjacent channels combining together.  Next we go through and add the
+   * information from the right tagger hits.  If there's a left tagger
+   * already at that time, they're combined; if not, then the right
+   * produces its own cluster.
+   */
+
+  current_N_left_clusters=tag_clusters->nclusters;
+
+  /* this is done so that we only match rights to lefts,
+   * not try to match rights to rights
+   */
+
+#ifdef DEBUGGING
+  fprintf(stderr,"make_tagger_clusters: entering entering second set of loops\n");
+#endif
+  for(i=0;i<tag_hits->nhits;i++){
+    for(j=0;j<tag_hits->hit[i].times[1];j++){
+      /* there is a 1 in brackets instead of a 0; we're looking through right 
+	 instances this time. */
+#ifdef DEBUGGING
+  fprintf(stderr,"Hit index %d, right instance %2d of that channel.\n",
+	  i,j);
+#endif      
+      k=0;
+      has_been_attached=0;
+      while(!has_been_attached && k<current_N_left_clusters){
+	/* k is the position in the initial list of left only clusters */
+	if(tag_clusters->cluster[k].channel==tag_hits->hit[i].channel &&
+	   tag_clusters->cluster[k].nreferences==1 ){
+	  /* this if checks to make sure that the current kth cluster and the 
+	     ith hit under consideration are the same detector channel, and 
+	     that there hasn't already been a right hit added to this cluster */
+	  if(fabs((tag_clusters->cluster[k].time)-
+		  (time_list->element[(tag_hits->hit[i].tindex[1])+j].le)) < 
+	     TAG_LR_MAX_DIFFERENCE){
+	    /* if this right is an in-time part of this cluster */
+	    tag_clusters->cluster[k].
+	      reference[tag_clusters->cluster[k].nreferences].hit_index=i;
+	    tag_clusters->cluster[k].
+	      reference[tag_clusters->cluster[k].nreferences].side_index=
+	      TAGGER_SIDE_INDEX_RIGHT;
+	    tag_clusters->cluster[k].
+	      reference[tag_clusters->cluster[k].nreferences].instance=j;
+	    (tag_clusters->cluster[k].nreferences)++;
+	    /* channel and energy of this new combined cluster don't 
+	       need to be updated */
+	    tag_clusters->cluster[k].time=
+	      ((tag_clusters->cluster[k].time)+time_list->
+	       element[(tag_hits->hit[i].tindex[1])+j].le)/2.0;
+	    has_been_attached=1;
+	  }
+	}
+	k++;
+      } /* while(!has_been_attached && k<current_N_left_clusters) */
+      if(!has_been_attached){
+#ifdef DEBUGGING
+	fprintf(stderr,"Didn't get attached, creating new cluster.\n");
+#endif
+	/* this section is run if this particular right instance didn't attach 
+	 * itself to an existing cluster seeded by a left; so we create a new
+	 * cluster.
+         */
+
+	cluster=tag_clusters->nclusters;
+	if(cluster>=max_clusters){
+	  fprintf(stderr,"make_tagger_clusters: exceeded max number ");
+	  fprintf(stderr,"of tagger clusters!  Returning error code.\n");
+	  return(1);
+	}
+	tag_clusters->cluster[cluster].
+	  reference[tag_clusters->cluster[cluster].nreferences].hit_index=i;
+	tag_clusters->cluster[cluster].
+	  reference[tag_clusters->cluster[cluster].nreferences].side_index=
+	  TAGGER_SIDE_INDEX_RIGHT;
+	tag_clusters->cluster[cluster].
+	  reference[tag_clusters->cluster[cluster].nreferences].instance=j;
+	(tag_clusters->nclusters)++;
+      }
+    }
+  }
+
+  /* We have grouped the clusters left and right, but clusters in adjacent 
+     channels with the same time have not been accounted for yet.  We 
+     populate the tag_clusters2 by clusterizing the tag_clusters.  tag_clusters2
+     will then be the group that's put into the TAGGER_CLUSTERS group. */
+  
+#ifdef DEBUGGING
+  fprintf(stderr,"Starting final loop. %2d clusters\n  ",
+	  tag_clusters->nclusters);
+#endif
+  for(i=0;i<tag_clusters->nclusters;i++){
+#ifdef DEBUGGING
+    fprintf(stderr,"cluster %2d\n",i);
+#endif
+    if(tag_clusters->cluster[i].nreferences==0)
+      continue;
+    current_cluster=i+1;
+    has_been_attached=0;
+    while(current_cluster<tag_clusters->nclusters){
+#ifdef DEBUGGING
+      fprintf(stderr,"Comparing cluster %2d and %2d:  ",i,current_cluster);
+#endif
+      if((tag_clusters->cluster[current_cluster].nreferences!=0) &&
+	 ((abs((tag_clusters->cluster[i].channel)-
+	       (tag_clusters->cluster[current_cluster].channel)))<2) &&
+	 (fabs((tag_clusters->cluster[i].time)-
+	       (tag_clusters->cluster[current_cluster].time))<TAG_LR_MAX_DIFFERENCE)){
+	/* if they're really the same hit */
+#ifdef DEBUGGING
+	fprintf(stderr," Match!! %2d + %2d -> %2d\n",
+		i,current_cluster,tag_clusters2->nclusters);
+#endif
+	if(tag_clusters2->nclusters>=tag_clusters2->maxclusters){
+	  fprintf(stderr,"make_tagger_clusters: filled up tag_clusters2!!!\n");
+	  return(1);
+	}
+	tag_clusters2->cluster[tag_clusters2->nclusters].channel=
+	  tag_clusters->cluster[i].channel;
+	tag_clusters2->cluster[tag_clusters2->nclusters].energy=
+	  (tag_clusters->cluster[i].energy+
+	   tag_clusters->cluster[current_cluster].energy)/2.0;
+	tag_clusters2->cluster[tag_clusters2->nclusters].time=
+	  (tag_clusters->cluster[i].time+
+	   tag_clusters->cluster[current_cluster].time)/2.0; 
+#ifdef DEBUGGING
+	fprintf(stderr," match1 \n");
+#endif
+	for(j=0;j<tag_clusters->cluster[i].nreferences;j++){
+#ifdef DEBUGGING
+	  fprintf(stderr," first loop j=%2d \n",j);
+#endif	  
+	  ref_index=tag_clusters2->cluster[tag_clusters2->nclusters].nreferences;
+	  if(ref_index<0 || ref_index>3){
+	    fprintf(stderr,"make_tagger_clusters:  ERROR!!!\n");
+	    fprintf(stderr,"second referecne propogation loop has\n");
+	    fprintf(stderr,"ref_index=%d!\n",ref_index);
+	  }
+	  
+	  /*  tag_clusters2->cluster[tag_clusters2->nclusters].
+	      reference[ref_index].hit_index=
+	      tag_clusters->cluster[i].reference[j].hit_index;
+	      tag_clusters2->cluster[tag_clusters2->nclusters].
+	      reference[ref_index].side_index=
+	      tag_clusters->cluster[i].reference[j].side_index;
+	      tag_clusters2->cluster[tag_clusters2->nclusters].
+	      reference[ref_index].instance=
+	      tag_clusters->cluster[i].reference[j].instance; */
+	  (tag_clusters2->cluster[tag_clusters2->nclusters].nreferences)++;
+	}
+#ifdef DEBUGGING
+	fprintf(stderr," match2 \n");
+#endif
+	for(j=0;j<tag_clusters->cluster[current_cluster].nreferences;j++){
+#ifdef DEBUGGING
+	fprintf(stderr," second loop j=%2d \n",j);
+#endif	  
+	  ref_index=tag_clusters2->cluster[tag_clusters2->nclusters].nreferences;
+	  if(ref_index<0 || ref_index>3){
+	    fprintf(stderr,"make_tagger_clusters:  ERROR!!!\n");
+	    fprintf(stderr,"second referecne propogation loop has\n");
+	    fprintf(stderr,"ref_index=%d!\n",ref_index);
+	  }
+	  /*	  tag_clusters2->cluster[tag_clusters2->nclusters].
+	    reference[ref_index].hit_index=
+	    tag_clusters->cluster[current_cluster].reference[j].hit_index;
+	  tag_clusters2->cluster[tag_clusters2->nclusters].
+	    reference[ref_index].side_index=
+	    tag_clusters->cluster[current_cluster].reference[j].side_index;
+	  tag_clusters2->cluster[tag_clusters2->nclusters].
+	    reference[ref_index].instance=
+	    tag_clusters->cluster[current_cluster].reference[j].instance; */
+	  (tag_clusters2->cluster[tag_clusters2->nclusters].nreferences)++;
+	}
+#ifdef DEBUGGING
+	fprintf(stderr," match 2.1 \n");
+#endif
+	(tag_clusters2->nclusters)++;
+	tag_clusters->cluster[i].nreferences=0;
+	tag_clusters->cluster[current_cluster].nreferences=0;
+	current_cluster=tag_clusters->nclusters; /* dumps us out of the while */
+	has_been_attached=1;
+#ifdef DEBUGGING
+	fprintf(stderr," match 3 \n");
+#endif
+      }
+      current_cluster++;
+    } /* while(current_cluster<tag_clusters->nclusters) */
+    if(!has_been_attached){
+#ifdef DEBUGGING
+      fprintf(stderr,"New cluster %2d -> %2d\n",i,tag_clusters2->nclusters);
+#endif
+      /* no match found, so this tag_clusters cluster becomes its own 
+	 tag_clusters2 cluster */
+      tag_clusters2->cluster[tag_clusters2->nclusters].channel=
+	tag_clusters->cluster[i].channel;
+      tag_clusters2->cluster[tag_clusters2->nclusters].energy=
+	tag_clusters->cluster[i].energy;
+      tag_clusters2->cluster[tag_clusters2->nclusters].time=
+	tag_clusters->cluster[i].time;
+      for(j=0;j<tag_clusters->cluster[i].nreferences;j++){
+	/*	ref_index=tag_clusters2->cluster[tag_clusters2->nclusters].nreferences;
+	tag_clusters2->cluster[tag_clusters2->nclusters].
+	  reference[ref_index].hit_index=
+	  tag_clusters->cluster[i].reference[j].hit_index;
+	tag_clusters2->cluster[tag_clusters2->nclusters].
+	  reference[ref_index].side_index=
+	  tag_clusters->cluster[i].reference[j].side_index;
+	tag_clusters2->cluster[tag_clusters2->nclusters].
+	  reference[ref_index].instance=
+	  tag_clusters->cluster[i].reference[j].instance; */
+	(tag_clusters2->cluster[tag_clusters2->nclusters].nreferences)++;
+      }
+      tag_clusters->cluster[i].nreferences=0;
+      (tag_clusters2->nclusters)++;
+#ifdef DEBUGGING
+      fprintf(stderr,"Finished new %2d \n",tag_clusters2->nclusters);
+#endif
+
+    }  /* if(!has_been_attached) */
+  }    /* for(i=0;i<tag_clusters->nclusters;i++) */
+#ifdef DEBUGGING
+  fprintf(stderr,"make_tagger_clusters: finished with loops, creating group \n");
+  fprintf(stderr,"with %3d clusters in the final count.\n",
+	  tag_clusters2->nclusters);
+#endif
+
+ makegroup:
+  if(p_clusters==NULL){
+    int size=sizeof_tagger_clusters_t(tag_clusters2->nclusters);
+    tagger_clusters_t *tmp=data_addGroup(event,BUFSIZE,GROUP_TAGGER_CLUSTERS,0,size);
+    tag_clusters->maxclusters=tag_clusters2->nclusters;
+    memcpy(tmp,tag_clusters2,size);
+    free(tag_clusters);
+    free(tag_clusters2);
+  }
+#ifdef DEBUGGING
+  fprintf(stderr,"make_tagger_clusters: finished, returning 0 \n");
+#endif
+  return(0);
+}
+
+int generate_tagger_cluster_for_MC_event(itape_header_t *event,
+					 int max_clusters){
+  mc_event_t *mc_event=NULL;
+  tagger_clusters_t tagger_clusters;
+  float beam_energy;
+  recoil_t *recoil=NULL;
+
+
+  if((mc_event=data_getGroup(event,GROUP_MC_EVENT,(int)NULL))==NULL){
+    fprintf(stderr,"HEEEELLLLLP!  generate_tagger_cluster_for_MC_event\n");
+    fprintf(stderr,"called on an event where there was no\n");
+    fprintf(stderr,"GROUP_MC_EVENT!!!\n");
+    return(1);
+  }
+  if((recoil=data_getGroup(event,GROUP_RECOIL,(int)NULL))==NULL){
+    fprintf(stderr,"generate_tagger_cluster_for_MC_event called\n");
+    fprintf(stderr,"without a GROUP_RECOIL!\n");
+    return(1);
+  }
+  if(mc_event->npart!=1){
+    fprintf(stderr,"HELP!  GROUP_MC_EVENT used to contain just one\n");
+    fprintf(stderr,"initial state particle.  This has changed, it now\n");
+    fprintf(stderr,"has %d particles.  generate_tagger_cluster_for_MC_event\n");
+    fprintf(stderr,"in the file make_tagger_clusters needs to be updated!\n");
+    return(1);
+  }
+  beam_energy=mc_event->part[0].momentum.t;
+#ifdef DEBUGGING
+  fprintf(stderr,"make_tagger_clusters: beam energy: %f\n",beam_energy);
+#endif
+  /* Now, we need to set up the parameters of this fake cluster as 
+     well as we can. */
+  tagger_clusters.nclusters=1;
+  tagger_clusters.maxclusters=max_clusters;
+  tagger_clusters.cluster[0].channel=0;
+  tagger_clusters.cluster[0].energy=beam_energy;
+  if(recoil->recoil_class==RECOIL_CLASS_SINGLE){
+    /* if there is a recoil class to time from, then we set the cluster
+       time to match */
+    tagger_clusters.cluster[0].time=recoil->time-bsd_minus_tagger_offset;
+  }
+  else{
+    tagger_clusters.cluster[0].time=0.0;
+  }
+  tagger_clusters.cluster[0].nreferences=0;
+  {
+    int size=sizeof_tagger_clusters_t(tagger_clusters.nclusters);
+    tagger_clusters_t *tmp=data_addGroup(event,BUFSIZE,GROUP_TAGGER_CLUSTERS,
+					 0,size);
+    tagger_clusters.maxclusters=tagger_clusters.nclusters;
+    memcpy(tmp,&tagger_clusters,size);
+  }
+#ifdef DEBUGGING
+  fprintf(stderr,"generate_tagger_cluster_for_MC_event: \n");
+  fprintf(stderr,"generated cluster for single photon.\n");
+#endif
+
+  return(0);
+}

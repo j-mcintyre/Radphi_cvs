@@ -1,0 +1,8 @@
+The makefile assumes that RADPHI_LIB, RADPHI_INCLUDE, and CERN_LIB
+are defined in the environment. This is usually done via
+  source ~radphi/setup
+
+Once that is done, type make rodd to build the program.
+
+The file com is a sample batch script that will tell RODD to
+read the whole input tape and then quit.

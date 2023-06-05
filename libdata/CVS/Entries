@@ -1,0 +1,25 @@
+/crc.c/1.1/Wed Oct 30 17:16:57 1996//
+/dataSeekTape.c/1.1/Sun May  4 03:21:29 1997//
+/endianConverter.c/1.3/Tue Jan 18 04:03:03 2000//
+/endianStubGen.perl/1.3/Tue Jan 18 04:03:03 2000//
+/libdecode.c/1.14/Mon May 29 20:41:56 2000//
+/libwrapper.c/1.1/Mon Jun 22 08:06:46 1998//
+/tapedb.c/1.1/Tue May 20 09:08:05 1997//
+/test_put.c/1.2/Tue Jun 27 04:30:42 2000//
+/thawData.c/1.4/Fri Dec 15 04:10:42 2000//
+/unpackMap.c/1.10/Thu Jun 17 17:33:58 1999//
+/calibration.c/1.7/Sat Nov 10 16:09:03 2001//
+/swap_util.c/1.2/Tue Mar  4 19:37:19 2003//
+/unpackData.c/1.23/Fri Sep  5 15:46:31 2003//
+/pedestals.c/1.8/Thu Sep 30 19:26:16 2004//
+/detector_params.c/1.18/Tue May 17 20:39:22 2005//
+/Makefile/1.21/Wed Mar 13 21:46:22 2013//
+/data.c/1.3/Sat Jan  4 22:14:42 2014//
+/dataIO.c/1.13/Sun Mar 10 02:50:22 2013//
+/disIO.c/1.5/Tue Feb 12 12:37:51 2013//
+/evio.c/1.4/Mon Jan  6 04:55:00 2014//
+/evt_dataIO.c/1.17/Tue Feb 12 15:50:31 2013//
+/fitting.c/1.5/Tue Feb 12 12:39:18 2013//
+/tapeIO.c/1.17/Sat Jan  4 22:11:37 2014//
+/tapeIoctl.c/1.5/Tue Feb 12 12:24:20 2013//
+D

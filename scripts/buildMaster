@@ -1,0 +1,31 @@
+#! /usr/local/bin/perl
+
+@targets = ("irix-mips4","irix-mips4-o","irix-mips3","irix-mips3-o","irix-mips2","irix-mips2-o","hpux","hpux-o","aix","aix-o","solaris","solaris-o");
+
+$ENV{'RADPHI_HOME'} = "/group/radphi";
+
+$modFile = "$ENV{'RADPHI_HOME'}/scripts/etc/build.modules";
+open(MODFILE,$modFile) || die "Failed to open $modFile\n";
+$nMod=0;
+while(<MODFILE>){
+    chop;
+    $modules[$nMod++] = $_;
+}
+
+foreach $key (@targets){
+    $dir = "$ENV{\"RADPHI_HOME\"}/build.$key";
+    chdir($dir);
+    foreach $module (@modules){
+	system("/cvs -z 5 -Q -d :pserver:radphi\@jlabs1.jlab.org:/group/radphi/cvs checkout $module 1>/dev/null");
+    }
+}
+
+#
+# Now we have all the source up to date... time to go to the various
+# systems and do the builds
+#
+system("rsh radphi\@nations /net/dustbunny.physics/usr1/radphi/scripts/doSolaris");
+system("rsh radphi\@auriga /radphi/scripts/doAIX");
+system("rsh radphi\@paoli /sgiusr1/radphi/scripts/doHPUX");
+system("rsh radphi\@dustbunny /usr1//radphi/scripts/doIRIX");
+

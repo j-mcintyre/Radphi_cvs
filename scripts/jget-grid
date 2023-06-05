@@ -1,0 +1,73 @@
+#!/usr/bin/perl
+#
+# jget-grid - fetch files from JLab mass storage system (mss)
+#
+# Note: This script needs to be run interactively at present
+#	because the only authentication method that works to get
+#	access to the jlab site is through keyboard-passwords.
+#
+# July 14 2000 - original version -rtj
+# Oct. 26 2000 - switched from jget to jcache -rtj
+# Dec. 6, 2002 - rewritten in perl to take advantage of pipes -rtj
+# ----------------------------------------------------------------
+
+$loginhost = "login1.jlab.org";
+$remotehost = "jlabl1.jlab.org";
+$ftphost = "grendl.phys.uconn.edu";
+$listdir = "/nfs/direct/app/radphi/mss";
+$tempdir = "/nfs/direct/app/radphi/temp";
+$destdir = "/nfs/direct/app/radphi/raw_data";
+$msspath = "/cache/mss/hallb/e94016/raw";
+
+$ssh = "ssh -l jonesrt $loginhost ssh $remotehost";
+
+while (@ARGV) {
+   if ($ARGV[0] =~ /-.*/) {
+      print "Usage: jcache rNNNN.evt [...]\n";
+      print "       jcache (no arguments)\n";
+      print " after creating dummy filenames in directory $listdir\n";
+      exit;
+   }
+   else {
+      $filelist[@filelist] = shift @ARGV;
+   }
+}
+
+if (@filelist == 0) {
+   @filelist = `ls $listdir/.cached`;
+}
+
+if (! open(RSH,"-|")) {
+   open(REQ,"| $ssh") || die "jget-grid error - cannot contact $remotehost\n";
+   while (@filelist) {
+# I must have already logged in previously and created the proxy
+# because it is too unsafe to put the password in this file - rtj, 12-20-2009
+#      syswrite(REQ,"echo openShop | grid-proxy-init -cert .globus/clientcerts/ftp-client.crt -key .globus/clientcerts/ftp-client.key -pwstdin\n");
+      for ($req = 0; @filelist > 0; $req++) {
+         ($file = shift @filelist) =~ s/\n//s;
+         system("mv $listdir/.cached/$file $listdir/.moving");
+         syswrite(REQ,"globus-url-copy -p 8 file:///$msspath/$file gsiftp://$ftphost/$tempdir/$file\n");
+         syswrite(REQ,"echo copy of $file completed with error code \$?\n");
+      }
+      syswrite(REQ,"\n");
+   }
+   syswrite(REQ,"exit\n");
+   wait;
+   close(REQ);
+   exit;
+}
+
+while ($response = <RSH>) {
+   print "$response";
+   if ($response =~ s/^copy of (r[0-9]+.evt) completed with error code 0.*$/$1/s) {
+      if (-r "$listdir/.moving/$response") {
+         print "received $file...\n";
+         system("mv $tempdir/$response $destdir/$response");
+         system("rm $listdir/.moving/$response");
+      }
+   }
+   elsif ($response =~ s/^copy of (r[0-9]+.evt) completed with error code .*$/$1/s) {
+         print "transfer failed for $file...\n";
+         system("mv $listdir/.moving/$response $listdir/.cached");
+      }
+}

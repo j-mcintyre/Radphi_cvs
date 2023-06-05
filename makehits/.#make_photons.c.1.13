@@ -1,0 +1,144 @@
+/*     make_photons.c
+ *
+ *     D.S. Armstrong    March 9 2000
+ *     - original version
+ *
+ *     R.T. Jones	 February 2 2001
+ *     - disabled call to correctPhotonEnergy()
+ *       because energy, angle correction are now applied at the same time
+ *       in makePhotonPatch() -- for more information see TechNote 2001-201.
+ */
+
+/* #define OLD_NONLINEAR_CORRECTION    -comment out to enable new corrections */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>  
+#include <string.h>
+#include <math.h>
+
+#include <itypes.h> 
+#include <eventType.h>
+#include <ntypes.h> 
+
+#include <disData.h>
+#include <lgdCluster.h>
+#include <lgdUtil.h>
+#include <lgdGeom.h>
+#include <pedestals.h>
+#include <calibration.h> 
+#include <makeHits.h>
+
+int setup_makePhotons(itape_header_t *event,
+	              float *in_epsilon,
+	              float *in_beta){
+  int actualRun;
+  
+  if(in_epsilon==NULL){
+    if(ccParameterLoad(PARAMETER_EPSILON,event->runNo,
+		       &epsilon,&actualRun)){
+      fprintf(stderr,"Failed to load epsilon parameter from map for run %d\n",
+	      event->runNo);
+      return(1);
+    }
+    fprintf(stderr,"Successfully loaded epsilon from map; real run %d\n",
+	    actualRun);
+  }
+  else{
+    epsilon=*in_epsilon;
+    fprintf(stderr,"Manuallly set epsilon constant to %f\n",epsilon);
+  }
+  if(in_beta==NULL){
+    if(ccParameterLoad(PARAMETER_BETA,event->runNo,
+		       &beta,&actualRun)){
+      fprintf(stderr,"Failed to load beta parameter from map for run %d\n",
+	      event->runNo);
+      return(1);
+    }
+    fprintf(stderr,"Successfully loaded beta from map; real run %d\n",
+	    actualRun);
+  }
+  else{
+    beta=*in_beta;
+    fprintf(stderr,"Manuallly set beta constant to %f\n",beta);
+  }
+  return(0);
+}
+
+int make_photons(itape_header_t *event, photons_t *p_phot, int max)
+{
+  lgd_clusters_t *clusters=NULL;
+  photons_t *photons=NULL;
+  vector4_t pGamma[30];
+  vector3_t vertex={0.0, 0.0, 0.0};
+  int size;
+  int i;
+
+
+  if(p_phot==NULL){
+    photons = malloc(sizeof_photons_t(max));
+  }
+  else{
+    photons = p_phot;
+  }
+
+  clusters = data_getGroup(event,GROUP_LGD_CLUSTERS,0);
+  if (clusters->nClusters > max){
+    fprintf(stderr,"Warning in make_photons: ");
+    fprintf(stderr,"buffer overflow at %d hits, truncating.\n",max+1);
+    clusters->nClusters = max;
+  }
+
+  photons->nPhotons = 0;
+  for (i=0; i<clusters->nClusters; i++) {
+
+  /*  apply corrections to turn clusters into photons   */
+    pGamma[i]=makePhotonPatch(&(clusters->cluster[i]),vertex);
+ 
+#ifdef OLD_NONLINEAR_CORRECTION
+  /* now apply correction for non-linearity in Pb/glass */
+    pGamma[i] = correctPhotonEnergy(pGamma[i]);
+#else
+  /* energy correction now applied in makePhotonPatch() */
+#endif
+
+    photons->photon[i].cluster = i;
+    photons->photon[i].energy = pGamma[i].t;
+    photons->photon[i].momentum = pGamma[i].space;
+    photons->photon[i].position = clusters->cluster[i].space;
+    (photons->nPhotons)++;
+
+  }
+
+  if(p_phot==NULL){
+    int size = sizeof_photons_t(photons->nPhotons);
+    photons_t *tmp = data_addGroup(event,BUFSIZE,GROUP_PHOTONS,0,size);
+    memcpy(tmp,photons,size);
+    free(photons);
+  }
+
+  return(0);
+}
+
+vector4_t correctPhotonEnergy(vector4_t photon)
+{
+    /*   This routine will adjust the reconstructed photon energy to
+       account for power-law non-linearity of the LGD response, due
+       to attenuation length in the Pb/glass; see Scott Teige's note
+       of Dec 15 1999 `Corrections to the Radphi mass scale' 
+               D.S. Armstrong
+    */
+
+     double factor;
+     vector4_t answer;
+
+     if (photon.t > 0) {
+       factor = exp((1-epsilon)*log(photon.t) + beta)/photon.t;
+       answer.t = factor*photon.t;
+       answer.space.x = factor*photon.space.x;
+       answer.space.y = factor*photon.space.y;
+       answer.space.z = factor*photon.space.z;
+       }
+    return(answer);
+}

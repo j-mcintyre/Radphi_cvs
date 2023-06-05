@@ -1,0 +1,17 @@
+MACRO plotcpv
+ satt * seen 0
+ satt cpga seen 1
+ satt cpgb seen 1
+ satt cpgc seen 1
+ satt cpgd seen 1
+ satt cpge seen 1
+ satt cpsa seen 1
+ satt cpsb seen 1
+ satt cpsc seen 1
+ satt cpsd seen 1
+ satt cpse seen 1
+ satt cpmt seen 1
+ satt cpmb seen 1
+ dopt hide on
+ next; draw cpv 140 60 0 10 10 .1 .1
+RETURN

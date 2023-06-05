@@ -1,0 +1,214 @@
+	Instructions for building piaf executables from sources
+        -------------------------------------------------------
+
+Before you can use the Makefile you need to set up the CVSCOSRC environment
+variable to point to the standard (read-only) cern source tree.  For example
+
+$ export CVSCOSRC=/cern/new/src
+
+works just fine.  After that you can build the executables, such as
+
+$ make piafront
+$ make piafserv
+
+To use it, it is nice to copy the piafront executable to both piafserv and
+piafslave in the /usr/local/piaf/bin area, and then connect these to the
+piafserv and piafslave inet service ports, respectively.  Both of them
+do their real work by starting up the piafserv executable, which they
+invoke as piafserv.931013 (weird but true).  So the following will do the
+appropriate installation.
+
+$ mkdir /usr/local/piaf
+$ mkdir /usr/local/piaf/bin
+$ cp piafront /usr/local/piaf/bin/piafserv
+$ cp piafront /usr/local/piaf/bin/piafslave
+$ cp piafserv /usr/local/piaf/bin/piafserv.931013
+$ mkdir /usr/local/piaf/etc
+
+In this /usr/local/piaf/etc directory a number of files can be placed to
+control different aspects of the piaf service.  The only required one is
+piaf.conf which is a simple key-value file that supports at least the
+following keys.
+
+  workdir <directory>	: defines pwd for piaf slaves
+  slave <nodename> 	: lists available slave nodes, repeat several times
+  split			: insert alone on its own line once into list of
+			  slaves to divide into 2 sessions
+  vmem <size> 		: set the size of the ntuple cache in slaves [54M]
+  user <name> on <node>	: reroute connections from user <name> to another
+			  master server running on <node>
+  userconf <name> on <dir> : look for custom piaf.conf file for user <name>
+			  in directory <dir>
+  interface <name> on <node> : reroute connections coming from net interface
+			  <name> to another master server running on <node>
+  node <node>		: start a slave server on node <node>
+
+Also in $PIAFCONF can be the file nopiaf to disallow piaf logins on
+that node, motd to provide a welcome message, and next.node to allow a
+load-balancing daemon the ability to steer requests to idle nodes.
+
+Richard Jones
+University of Connecticut
+July 10, 2002
+
+
+         Extensions and fixes to the standard piaf interface
+        ------------------------------------------------------
+
+1. Non-default record size of rz files in chains
+   #define PIAF_LRECL_SUPPORT 1
+   The standard paw command /histogram/file allows you to specify a non-
+   default record size for the rz file in the LRECL argument.  But when
+   the file is specified as a member of a chain, there is no LRECL argument.
+   If the system cannot guess the LRECL value then the open will fail.
+   For hbook files on piaf I added an extension to the file name that
+   allows the user to specify a nondefault value for LRECL, that appears
+   as a number in parentheses tacked onto the end of the file name.
+   Example:
+              paw> chain may2002 //piaf/may2002file5.hbook(65536)
+
+2. Ability to execute arbitrary kuip commands on piaf master and slaves.
+   #define GENERAL_COMMAND_MESSAGES 1
+   The general form of arbitrary kuip commands to piaf are show in these
+   examples:
+              paw> piaf/message Master hist/list
+              paw> piaf/message Slaves sigma counts=array(10,1#10)
+
+3. Make Ntuple processing progress meter work again
+   #define PIAF_PROGRESS_METER 1
+   The progress meter disappeared when the new query processor was
+   invented. It was nice, and now it is back.  The counters are not
+   labeled by their correct meaning (eg. the file counter increments
+   at the end of each file or every METER_UPDATE_INTERVAL seconds) but
+   the progress meter bar is correct, as is the pass count.
+
+4. Small code changes for gcc compiler
+   #define MAKE_GCC_HAPPY 1
+
+5. Changes to piaf username/password for single-uid piaf for slaves
+   #define USE_USERNAME_AS_PASSWD 1
+   #define USE_REMOTE_USERNAME 1
+   In the standard implementation of piaf it was intended that each user
+   have an identity on the piaf server machines.  This does not fit with
+   our use of paw/piaf as a web browser helper application.  To fit this
+   model, we set up piaf slaves to all run as user piaf group piaf.  This
+   means that all users log into the piaf service as user "piaf" but they
+   pass their userid as the password value.  That lets the piaf service
+   set up a separate scratch area for each user.  The only connection of
+   this password with security is that the piaf service checks that the
+   password == a userid in the group piaf.
+
+6. Fix master/slave communication to suppress unexpected hangups
+   #define FIX_SLAVE_HANGUP_BUG 1
+   See code.
+
+7. Optimize PCNEXT to prevent unnecessary open/close of data files
+   #define PCNEXT_OPTIMIZATION 1
+   In the standard implementation, every slave opens every file in a
+   chain, even if he has nothing to process therein.  This optimization
+   allows the slaves to skip the open/close step if he knows that he has
+   no records to process in that file.
+
+8. Do not wait for responses from slaves not given any work to do
+   #define FIX_NSLAVE_COUNTER_BUG 1
+   See code.
+
+9. Increase size of PAWC area on master and slaves
+   #define PIAF_BIG_PAWC 1
+   See code.
+
+10. Prevent annoying "no such file" messages on upload of new code
+   #define PIAF_SHARED_WORKDIR 1
+   The standard piaf service tried to delete old versions on every slave
+   of new code being uploaded.  In the case where they all share the same
+   copy of the code, this produced N-1 error messages that the file does
+   not exist.  This mod removes the file only on the master.  It also tells
+   the slaves to use their local /tmp directory for do local comis compiles
+   so that they do not collide in the (frequent) case that processes on 
+   different nodes happen to have the same PID.
+
+11. Prevent hangups on repeat csexec of .sl files
+   #define RENAME_SHARED_EXECS 1
+   A troublesome feature of the standard piaf implementation is that any
+   time a .sl shared executable is uploaded to piaf, if a file with the same
+   name was already connected then the piaf master will crash.  This fix
+   renames the .sl or .csl file to a unique local name on piaf before it is
+   associated with the piaf master and slaves.  It is then dissociated and
+   deleted when a new version is uploaded, then the new instance is moved
+   to the new name.
+
+12. Load executables on call of .f77 or .c files on piaf slaves
+   #define LOAD_SLAVES_ON_CSEXEC 1
+   In the case of .f77 or .c files, a call ftn.f77 or call ftn.c triggers
+   an upload of the source to the piaf master and a compile and load step.
+   But it is not propagated to the slaves until the first n/pl command.
+   This is inconsistent with the behavior with .sl and .csl files, and is
+   inconvenient.  This fix causes the load to happen on all slaves, just
+   like it is for the case of the call ftn.sl or call ftn.csl commands.
+
+13. Prevent automatic zeroing of all histograms upon each ntuple cmd
+   #define HINFP_OPTION_NORESET 1
+   See code.
+
+14. Fix bug related to what happens when slaves hang up the connection
+   #define FIX_SLAVE_OVERWRITE_BUG 1
+   See code.
+
+15. Prevent erasure of all cuts, vectors and histograms upon each ntuple cmd
+   #define NTCMD_AUTOPURGE_SELECTABLE 1
+   In the standard implementation, piaf is supposed to be stateless.  This
+   is inconvenient when you would like to pass information in the form of
+   vectors or histograms from one processing step to another.  With this
+   fix, definition of cuts and histograms that have already been used will
+   generate warning messages, which you can either ignore or get rid of by
+   sending explicit commands through the piaf/message interface to clear
+   the cuts, histograms or vectors prior to their redefinition (see # 2).
+   Examples of paw commands that exploit this feature are shown below.
+             piaf/message keep vectors
+             piaf/message keep histos
+             piaf/message keep none		[default]
+
+16. Fix problem with slaves getting out of sync on status command
+   #define FIX_STATUS_SYNC_BUG 1
+   See code.
+
+17. Enable correct processing of chains with more than 2^31 rows
+   #define LONG_LONG_CHAIN 1
+   HBOOK and its underlying i/o package RZIO have intrinsic limitations
+   to 32 bits in all quantities represented as integers, including the
+   number of rows in a ntuple.  This is responsible for the well-known
+   limitation that HBOOK files cannot be more than 2GB long.  Ntuple
+   chains are supposed to provide a way around the problem by extending
+   a single ntuple across many files.  Unfortunately in standard paw and
+   piaf the problem comes back again because the total length of a chain
+   cannot be greater than 2^31 rows.  The macro enables modifications to
+   the ntuple query processor which change row counters from "int" to 
+   "long long int" which enable users to process ntuple chains containing
+   up to 2^63 rows on piaf.  Because all of the piaf processing takes
+   place on the server, this works even if the user's version of paw has
+   the old 32-bit limitations.
+
+18. Adjust the relative workload of slaves during ntuple query processing
+   #define WEIGHTED_NTUPLE_PARTITIONING 1
+   By default all slaves are assigned an equal subset of the requested
+   rows in the ntuple or chain being processed by the query.  Sometimes
+   that is inefficient because the slaves are not equal in cpu performance,
+   or because certain slaves have preferential access to certain files.
+   With the weighted partitioning scheme, the rows in the ntuple or chain
+   are still apportioned to the slaves as sequential segments in the order
+   the slaves are declared in the piaf configuration file, but with weight
+   factors that control the relative row count assigned to each.  Default
+   weights of unity are assigned to each slave at piaf startup.  The overall
+   normalization of the weights is arbitrary.  The command to assign new
+   weights is:
+        paw> piaf/message reload <s> <w>
+   where <s> is a slave index 1..NSLAVE and <w> is an integer weight that
+   represents the relative number of rows to be processed by that slave.
+   As an alternative, it is possible to append and index to the end of the
+   chain entry name on piaf, as shown in the following example.
+        paw> chain nt3 //piaf/ntuple1.hbook(8192):1
+        paw> chain nt3 //piaf/ntuple2.hbook(8192):2
+        paw> chain nt3 //piaf/ntuple3.hbook(8192):3
+   The piaf query processor takes this to mean that the data files are
+   local to piaf slaves 1,2,3 respectively.  When the ntuple is loaded
+   it assigns appropriate weights to keep the processing local.

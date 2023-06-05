@@ -1,0 +1,58 @@
+MACRO ntuple filename=initialize count=10000 start=0 id=1
+  if [filename]=initialize then
+    exec ntuple#init
+    exitm
+  elseif $index(read_ntuple,'exec ntuple') = 0 then
+    exec ntuple#init opt=quiet
+  endif
+  if $substring([1],1,1)='/' then
+    cmd=ls  [1]
+  else
+    cmd=ls work/[1]
+  endif
+  list=$shell([cmd])
+  if $index([list],'$shell')=0 then
+    do n=1,$words([list],' ')
+      file=$word([list],[n],1,' ')
+      if ([count].gt.0) then
+        call=ntuple($quote([file]),[id],[count],[start])
+        count = $icall([call])
+      endif
+    enddo
+  endif
+  hrout [id]
+RETURN
+
+MACRO init opt=announce use='ruclvtbxpm'
+  if $index(read_ntuple,'exec ntuple') > 0 then
+    if [opt]=announce then
+      message 'usage: ntuple <filename or pattern>'
+      message ' as in:   ntuple r51*.evt'
+    endif
+  else
+    alias/create read_ntuple 'exec ntuple' A
+    h/file 93 ntuple.hbook 4096 n
+    init='init '//[use]//' '
+    call ntuple.sl($quote([init]),0,0,0)
+    if ([opt]=announce) then
+      message 'Ntuple initialization complete.'
+      message 'To read in ntuple do: exec ntuple <filename or pattern>'
+      message 'To select certain run/time ranges, do: cut 1 <your cut>'
+    endif
+  endif
+RETURN
+
+MACRO reset opt=announce
+  if $index(read_ntuple,'exec ntuple') = 0 then
+    if [opt]=announce then
+      message 'usage: ntuple <filename or pattern>'
+      message ' as in:   ntuple r51*.evt'
+    endif
+  else
+    alias/delete read_ntuple
+    close 93
+    if ([opt]=announce) then
+      message 'Ntuple has been reset'
+    endif
+  endif
+RETURN 

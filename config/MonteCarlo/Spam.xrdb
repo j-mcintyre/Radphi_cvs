@@ -1,0 +1,28 @@
+
+# The list MUST be in order - products should appear BEFORE parents
+
+Spam.particles: gamma,pi0,pi+,pi-,eta,omega,rho0,rho+,rho-,omega,etaprime,a0,f0,a2,f2,phi,proton,neutron
+
+setup.maxParticles: 100
+
+
+# Some default values
+
+beam.type: gamma
+beam.momentum.type: BREM
+beam.momentum.value: 6.0
+beam.momentum.bremThetaMax : 3.00
+beam.spatial.type : GAUSSIAN
+beam.spatial.x.sigma : 0.500
+beam.spatial.y.sigma : 0.500
+
+target.type: proton
+product.type: phi
+recoil.type: proton
+transfer.type: TDIST_1
+transfer.exponent: 3.75
+target.fermi: True
+
+setup.nIterations: 10000
+setup.geometry: CEBAF_328
+

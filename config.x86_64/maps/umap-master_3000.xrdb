@@ -1,0 +1,22 @@
+#
+# module info
+#
+LRS_1885M.nchannels: 96     
+LRS_1885M.bus: FASTBUS
+LRS_1885M.type: ADC
+STK_10C6.nchannels: 32
+STK_10C6.bus: FASTBUS
+STK_10C6.type: TDC
+LRS_1151.nchannels: 16
+LRS_1151.bus: VME
+LRS_1151.type: SCALER
+STK_7200.nchannels: 32
+STK_7200.bus: VME
+STK_7200.type: SCALER
+#
+# ROCs
+#
+nrocs: 2
+roc.*.detector: UNUSED
+#
+# End File

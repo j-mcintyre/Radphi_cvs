@@ -1,0 +1,53 @@
+#!/bin/sh
+#
+# jgetall - stage all files from JLab mass storage system (mss)
+#
+# Richard Jones, Oct 2 2000
+# ---------------------------
+
+if [ $# -ge 1 ]
+ then
+   run0=$1
+ else
+   run0=7415
+fi
+
+if [ $# -ge 2 ]
+ then
+   run1=$2
+ else
+   run1=8800
+fi
+
+if [ $# -ge 3 ]
+ then
+   runs=$3
+ else
+   runs=5
+fi
+
+archive=/radphi
+
+run=$run0
+while [ $run -le $run1 ]
+ do
+   i=0
+   sources=""
+   while [ $i -lt $runs ]
+    do
+      mkdir $archive/r$run 2>/dev/null
+      if [ $? = 0 ]
+       then
+         sources="$sources r$run.evt"
+       else
+         echo "run $run already on disk, skipping"
+       fi
+      run=`expr $run + 1`
+      i=`expr $i + 1`
+    done
+   if [ -n "$sources" ]
+    then
+      echo "jgetting runs $sources"
+      /home/radphi/jget "$sources"
+    fi
+ done

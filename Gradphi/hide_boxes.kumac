@@ -1,0 +1,19 @@
+MACRO hide_boxes
+ satt * seen 1 
+ satt hall seen 0
+ satt lgd seen 0
+ satt pmtw seen 0
+ satt rpd seen 0
+ satt cel1 seen 0
+ satt wal1 seen 0
+ satt wal2 seen 0
+ satt cpv seen 0
+ satt cpva seen 0
+ satt cpvb seen 0
+ satt cpvc seen 0
+ satt cpvd seen 0
+ satt cpve seen 0
+ satt upv seen 0
+ satt cpv seen 0
+ satt way seen 0
+RETURN

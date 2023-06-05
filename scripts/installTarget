@@ -1,0 +1,43 @@
+#!  /usr/local/bin/perl
+
+
+$target = $ARGV[0];
+
+if(!$target){
+    print "updateTarget <target>\n";
+}
+
+$binFile = "/group/radphi/tarballs/bin.$target.tar.gz";
+$libFile = "/group/radphi/tarballs/lib.$target.tar.gz";
+
+if($ENV{'RADPHI_SCRATCH'}){
+    $localDir = $ENV{'RADPHI_SCRATCH'}
+}
+else{
+    if ($ENV{'TMPDIR'}){
+	$localDir = $ENV{'TMPDIR'};
+    }
+    else{
+	$localDir = "/usr/tmp";
+    }
+}
+$localBinFile = "$localDir/bin.tar.gz";
+$localLibFile = "$localDir/lib.tar.gz";
+
+$cmd = "rcp radphi\@dustbunny.physics.indiana.edu:$binFile $localBinFile";
+system($cmd);
+$cmd = "rcp radphi\@dustbunny.physics.indiana.edu:$libFile $localLibFile";
+system($cmd);
+
+chdir($ENV{'RADPHI_HOME'});
+
+$cmd = "gunzip -c $localBinFile | tar xf -";
+#print "$cmd\n";
+system($cmd);
+$cmd = "gunzip -c $localLibFile | tar xf -";
+#print "$cmd\n";
+system($cmd);
+
+system("rm $localBinFile");
+system("rm $localLibFile");
+

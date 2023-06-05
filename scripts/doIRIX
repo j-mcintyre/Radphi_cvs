@@ -1,0 +1,9 @@
+#!/bin/csh
+
+foreach REMOTE_TARGET ( irix-mips4 irix-mips4-o irix-mips3 irix-mips3-o irix-mips2 irix-mips2-o)
+        source /usr1/radphi/setup
+	$RADPHI_HOME/scripts/doOneTarget >& $RADPHI_HOME/build.$RADPHI_MAKETARGET/build.log
+	if ($status != 0) then
+	  echo "Errors during build of $RADPHI_MAKETARGET target"
+	endif
+end

@@ -1,0 +1,8 @@
+MACRO hide_boxes
+ satt * seen 0
+ satt UPVS seen 1
+ satt UPVL seen 1
+ satt UPVP seen 1
+ dopt hide on
+ next; draw upv 140 60 0 10 10 .1 .1
+RETURN

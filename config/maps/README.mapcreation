@@ -1,0 +1,73 @@
+This file is a text file, created on February 8, 2000 by Craig
+Steffen.  This file contains the very basic information for creating a
+map file, and adding groups to it.  It uses commands in the mapmanager
+package in radphi.
+
+A map can be created by using the mapcreate command, used like
+mapcreate newmap.map
+
+This creates a blank map, with no sub-systems.  
+
+I have created tools that can be used to both create new sub-systems
+and new items within those subsystems.  For some reason, the
+map_create_subsystem does not work properly.  
+
+To create an item in a subsyste, or to create a subsystem, use the new
+map_create_float_item or map_create_int_item.  If the item is in an
+already existing sub-system, then the item will be created.  If the
+sub-system does not exist, then it is created, with the specified item
+in it.  The following is an example of me messing around with
+map_create_float_item.  
+
+(Once the items are created, then they are filled from within programs
+using routines called map_put_float, map_put_int, etc.)
+
+BTW, mapdump is a useful command that lists the contents of a map
+file.  
+begin example:
+
+jlabs1> mapdump tdc_peak.map 
+Map: tdc_peak.map.  Number of subsystems: 2.
+Subsystem: BGV.  Number of items: 2.
+  Item: lower_bound.  Array size: 48.  Array type: int.  Number of arrays: 0.
+  Item: upper_bound.  Array size: 48.  Array type: int.  Number of arrays: 0.
+Subsystem: CPV.  Number of items: 2.
+  Item: lower_bound.  Array size: 30.  Array type: int.  Number of arrays: 0.
+  Item: upper_bound.  Array size: 30.  Array type: int.  Number of arrays: 0.
+jlabs1> map_create_float_item 
+usage: map_create_subsystem <mapfilename> <subsystem name> <new item> <length>
+jlabs1> map_create_float_item tdc_peak.map CPV peak_center 30
+
+
+Creating new item peak_center in subsystem CPV in map tdc_peak.map
+
+Opened map file tdc_peak.map for modification.
+Creation successful.
+jlabs1> mapdump tdc_peak.map
+Map: tdc_peak.map.  Number of subsystems: 2.
+Subsystem: BGV.  Number of items: 2.
+  Item: lower_bound.  Array size: 48.  Array type: int.  Number of arrays: 0.
+  Item: upper_bound.  Array size: 48.  Array type: int.  Number of arrays: 0.
+Subsystem: CPV.  Number of items: 3.
+  Item: lower_bound.  Array size: 30.  Array type: int.  Number of arrays: 0.
+  Item: peak_center.  Array size: 30.  Array type: float.  Number of arrays: 0.
+  Item: upper_bound.  Array size: 30.  Array type: int.  Number of arrays: 0.
+jlabs1> map_create_float_item tdc_peak.map BSD peak_center 48
+
+
+Creating new item peak_center in subsystem BSD in map tdc_peak.map
+
+Opened map file tdc_peak.map for modification.
+Creation successful.
+jlabs1> mapdump tdc_peak.map
+Map: tdc_peak.map.  Number of subsystems: 3.
+Subsystem: BGV.  Number of items: 2.
+  Item: lower_bound.  Array size: 48.  Array type: int.  Number of arrays: 0.
+  Item: upper_bound.  Array size: 48.  Array type: int.  Number of arrays: 0.
+Subsystem: BSD.  Number of items: 1.
+  Item: peak_center.  Array size: 48.  Array type: float.  Number of arrays: 0.
+Subsystem: CPV.  Number of items: 3.
+  Item: lower_bound.  Array size: 30.  Array type: int.  Number of arrays: 0.
+  Item: peak_center.  Array size: 30.  Array type: float.  Number of arrays: 0.
+  Item: upper_bound.  Array size: 30.  Array type: int.  Number of arrays: 0.
+

@@ -1,0 +1,43 @@
+#! /bin/csh
+
+#
+#
+# To be run at DAQ go
+#
+#
+
+source /home/radphi/setup
+source /home/radphi/dosetupepics >& /dev/null
+source /home/radphi/dosetupcoda >& /dev/null
+
+cd /radphi/logfiles
+tail -9 runs.log > data.txt
+cau >> data.txt
+get MBSY2C_energy
+get SMRPOSA
+get SMRPOSB
+get SMRPOSC
+get IGT0I00BIASET
+get IBC2C24AVG
+get IPM2H01.XPOS
+get IPM2H01.YPOS
+get IPM2H01
+get IPM2C24A.XPOS
+get IPM2C24A.YPOS
+get IPM2C24A
+get IPM2C22A.XPOS
+get IPM2C22A.YPOS
+get IPM2C22A
+get scalerS2o
+get scalerS3o
+get scalerS4o
+get scalerS5o
+get scalerS6o
+get scalerS7o
+get scalerS8o
+get scalerS9o
+get TMSETI
+get TMVRBCK
+quit
+
+# end file

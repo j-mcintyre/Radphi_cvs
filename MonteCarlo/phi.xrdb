@@ -1,0 +1,65 @@
+#
+# Chees resource file
+# Created Tue May 28 10:12:10 1996 by Spam, Version 0.9.1 BETA
+#
+
+#
+# reaction definition
+#
+
+beam.type : gamma
+target.type : proton
+target.fermi: T
+product.type : phi
+recoil.type : proton
+
+#
+# Beam stuff
+#
+
+beam.momentum.type: BREM
+beam.momentum.value : 4.00
+
+beam.momentum.bremThetaMax : 3.00
+beam.spatial.type : GAUSSIAN
+beam.spatial.x.sigma : 0.500
+beam.spatial.y.sigma : 0.500
+
+beam.angular.type : NONE
+
+#
+# t distribution stuff
+#
+transfer.type : TDIST_1
+transfer.exponent : 3.7500
+
+#
+# general config
+#
+
+setup.nIterations: 10000
+setup.output : NONE
+setup.doHistos : True
+setup.returnAll : False
+setup.geometry : CEBAF_620
+
+#
+# Changes to definition of phi
+#
+
+phi.returnData : True
+
+
+#
+# Changes to definition of proton
+#
+
+proton.returnData : True
+proton.mass : 0.938
+
+
+
+
+
+
+

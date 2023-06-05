@@ -1,0 +1,11 @@
+MACRO plotbsd
+ satt * seen 0
+ satt bsr1 seen 1
+ satt bsr2 seen 1
+ satt bsr3 seen 1
+ satt bsso seen 1
+ satt bssi seen 1
+ satt bsst seen 1
+ dopt hide on
+ next; draw bsd 140 40 0 10 10 .14 .14
+RETURN

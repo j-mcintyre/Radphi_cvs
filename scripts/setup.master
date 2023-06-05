@@ -1,0 +1,85 @@
+#/bin/csh -f
+# 
+#
+
+switch($TARGET)
+	case 'irix-mips4':
+	  setenv RADPHI_MAKETARGET irix-mips4
+	breaksw
+	case 'irix-mips4-o':
+	  setenv RADPHI_MAKETARGET irix-mips4-o
+	breaksw
+	case 'irix-mips3':
+	  setenv RADPHI_MAKETARGET irix-mips3
+	breaksw
+	case 'irix-mips3-o':
+	  setenv RADPHI_MAKETARGET irix-mips3-o
+	breaksw
+	case 'irix-mips2':
+	  setenv RADPHI_MAKETARGET irix-mips2
+	breaksw
+	case 'irix-mips2-o':
+	  setenv RADPHI_MAKETARGET irix-mips2-o
+	breaksw
+	case 'dec':
+	  setenv RADPHI_MAKETARGET dec
+	breaksw
+	case 'dec-o':
+	  setenv RADPHI_MAKETARGET dec-o
+	breaksw
+	case 'aix':
+	  setenv RADPHI_MAKETARGET aix
+	breaksw
+	case 'aix-o':
+	  setenv RADPHI_MAKETARGET aix-o
+	breaksw
+	case 'hpux':
+	  setenv RADPHI_MAKETARGET hpux
+	breaksw
+	case 'hpux-o':
+	  setenv RADPHI_MAKETARGET hpux-o
+	breaksw
+	case 'solaris':
+	  setenv RADPHI_MAKETARGET solaris
+	breaksw
+	case 'solaris-o':
+	  setenv RADPHI_MAKETARGET solaris-o
+	breaksw
+	case 'linux':
+	  setenv RADPHI_MAKETARGET linux
+	breaksw
+	case 'linux-o':
+	  setenv RADPHI_MAKETARGET linux-o
+	breaksw
+	default:
+	echo "Usage:"
+	echo "source setup <target>"
+	echo "  <target> can be:"
+	echo "   irix-mips4,irix-mips4-o,irix-mips3,irix-mips3-o"
+	echo "   irix-mips2,irix-mips2-o,dec,dec-o,aix,aix-o"
+	echo "   hpux,hpux-o,solaris,solaris-o,linux,linux-o"
+	breaksw;
+endsw
+
+setenv RADPHI_BIN $RADPHI_HOME/bin.$RADPHI_MAKETARGET/$TARGET_ARCH
+setenv RADPHI_CONFIG $RADPHI_HOME/config.`uname -m`
+setenv RADPHI_MAKE $RADPHI_HOME/makefiles
+setenv RADPHI_LOGDIR $RADPHI_HOME/logfiles
+setenv RADPHI_CAMAC urvme1.jlab.org
+setenv RADPHI_DISPATCHER urs2.cebaf.gov:10357
+#setenv RADPHI_DISPATCHER urs3.cebaf.gov:10357
+setenv HISTO_DIR $RADPHI_HOME/histoscope.$RADPHI_MAKETARGET
+setenv TAPEIO_MAXVBLOCK 102400
+setenv DD_NAME radphi1
+setenv LOGD_CONFIG_FILE $RADPHI_CONFIG/logd.conf
+setenv RADPHI_LOGD urs1.cebaf.gov:10380
+
+#
+# Path from additional calls are added last
+#
+
+if ($?PATH) then
+   setenv PATH $PATH':'$RADPHI_BIN':'$RADPHI_HOME'/scripts'
+else
+   setenv PATH /bin':'/usr/sbin':'/usr/local/bin':'$RADPHI_BIN':'$RADPHI_HOME'/scripts'
+endif

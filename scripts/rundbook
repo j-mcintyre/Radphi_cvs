@@ -1,0 +1,386 @@
+#!/usr/local/bin/perl -w
+#
+# runbook:  an entry script for the online run logbook database
+#
+# v1.0:   Apr. 10, 1998		original version  -RTJ
+# v2.0:   Jul. 10, 1999		moved the run logbook into a dbm
+#				database and converted script to PERL
+# v2.1:   Oct. 12, 2000		converted database over to Berkeley DB
+# 				standard for endian-independence -RTJ
+#====================================================================
+
+use Fcntl;
+use DB_File;
+use POSIX;
+
+$datadir = "/data*";
+$msspath = "/mss/hallb/e94016/raw";
+
+$dbfile = "/home/radphi/runbook.db";
+tie (%dbase, 'DB_File', $dbfile, O_RDWR|O_CREAT, 0664);
+
+%month = qw(Jan 0 Feb 1 Mar 2 Apr 3 May 4 Jun 5
+            Jul 6 Aug 7 Sep 8 Oct 9 Nov 10 Dec 11);
+
+if (@ARGV >= 1 && $ARGV[0] eq "-r")
+{
+   shift @ARGV;
+   foreach $run (@ARGV)
+   {
+      if ($dbase{"$run.date"})
+      {
+         print "Remove run $run from database? [n] ";
+         if (&get_yesno_answer)
+         {
+            remove_run($run);
+         }
+      }
+      else
+      {
+         print "Run $run not found in database, skipping...\n";
+      }
+   }
+   untie %dbase;
+   exit;
+}
+elsif (@ARGV >= 1 && $ARGV[0] eq "-l")
+{
+   shift @ARGV;
+   foreach $run (@ARGV)
+   {
+      if ($dbase{"$run.date"})
+      {
+         &print_summary($run);
+      }
+      else
+      {
+         print "Run $run not found in database, skipping...\n";
+      }
+   }
+   untie %dbase;
+   exit;
+}
+elsif (@ARGV >= 1 && $ARGV[0] eq "-u")
+{
+   shift @ARGV;
+   foreach $run (@ARGV)
+   {
+      if ($dbase{"$run.date"})
+      {
+         update_run($run);
+         print "Run $run updated in database.\n";
+      }
+      else
+      {
+         print "Run $run not found in database, skipping...\n";
+      }
+   }
+   untie %dbase;
+   exit;
+}
+
+if (@ARGV != 1)
+{
+   &usage;
+   untie %dbase;
+   exit;
+}
+
+$run = $ARGV[0];
+
+if ($run =~ /\D/)
+{
+   &read_from_html;
+   untie %dbase;
+   exit;
+}
+
+if ($dbase{"$run.date"})
+{
+   print "Run $run is already listed in the run book.  Overwrite? [n] ";
+   $ans = &get_yesno_answer;
+   if ($ans != 1)
+   {
+      print "No updates made to run book.\n";
+      untie %dbase;
+      exit;
+   }
+}
+
+$dbase{"$run.filename"} = &get_file_name;
+$dbase{"$run.date"} = &get_file_date;
+$dbase{"$run.size"} = &get_file_size;
+$dbase{"$run.energy"} = get_with_prompt("5.65 GeV","Beam energy for run $run?");
+$dbase{"$run.trigger"} = get_with_prompt("default","Trigger for run $run?");
+$dbase{"$run.comment"} = get_with_prompt("","Comment for run $run?");
+$dbase{"$run.archive"} = get_with_prompt("mss","Archive?");
+
+untie %dbase;
+
+
+sub get_yesno_answer {
+   $ans = <STDIN>;
+   chop $ans;
+   if (!$ans)
+   {
+      return 0;
+   }
+   elsif ($ans =~ /^yes$/ )
+   {
+      return 1;
+   } 
+   elsif ($ans =~ /^no$/)
+   {
+      return 0;
+   }
+   elsif ($ans =~ /^y$/)
+   {
+      return 1;
+   }
+   elsif ($ans =~ /^ye$/)
+   {
+      return 1;
+   }
+   elsif ($ans =~ /^n$/)
+   {
+      return 0;
+   }
+   return -1;
+}
+
+sub get_file_name {
+   ls_event_file("r$run.evt");
+   $entry = "no file";
+   loop: while ($filename ne $entry)
+   {
+      print "Name of data file? [$filename] ";
+      $entry = <STDIN>;
+      chop $entry;
+      if ($entry)
+      {
+         ls_event_file("$entry");
+      }
+      if (!$filename || $filename =~ /^ /)
+      {
+          print "File $entry not found; try full pathname, ";
+          print "or control-C to quit.\n";
+          $filename = "";
+          $entry = "null";
+      }
+      else
+      {
+         last loop;
+      }
+   }
+   return $filename;
+}
+
+sub ls_event_file {
+   my $string = "@_";
+
+   if (system("ls $datadir/$string >/dev/null 2>&1") == 0)
+   {
+      @listing = split(' ',`ls -l $datadir/$string`);
+      $filepath = $listing[$#listing];
+   }
+   elsif (system("ls $msspath/$string >/dev/null 2>&1") == 0)
+   {
+      @listing = split(' ',`ls -l $msspath/$string`);
+      $filepath = $listing[$#listing];
+      if ($listing[4] < 200)
+      {
+         open(STUB,"<$filepath");
+         @stub = <STUB>;
+         close(STUB);
+         chop $stub[10];
+         $listing[4] = $stub[10];
+      }
+   }
+   if (@listing > 0)
+   {
+      $filename = `basename $filepath`;
+      chop $filename;
+   }
+   else
+   {
+      $filename = "";
+   }
+}
+
+sub get_file_date {
+   @hrmin = split(':', $listing[7]);
+   $wday = 0;
+   $yday = 0;
+   if ($hrmin[0] < 1900)
+   {
+      @now = localtime();
+      $date = mktime(0, $hrmin[1], $hrmin[0],
+                     $listing[6], $month{$listing[5]}, $now[5],
+                     $wday, $yday, -1);
+   }
+   else
+   {
+      $date = mktime(0, 0, 0, 
+                     $listing[6], $month{$listing[5]}, $hrmin[0]-1900,
+                     $wday, $yday, -1);
+   }
+   $sdate = ctime($date);
+   chop $sdate;
+   return $date;
+}
+
+sub get_file_size {
+   $size = $listing[4];
+   if ($size > 1024*1024) 
+   {
+      $size = sprintf("%.1f Mb",$size/1024/1024);
+   }
+   elsif ($size > 1024)
+   {
+      $size = sprintf("%.1f Kb",$size/1024);
+   }
+   else
+   {
+      $size = sprintf("%d b",$size);
+   }
+   return $size;
+}
+
+sub get_with_prompt {
+   my($default, $prompt) = @_;
+
+   print "$prompt [$default] ";
+   $ans = <STDIN>;
+   chop $ans;
+   if ($ans)
+   {
+      $result = $ans;
+   }
+   else
+   {
+      $result = $default;
+   }
+   return $result;
+}
+
+sub read_from_html {
+   if (!open(HTML,$ARGV[0]))
+   {
+      print "Could not find file $ARGV[0], quitting.\n";
+      return -1;
+   }
+   @html = <HTML>;
+   $n = 0;
+   loop: while ($n < @html)
+   {
+      $line = $html[$n++];
+      if ($line =~ s/^ *<td.*>(\d\d*)<\/td>/$1/)
+      {
+         $run = $line;
+         $date = &next_td_field;
+         $time = &next_td_field;
+         $energy = &next_td_field;
+         $trigger = &next_td_field;
+         $comment = &next_td_field;
+         $file = &next_td_field;
+         $archive = &next_td_field;
+         @hrmin = split(':',$time);
+         @daymo = split(/\./,$date);
+         $time_t = mktime(0, $hrmin[1], $hrmin[0],
+                          $daymo[1], $month{$daymo[0]}, 98,
+                          $wday, $yday, -1);
+         $ctime = localtime($time_t);
+         $energy =~ s/([\d])([^\d.])/$1 $2/g;
+         @namesz = split(/[ ()]/,$file);
+         $name = $namesz[0];
+         $size = $namesz[2];
+         $size =~ s/(\d*)(.*)/$1 $2/;
+         chop $run;
+         $dbase{"$run.date"} = $time_t;
+         $dbase{"$run.size"} = $size;
+         $dbase{"$run.energy"} = $energy;
+         $dbase{"$run.trigger"} = $trigger;
+         $dbase{"$run.comment"} = $comment;
+         $dbase{"$run.filename"} = $name;
+         $dbase{"$run.archive"} = $archive;
+         print_summary($run);
+      }
+   }
+}
+
+sub next_td_field {
+   $field = "";
+   until ($line =~ s/^ *<td[^>]*>(.*)$/$1/)
+   {
+      $line = $html[$n++];
+   }
+   until ($line =~ s/^(.*)<\/td.*$/$1/)
+   {
+      chop $line;
+      if ($field)
+      {
+         $field = join(' ',($field, $line));
+      }
+      else
+      {
+         $field = $line;
+      }
+      $line = $html[$n++];
+   }
+   chop $line;
+   if ($field)
+   {
+      $field = join(' ',($field, $line));
+   }
+   else
+   {
+      $field = $line;
+   }
+   $field =~ s/&nbsp;/ /g;
+   return $field;
+}
+
+sub usage {
+   print "RADPHI online log book interface: runbook v2.0\n";
+   print "usage: runbook [-r | -u | -l] <run_number>\n";
+   untie %dbase;
+   exit;
+}
+
+sub remove_run {
+   my $run = "@_";
+
+   delete $dbase{"$run.date"};
+   delete $dbase{"$run.energy"};
+   delete $dbase{"$run.trigger"};
+   delete $dbase{"$run.comment"};
+   delete $dbase{"$run.filename"};
+   delete $dbase{"$run.size"};
+   delete $dbase{"$run.archive"};
+}
+
+sub update_run {
+   my $run = "@_";
+
+   ls_event_file("r$run.evt");
+   if ("$filename")
+   {
+      $dbase{"$run.filename"} = $filename;
+      $dbase{"$run.date"} = &get_file_date;
+      $dbase{"$run.size"} = &get_file_size;
+   }
+}
+
+sub print_summary {
+   my $run = "@_";
+
+   print "\n";
+   print "run: ",$run,", ";
+   print "time: ",ctime($dbase{"$run.date"});
+   print "energy: ",$dbase{"$run.energy"},", ";
+   print "trigger: ",$dbase{"$run.trigger"},"\n";
+   print "comment: ",$dbase{"$run.comment"},"\n";
+   print "name: ",$dbase{"$run.filename"},", ";
+   print "size: ",$dbase{"$run.size"},", ";
+   print "archive: ",$dbase{"$run.archive"},"\n";
+}

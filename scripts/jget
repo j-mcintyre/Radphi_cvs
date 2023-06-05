@@ -1,0 +1,66 @@
+#!/bin/tcsh
+#
+# jget - fetch files from Jlab mass storage system (mss)
+#
+# Note: This script uses bbftp to fetch raw data from the Jlab mss
+#	cache disk.  First you have to make sure that the files have
+#	been placed in the cache, using the jcache script.  This
+#	script must be executed interactively because access to jlab
+#	machines requires an interactive logon.
+#
+# Richard Jones, December 5, 2002
+# -------------------------------
+
+set tempdir=/export/app/radphi/temp
+set localdir=/export/app/radphi/raw_data
+set remotedir=/cache/mss/hallb/e94016/raw
+set listdir=/export/app/radphi/mss/.cached
+set ftphost=bbftp.jlab.org
+set tempfile=/tmp/jget_$$
+
+set filelist=""
+while ($#argv > 0)
+   switch ($argv[1])
+    case -*:
+      echo "Usage: jget rNNNN.evt [...]";
+      echo "       jget (no arguments)";
+      echo " after creating dummy filenames in directory $listdir";
+      exit
+    default:
+      set filelist="$filelist $argv[1]"
+      shift
+   endsw
+end
+
+if ("$filelist" == "") then
+   set filelist=`ls $listdir`
+endif
+
+foreach file ($filelist)
+   if (-r $listdir/$file) then
+      mv $listdir/$file $listdir/.pending
+      if ($? == 0) then
+         echo "get $remotedir/$file $tempdir/$file" >>$tempfile
+      endif
+   endif
+end
+
+if (-r $tempfile) then
+   bbftp -u radphi -p 8 -i $tempfile $ftphost
+   rm -f $tempfile
+endif
+
+foreach file ($filelist)
+   if (-r $listdir/.pending/$file) then
+      if (-r $tempdir/$file) then
+         mv $tempdir/$file $localdir
+         rm -f $listdir/.pending/$file
+      else
+         mv $listdir/.pending/$file $listdir
+      endif
+   else
+      if (-r $tempdir/$file) then
+         mv $tempdir/$file $localdir
+      endif
+   endif
+end

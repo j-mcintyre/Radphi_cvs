@@ -1,0 +1,500 @@
+#
+# This is the UMAP database for the VME ROC (ROC2)
+#
+#   new version for March 1998 run period - R.T.Jones
+#
+#   new version for July 1999 run period - R.T.Jones
+#
+roc.3.address: 24
+roc.3.nmodules: 1
+roc.3.module.*.bus: VME
+#
+roc.3.module.*.channel.*.detector: SCALER
+#
+# block of 32-channel scalers
+#
+STK_7200.nchannels: 160
+STK_7200.bus: VME
+STK_7200.type: SCALER
+roc.3.module.0.type: STK_7200
+roc.3.module.0.slot: 0
+roc.3.module.0.channel.0.channel: 0
+roc.3.module.0.channel.0.name:		bsd1or
+roc.3.module.0.channel.0.description:	BSD right OR
+roc.3.module.0.channel.1.channel: 1
+roc.3.module.0.channel.1.name:		bsd2or
+roc.3.module.0.channel.1.description:	BSD left OR
+roc.3.module.0.channel.2.channel: 2
+roc.3.module.0.channel.2.name:		bsd3or
+roc.3.module.0.channel.2.description:	BSD straight OR
+roc.3.module.0.channel.3.channel: 3
+roc.3.module.0.channel.3.name:		tagOr
+roc.3.module.0.channel.3.description:	tagger OR
+roc.3.module.0.channel.4.channel: 4
+roc.3.module.0.channel.4.name:		upvOr
+roc.3.module.0.channel.4.description:	UPV OR
+roc.3.module.0.channel.5.channel: 5
+roc.3.module.0.channel.5.name:		L1raw
+roc.3.module.0.channel.5.description:	level 1 trigger raw
+roc.3.module.0.channel.6.channel: 6
+roc.3.module.0.channel.6.name:		L1live
+roc.3.module.0.channel.6.description:	level 1 trigger live
+roc.3.module.0.channel.7.channel: 7
+roc.3.module.0.channel.7.name:		L2pass
+roc.3.module.0.channel.7.description:	level 2 trigger pass
+roc.3.module.0.channel.8.channel: 8
+roc.3.module.0.channel.8.name:		L2fail
+roc.3.module.0.channel.8.description:	level 2 trigger fail
+roc.3.module.0.channel.9.channel: 9
+roc.3.module.0.channel.9.name:		L3pass
+roc.3.module.0.channel.9.description:	level 3 trigger pass
+roc.3.module.0.channel.10.channel: 10
+roc.3.module.0.channel.10.name:		L3fail
+roc.3.module.0.channel.10.description:	level 3 trigger fail
+roc.3.module.0.channel.11.channel: 11
+roc.3.module.0.channel.11.name:		pixelY
+roc.3.module.0.channel.11.description:	BSD pixel pass
+roc.3.module.0.channel.12.channel: 12
+roc.3.module.0.channel.12.name:		pixelN
+roc.3.module.0.channel.12.description:	BSD pixel fail
+roc.3.module.0.channel.13.channel: 13
+roc.3.module.0.channel.13.name:		dorY
+roc.3.module.0.channel.13.description:	LGD DOR pass
+roc.3.module.0.channel.14.channel: 14
+roc.3.module.0.channel.14.name:		bsdAnd
+roc.3.module.0.channel.14.description:	BSD AND
+roc.3.module.0.channel.15.channel: 15
+roc.3.module.0.channel.15.name:		tsOrL1
+roc.3.module.0.channel.15.description:	TS OR Level 1
+roc.3.module.0.channel.16.channel: 16
+roc.3.module.0.channel.16.name:		upv3
+roc.3.module.0.channel.16.description:	UPV 3
+roc.3.module.0.channel.17.channel: 17
+roc.3.module.0.channel.17.name:		upv0
+roc.3.module.0.channel.17.description:	UPV 0
+roc.3.module.0.channel.18.channel: 18
+roc.3.module.0.channel.18.name:		upv7
+roc.3.module.0.channel.18.description:	UPV 7
+roc.3.module.0.channel.19.channel: 19
+roc.3.module.0.channel.19.name:		upv5
+roc.3.module.0.channel.19.description:	UPV 5
+roc.3.module.0.channel.20.channel: 20
+roc.3.module.0.channel.20.name:		upv4
+roc.3.module.0.channel.20.description:	UPV 4
+roc.3.module.0.channel.21.channel: 21
+roc.3.module.0.channel.21.name:		upv2
+roc.3.module.0.channel.21.description:	UPV 2
+roc.3.module.0.channel.22.channel: 22
+roc.3.module.0.channel.22.name:		upv1
+roc.3.module.0.channel.22.description:	UPV 1
+roc.3.module.0.channel.23.channel: 23
+roc.3.module.0.channel.23.name:		upv6
+roc.3.module.0.channel.23.description:	UPV 6
+roc.3.module.0.channel.24.channel: 24
+roc.3.module.0.channel.24.name:		tagL17
+roc.3.module.0.channel.24.description:	tagger L17
+roc.3.module.0.channel.25.channel: 25
+roc.3.module.0.channel.25.name:		tagL18
+roc.3.module.0.channel.25.description:	tagger L18
+roc.3.module.0.channel.26.channel: 26
+roc.3.module.0.channel.26.name:		tagL19
+roc.3.module.0.channel.26.description:	tagger L19
+roc.3.module.0.channel.27.channel: 27
+roc.3.module.0.channel.27.name:		tagR17
+roc.3.module.0.channel.27.description:	tagger R17
+roc.3.module.0.channel.28.channel: 28
+roc.3.module.0.channel.28.name:		tagR18
+roc.3.module.0.channel.28.description:	tagger R18
+roc.3.module.0.channel.29.channel: 29
+roc.3.module.0.channel.29.name:		tagR19
+roc.3.module.0.channel.29.description:	tagger R19
+roc.3.module.0.channel.30.channel: 30
+roc.3.module.0.channel.30.name:		clock
+roc.3.module.0.channel.30.description:	100Hz clock
+roc.3.module.0.channel.31.channel: 31
+roc.3.module.0.channel.31.name:		nim32
+roc.3.module.0.channel.31.description:	NIM 32 unused
+roc.3.module.0.channel.32.channel: 32
+roc.3.module.0.channel.32.name:		bsdR0
+roc.3.module.0.channel.32.description:	BSD right 0
+roc.3.module.0.channel.33.channel: 33
+roc.3.module.0.channel.33.name:		bsdR1
+roc.3.module.0.channel.33.description:	BSD right 1
+roc.3.module.0.channel.34.channel: 34
+roc.3.module.0.channel.34.name:		bsdR2
+roc.3.module.0.channel.34.description:	BSD right 2
+roc.3.module.0.channel.35.channel: 35
+roc.3.module.0.channel.35.name:		bsdR3
+roc.3.module.0.channel.35.description:	BSD right 3
+roc.3.module.0.channel.36.channel: 36
+roc.3.module.0.channel.36.name:		bsdR4
+roc.3.module.0.channel.36.description:	BSD right 4
+roc.3.module.0.channel.37.channel: 37
+roc.3.module.0.channel.37.name:		bsdR5
+roc.3.module.0.channel.37.description:	BSD right 5
+roc.3.module.0.channel.38.channel: 38
+roc.3.module.0.channel.38.name:		bsdR6
+roc.3.module.0.channel.38.description:	BSD right 6
+roc.3.module.0.channel.39.channel: 39
+roc.3.module.0.channel.39.name:		bsdR7
+roc.3.module.0.channel.39.description:	BSD right 7
+roc.3.module.0.channel.40.channel: 40
+roc.3.module.0.channel.40.name:		bsdR8
+roc.3.module.0.channel.40.description:	BSD right 8
+roc.3.module.0.channel.41.channel: 41
+roc.3.module.0.channel.41.name:		bsdR9
+roc.3.module.0.channel.41.description:	BSD right 9
+roc.3.module.0.channel.42.channel: 42
+roc.3.module.0.channel.42.name:		bsdR10
+roc.3.module.0.channel.42.description:	BSD right 10
+roc.3.module.0.channel.43.channel: 43
+roc.3.module.0.channel.43.name:		bsdR11
+roc.3.module.0.channel.43.description:	BSD right 11
+roc.3.module.0.channel.44.channel: 44
+roc.3.module.0.channel.44.name:		bsdL0
+roc.3.module.0.channel.44.description:	BSD left 0
+roc.3.module.0.channel.45.channel: 45
+roc.3.module.0.channel.45.name:		bsdL1
+roc.3.module.0.channel.45.description:	BSD left 1
+roc.3.module.0.channel.46.channel: 46
+roc.3.module.0.channel.46.name:		bsdL2
+roc.3.module.0.channel.46.description:	BSD left 2
+roc.3.module.0.channel.47.channel: 47
+roc.3.module.0.channel.47.name:		bsdL3
+roc.3.module.0.channel.47.description:	BSD left 3
+roc.3.module.0.channel.48.channel: 48
+roc.3.module.0.channel.48.name:		bsdL4
+roc.3.module.0.channel.48.description:	BSD left 4
+roc.3.module.0.channel.49.channel: 49
+roc.3.module.0.channel.49.name:		bsdL5
+roc.3.module.0.channel.49.description:	BSD left 5
+roc.3.module.0.channel.50.channel: 50
+roc.3.module.0.channel.50.name:		bsdL6
+roc.3.module.0.channel.50.description:	BSD left 6
+roc.3.module.0.channel.51.channel: 51
+roc.3.module.0.channel.51.name:		bsdL7
+roc.3.module.0.channel.51.description:	BSD left 7
+roc.3.module.0.channel.52.channel: 52
+roc.3.module.0.channel.52.name:		bsdL8
+roc.3.module.0.channel.52.description:	BSD left 8
+roc.3.module.0.channel.53.channel: 53
+roc.3.module.0.channel.53.name:		bsdL9
+roc.3.module.0.channel.53.description:	BSD left 9
+roc.3.module.0.channel.54.channel: 54
+roc.3.module.0.channel.54.name:		bsdL10
+roc.3.module.0.channel.54.description:	BSD left 10
+roc.3.module.0.channel.55.channel: 55
+roc.3.module.0.channel.55.name:		bsdL11
+roc.3.module.0.channel.55.description:	BSD left 11
+roc.3.module.0.channel.56.channel: 56
+roc.3.module.0.channel.56.name:		bsdS0
+roc.3.module.0.channel.56.description:	BSD straight 0
+roc.3.module.0.channel.57.channel: 57
+roc.3.module.0.channel.57.name:		bsdS1
+roc.3.module.0.channel.57.description:	BSD straight 1
+roc.3.module.0.channel.58.channel: 58
+roc.3.module.0.channel.58.name:		bsdS2
+roc.3.module.0.channel.58.description:	BSD straight 2
+roc.3.module.0.channel.59.channel: 59
+roc.3.module.0.channel.59.name:		bsdS3
+roc.3.module.0.channel.59.description:	BSD straight 3
+roc.3.module.0.channel.60.channel: 60
+roc.3.module.0.channel.60.name:		bsdS4
+roc.3.module.0.channel.60.description:	BSD straight 4
+roc.3.module.0.channel.61.channel: 61
+roc.3.module.0.channel.61.name:		bsdS5
+roc.3.module.0.channel.61.description:	BSD straight 5
+roc.3.module.0.channel.62.channel: 62
+roc.3.module.0.channel.62.name:		bsdS6
+roc.3.module.0.channel.62.description:	BSD straight 6
+roc.3.module.0.channel.63.channel: 63
+roc.3.module.0.channel.63.name:		bsdS7
+roc.3.module.0.channel.63.description:	BSD straight 7
+roc.3.module.0.channel.64.channel: 64
+roc.3.module.0.channel.64.name:		bsdS8
+roc.3.module.0.channel.64.description:	BSD straight 8
+roc.3.module.0.channel.65.channel: 65
+roc.3.module.0.channel.65.name:		bsdS9
+roc.3.module.0.channel.65.description:	BSD straight 9
+roc.3.module.0.channel.66.channel: 66
+roc.3.module.0.channel.66.name:		bsdS10
+roc.3.module.0.channel.66.description:	BSD straight 10
+roc.3.module.0.channel.67.channel: 67
+roc.3.module.0.channel.67.name:		bsdS11
+roc.3.module.0.channel.67.description:	BSD straight 11
+roc.3.module.0.channel.68.channel: 68
+roc.3.module.0.channel.68.name:		bsdS12
+roc.3.module.0.channel.68.description:	BSD straight 12
+roc.3.module.0.channel.69.channel: 69
+roc.3.module.0.channel.69.name:		bsd13
+roc.3.module.0.channel.69.description:	BSD straight 13
+roc.3.module.0.channel.70.channel: 70
+roc.3.module.0.channel.70.name:		bsd14
+roc.3.module.0.channel.70.description:	BSD straight 14
+roc.3.module.0.channel.71.channel: 71
+roc.3.module.0.channel.71.name:		bsd15
+roc.3.module.0.channel.71.description:	BSD straight 15
+roc.3.module.0.channel.72.channel: 72
+roc.3.module.0.channel.72.name:		bsd16
+roc.3.module.0.channel.72.description:	BSD straight 16
+roc.3.module.0.channel.73.channel: 73
+roc.3.module.0.channel.73.name:		bsd17
+roc.3.module.0.channel.73.description:	BSD straight 17
+roc.3.module.0.channel.74.channel: 74
+roc.3.module.0.channel.74.name:		bsd18
+roc.3.module.0.channel.74.description:	BSD straight 18
+roc.3.module.0.channel.75.channel: 75
+roc.3.module.0.channel.75.name:		bsd19
+roc.3.module.0.channel.75.description:	BSD straight 19
+roc.3.module.0.channel.76.channel: 76
+roc.3.module.0.channel.76.name:		bsd20
+roc.3.module.0.channel.76.description:	BSD straight 20
+roc.3.module.0.channel.77.channel: 77
+roc.3.module.0.channel.77.name:		bsd21
+roc.3.module.0.channel.77.description:	BSD straight 21
+roc.3.module.0.channel.78.channel: 78
+roc.3.module.0.channel.78.name:		bsd22
+roc.3.module.0.channel.78.description:	BSD straight 22
+roc.3.module.0.channel.79.channel: 79
+roc.3.module.0.channel.79.name:		bsd23
+roc.3.module.0.channel.79.description:	BSD straight 23
+roc.3.module.0.channel.80.channel: 80
+roc.3.module.0.channel.80.name:		cpv13
+roc.3.module.0.channel.80.description:	CPV 13
+roc.3.module.0.channel.81.channel: 81
+roc.3.module.0.channel.81.name:		cpv8
+roc.3.module.0.channel.81.description:	CPV 8
+roc.3.module.0.channel.82.channel: 82
+roc.3.module.0.channel.82.name:		cpv16
+roc.3.module.0.channel.82.description:	CPV 16
+roc.3.module.0.channel.83.channel: 83
+roc.3.module.0.channel.83.name:		ecl83
+roc.3.module.0.channel.83.description:	Struck ECL 2_19 unused
+roc.3.module.0.channel.84.channel: 84
+roc.3.module.0.channel.84.name:		cpv26
+roc.3.module.0.channel.84.description:	CPV 26
+roc.3.module.0.channel.85.channel: 85
+roc.3.module.0.channel.85.name:		cpv4
+roc.3.module.0.channel.85.description:	CPV 4
+roc.3.module.0.channel.86.channel: 86
+roc.3.module.0.channel.86.name:		cpv18
+roc.3.module.0.channel.86.description:	CPV 18
+roc.3.module.0.channel.87.channel: 87
+roc.3.module.0.channel.87.name:		cpv0
+roc.3.module.0.channel.87.description:	CPV 0
+roc.3.module.0.channel.88.channel: 88
+roc.3.module.0.channel.88.name:		cpv19
+roc.3.module.0.channel.88.description:	CPV 19
+roc.3.module.0.channel.89.channel: 89
+roc.3.module.0.channel.89.name:		cpv7
+roc.3.module.0.channel.89.description:	CPV 7
+roc.3.module.0.channel.90.channel: 90
+roc.3.module.0.channel.90.name:		cpv11
+roc.3.module.0.channel.90.description:	CPV 11
+roc.3.module.0.channel.91.channel: 91
+roc.3.module.0.channel.91.name:		cpv10
+roc.3.module.0.channel.91.description:	CPV 10
+roc.3.module.0.channel.92.channel: 92
+roc.3.module.0.channel.92.name:		cpv6
+roc.3.module.0.channel.92.description:	CPV 6
+roc.3.module.0.channel.93.channel: 93
+roc.3.module.0.channel.93.name:		cpv3
+roc.3.module.0.channel.93.description:	CPV 3
+roc.3.module.0.channel.94.channel: 94
+roc.3.module.0.channel.94.name:		cpv5
+roc.3.module.0.channel.94.description:	CPV 5
+roc.3.module.0.channel.95.channel: 95
+roc.3.module.0.channel.95.name:		cpv20
+roc.3.module.0.channel.95.description:	CPV 20
+roc.3.module.0.channel.96.channel: 96
+roc.3.module.0.channel.96.name:		cpv9
+roc.3.module.0.channel.96.description:	CPV 9
+roc.3.module.0.channel.97.channel: 97
+roc.3.module.0.channel.97.name:		cpv2
+roc.3.module.0.channel.97.description:	CPV 2
+roc.3.module.0.channel.98.channel: 98
+roc.3.module.0.channel.98.name:		cpv1
+roc.3.module.0.channel.98.description:	CPV 1
+roc.3.module.0.channel.99.channel: 99
+roc.3.module.0.channel.99.name:		ecl99
+roc.3.module.0.channel.99.description:	Lecroy ECL 1_4 unused
+roc.3.module.0.channel.100.channel: 100
+roc.3.module.0.channel.100.name:	cpv21
+roc.3.module.0.channel.100.description:	CPV 21
+roc.3.module.0.channel.101.channel: 101
+roc.3.module.0.channel.101.name:	cpv15
+roc.3.module.0.channel.101.description:	CPV 15
+roc.3.module.0.channel.102.channel: 102
+roc.3.module.0.channel.102.name:	cpv24
+roc.3.module.0.channel.102.description:	CPV 24
+roc.3.module.0.channel.103.channel: 103
+roc.3.module.0.channel.103.name:	cpv29
+roc.3.module.0.channel.103.description:	CPV 29
+roc.3.module.0.channel.104.channel: 104
+roc.3.module.0.channel.104.name:	cpv23
+roc.3.module.0.channel.104.description:	CPV 23
+roc.3.module.0.channel.105.channel: 105
+roc.3.module.0.channel.105.name:	cpv12
+roc.3.module.0.channel.105.description:	CPV 12
+roc.3.module.0.channel.106.channel: 106
+roc.3.module.0.channel.106.name:	cpv25
+roc.3.module.0.channel.106.description:	CPV 25
+roc.3.module.0.channel.107.channel: 107
+roc.3.module.0.channel.107.name:	cpv27
+roc.3.module.0.channel.107.description:	CPV 27
+roc.3.module.0.channel.108.channel: 108
+roc.3.module.0.channel.108.name:	cpv22
+roc.3.module.0.channel.108.description:	CPV 22
+roc.3.module.0.channel.109.channel: 109
+roc.3.module.0.channel.109.name:	cpv28
+roc.3.module.0.channel.109.description:	CPV 28
+roc.3.module.0.channel.110.channel: 110
+roc.3.module.0.channel.110.name:	cpv14
+roc.3.module.0.channel.110.description:	CPV 14
+roc.3.module.0.channel.111.channel: 111
+roc.3.module.0.channel.111.name:	cpv17
+roc.3.module.0.channel.111.description:	CPV 17
+roc.3.module.0.channel.112.channel: 112
+roc.3.module.0.channel.112.name:	tagL16
+roc.3.module.0.channel.112.description:	tagger L16
+roc.3.module.0.channel.113.channel: 113
+roc.3.module.0.channel.113.name:	tagL15
+roc.3.module.0.channel.113.description:	tagger L15
+roc.3.module.0.channel.114.channel: 114
+roc.3.module.0.channel.114.name:	tagL14
+roc.3.module.0.channel.114.description:	tagger L14
+roc.3.module.0.channel.115.channel: 115
+roc.3.module.0.channel.115.name:	tagL13
+roc.3.module.0.channel.115.description:	tagger L13
+roc.3.module.0.channel.116.channel: 116
+roc.3.module.0.channel.116.name:	tagL12
+roc.3.module.0.channel.116.description:	tagger L12
+roc.3.module.0.channel.117.channel: 117
+roc.3.module.0.channel.117.name:	tagL11
+roc.3.module.0.channel.117.description:	tagger L11
+roc.3.module.0.channel.118.channel: 118
+roc.3.module.0.channel.118.name:	tagL10
+roc.3.module.0.channel.118.description:	tagger L10
+roc.3.module.0.channel.119.channel: 119
+roc.3.module.0.channel.119.name:	tagL9
+roc.3.module.0.channel.119.description:	tagger L9
+roc.3.module.0.channel.120.channel: 120
+roc.3.module.0.channel.120.name:	tagL8
+roc.3.module.0.channel.120.description:	tagger L8
+roc.3.module.0.channel.121.channel: 121
+roc.3.module.0.channel.121.name:	tagL7
+roc.3.module.0.channel.121.description:	tagger L7
+roc.3.module.0.channel.122.channel: 122
+roc.3.module.0.channel.122.name:	tagL6
+roc.3.module.0.channel.122.description:	tagger L6
+roc.3.module.0.channel.123.channel: 123
+roc.3.module.0.channel.123.name:	tagL5
+roc.3.module.0.channel.123.description:	tagger L5
+roc.3.module.0.channel.124.channel: 124
+roc.3.module.0.channel.124.name:	tagL4
+roc.3.module.0.channel.124.description:	tagger L4
+roc.3.module.0.channel.125.channel: 125
+roc.3.module.0.channel.125.name:	tagL3
+roc.3.module.0.channel.125.description:	tagger L3
+roc.3.module.0.channel.126.channel: 126
+roc.3.module.0.channel.126.name:	tagL2
+roc.3.module.0.channel.126.description:	tagger L2
+roc.3.module.0.channel.127.channel: 127
+roc.3.module.0.channel.127.name:	tagL1
+roc.3.module.0.channel.127.description:	tagger L1
+roc.3.module.0.channel.128.channel: 128
+roc.3.module.0.channel.128.name:	bgvD16
+roc.3.module.0.channel.128.description:	BGV downstream 16
+roc.3.module.0.channel.129.channel: 129
+roc.3.module.0.channel.129.name:	bgvD17
+roc.3.module.0.channel.129.description:	BGV downstream 17
+roc.3.module.0.channel.130.channel: 130
+roc.3.module.0.channel.130.name:	bgvD18
+roc.3.module.0.channel.130.description:	BGV downstream 18
+roc.3.module.0.channel.131.channel: 131
+roc.3.module.0.channel.131.name:	bgvD19
+roc.3.module.0.channel.131.description:	BGV downstream 19
+roc.3.module.0.channel.132.channel: 132
+roc.3.module.0.channel.132.name:	bgvD20
+roc.3.module.0.channel.132.description:	BGV downstream 20
+roc.3.module.0.channel.133.channel: 133
+roc.3.module.0.channel.133.name:	bgvD21
+roc.3.module.0.channel.133.description:	BGV downstream 21
+roc.3.module.0.channel.134.channel: 134
+roc.3.module.0.channel.134.name:	bgvD22
+roc.3.module.0.channel.134.description:	BGV downstream 22
+roc.3.module.0.channel.135.channel: 135
+roc.3.module.0.channel.135.name:	bgvD23
+roc.3.module.0.channel.135.description:	BGV downstream 23
+roc.3.module.0.channel.136.channel: 136
+roc.3.module.0.channel.136.name:	bgvU0
+roc.3.module.0.channel.136.description:	BGV upstream 0
+roc.3.module.0.channel.137.channel: 137
+roc.3.module.0.channel.137.name:	bgvU1
+roc.3.module.0.channel.137.description:	BGV upstream 1
+roc.3.module.0.channel.138.channel: 138
+roc.3.module.0.channel.138.name:	bgvU2
+roc.3.module.0.channel.138.description:	BGV upstream 2
+roc.3.module.0.channel.139.channel: 139
+roc.3.module.0.channel.139.name:	bgvU3
+roc.3.module.0.channel.139.description:	BGV upstream 3
+roc.3.module.0.channel.140.channel: 140
+roc.3.module.0.channel.140.name:	bgvU4
+roc.3.module.0.channel.140.description:	BGV upstream 4
+roc.3.module.0.channel.141.channel: 141
+roc.3.module.0.channel.141.name:	bgvU5
+roc.3.module.0.channel.141.description:	BGV upstream 5
+roc.3.module.0.channel.142.channel: 142
+roc.3.module.0.channel.142.name:	bgvU6
+roc.3.module.0.channel.142.description:	BGV upstream 6
+roc.3.module.0.channel.143.channel: 143
+roc.3.module.0.channel.143.name:	bgvU7
+roc.3.module.0.channel.143.description:	BGV upstream 7
+roc.3.module.0.channel.144.channel: 144
+roc.3.module.0.channel.144.name:	tagR16
+roc.3.module.0.channel.144.description:	tagger R16
+roc.3.module.0.channel.145.channel: 145
+roc.3.module.0.channel.145.name:	tagR15
+roc.3.module.0.channel.145.description:	tagger R15
+roc.3.module.0.channel.146.channel: 146
+roc.3.module.0.channel.146.name:	tagR14
+roc.3.module.0.channel.146.description:	tagger R14
+roc.3.module.0.channel.147.channel: 147
+roc.3.module.0.channel.147.name:	tagR13
+roc.3.module.0.channel.147.description:	tagger R13
+roc.3.module.0.channel.148.channel: 148
+roc.3.module.0.channel.148.name:	tagR12
+roc.3.module.0.channel.148.description:	tagger R12
+roc.3.module.0.channel.149.channel: 149
+roc.3.module.0.channel.149.name:	tagR11
+roc.3.module.0.channel.149.description:	tagger R11
+roc.3.module.0.channel.150.channel: 150
+roc.3.module.0.channel.150.name:	tagR10
+roc.3.module.0.channel.150.description:	tagger R10
+roc.3.module.0.channel.151.channel: 151
+roc.3.module.0.channel.151.name:	tagR9
+roc.3.module.0.channel.151.description:	tagger R9
+roc.3.module.0.channel.152.channel: 152
+roc.3.module.0.channel.152.name:	tagR8
+roc.3.module.0.channel.152.description:	tagger R8
+roc.3.module.0.channel.153.channel: 153
+roc.3.module.0.channel.153.name:	tagR7
+roc.3.module.0.channel.153.description:	tagger R7
+roc.3.module.0.channel.154.channel: 154
+roc.3.module.0.channel.154.name:	tagR6
+roc.3.module.0.channel.154.description:	tagger R6
+roc.3.module.0.channel.155.channel: 155
+roc.3.module.0.channel.155.name:	tagR5
+roc.3.module.0.channel.155.description:	tagger R5
+roc.3.module.0.channel.156.channel: 156
+roc.3.module.0.channel.156.name:	tagR4
+roc.3.module.0.channel.156.description:	tagger R4
+roc.3.module.0.channel.157.channel: 157
+roc.3.module.0.channel.157.name:	tagR3
+roc.3.module.0.channel.157.description:	tagger R3
+roc.3.module.0.channel.158.channel: 158
+roc.3.module.0.channel.158.name:	tagR2
+roc.3.module.0.channel.158.description:	tagger R2
+roc.3.module.0.channel.159.channel: 159
+roc.3.module.0.channel.159.name:	tagR1
+roc.3.module.0.channel.159.description:	tagger R1
