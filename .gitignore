@@ -18,3 +18,8 @@ Examples/ntuple.hbook
 # These are object files. Code that is compiled to machine code, not needed to be saved/tracked in GitHub.
 *.o
 *.o.*
+
+# Other files
+*.root
+*.hbook
+*.itape
